@@ -1,0 +1,48 @@
+[core]
+#useless passcode code.... devs can use this for unlocking cheat and hidden stuff like 1v5 boss battle, op boss unit, infinite resource, memery, evil desire, etc
+#make sure update the passcodes every patch 
+# "    "   hide the code somewhere (not in all-units.template aint safe for rats)
+#============== passcodes / hints ==============
+#------------------------------------------------- this is for bug faction 4 rnd code and hint
+#----------------------- hint: ?? 
+@global numNumPass_a_hint: The AEA holds the distinction of the most powerful and capable navy in the Unlimited Warfare
+@global numNumPass_a1: 2
+@global numNumPass_a2: 4
+@global numNumPass_a3: 8
+@global numNumPass_a4: 5
+#----------------------- hint: ?? 
+@global numNumPass_b_hint: The BGC retains its top spot as the undisputed surface combatant and most advanced faction
+@global numNumPass_b1: 1
+@global numNumPass_b2: 1
+@global numNumPass_b3: 2
+@global numNumPass_b4: 8
+#----------------------- hint: ??
+@global numNumPass_c_hint: The EKE Offers the best structural defenses, Orbital strikes, and the most powerful air fleet 
+@global numNumPass_c1: 7
+@global numNumPass_c2: 1
+@global numNumPass_c3: 2
+@global numNumPass_c4: 5
+#----------------------- hint: ??
+@global numNumPass_d_hint: The Bugs are bugs, spam is spam
+@global numNumPass_d1: 9
+@global numNumPass_d2: 2
+@global numNumPass_d3: 1
+@global numNumPass_d4: 4
+#------------------------------------------------- execute 
+[hiddenAction_numpass_execute_a]
+@define sld: a
+@copyFromSection: template_inmutxaxaaaxaxaxa
+requireConditional: if memory.num1==${numNumPass_a1} and memory.num2==${numNumPass_a2} and memory.num3==${numNumPass_a3} and memory.num4==${numNumPass_a4} and self.hasFlag(id=27)
+[hiddenAction_numpass_execute_b]
+@define sld: b
+@copyFromSection: template_inmutxaxaaaxaxaxa
+requireConditional: if memory.num1==${numNumPass_b1} and memory.num2==${numNumPass_b2} and memory.num3==${numNumPass_b3} and memory.num4==${numNumPass_b4} and self.hasFlag(id=28)
+[hiddenAction_numpass_execute_c]
+@define sld: c
+@copyFromSection: template_inmutxaxaaaxaxaxa
+requireConditional: if memory.num1==${numNumPass_c1} and memory.num2==${numNumPass_c2} and memory.num3==${numNumPass_c3} and memory.num4==${numNumPass_c4} and self.hasFlag(id=29)
+[hiddenAction_numpass_execute_d]
+@define sld: d
+@copyFromSection: template_inmutxaxaaaxaxaxa
+requireConditional: if memory.num1==${numNumPass_d1} and memory.num2==${numNumPass_d2} and memory.num3==${numNumPass_d3} and memory.num4==${numNumPass_d4} and self.hasFlag(id=30)
+#------------------------------------------------- END

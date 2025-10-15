@@ -1,0 +1,598 @@
+#used as the copy template for all units that are not buildings to create 
+#dynamic stat adjustments in percentages and fractions 
+
+[core]
+armour: 0
+fogOfWarSightRange: 10
+@memory EMPFrame: float
+@memory EMPDir: float
+updateUnitMemory: EMPFrame=rnd(3,7), EMPDir=rnd(0,360)
+updateUnitMemoryRate: 0.1s
+@global EMPMaxTime: 5s
+#REQUIRED!!!!!!!!!!!!!! OR MOD BREAK!!!!!
+selfRegenRate=0
+#=============================================StatusEffects----Effects----==========================#
+[effect_imOnfire1]
+priority:veryhigh
+createWhenOffscreen: false
+showInFog: false
+delayedStartTimer: 0s
+image: ROOT:data\images\new_smoke.png
+total_frames: 8
+animateFrameStart: 0
+animateFrameEnd:   7
+animateFrameSpeed: 0.7
+animateFrameLooping: true
+life: 300
+attachedToUnit: true
+
+scaleFrom: 1
+scaleTo: 1
+alpha: 0.6
+drawUnderUnits:false
+alwayStartDirAtZero: true
+dirOffset: 0
+yOffsetAbsolute: -32
+
+#Bugsteal=================================
+
+
+
+
+#==============================================buff ressource decals value for triggers==========================================#
+[hiddenAction_onFireDecal]
+autoTrigger: if self.tags(includes='IMONFIRE') and memory.burningDebuff == 5
+spawnEffects: imOnfire1
+
+[hiddenAction_onFireDecal]
+autoTrigger: if self.tags(includes='IMONFIRE2') and memory.burningDebuff == 5
+spawnEffects: imOnfire1
+
+[decal_ONFIREICON]
+isVisible: if self.tags(includes='IMONFIRE') or self.tags(includes='IMONFIRE2')
+onlyWhileAlive: true
+layer: afterBody
+yOffsetAbsolute: 30
+xOffsetAbsolute: -5
+image: Fissure.png
+alwaysStartDirAtZero: true
+hOffset: 0
+alpha: 1
+total_frames: 1
+image: ROOT:_EKE_\Airstrikes\bombing runs\napalm.png
+onlyOnNonPreview: true
+imageScale: 0.13
+
+#[decal_CRIPPLEDICON]
+#isVisible: if self.tags(includes='icantheal')
+#onlyWhileAlive: true
+#layer: afterBody
+#yOffsetAbsolute: 30
+#xOffsetAbsolute: 11
+#alwaysStartDirAtZero: true
+#hOffset: 0
+#alpha: 1
+#total_frames: 1
+#image: ROOT:data\icons\noRepairs.png
+#onlyOnNonPreview: true
+#imageScale: 0.1
+
+[decal_ImmobilizedIcon]
+isVisible: if memory.shockvalue > 0
+onlyWhileAlive: true
+layer: afterBody
+yOffsetAbsolute: 30
+xOffsetAbsolute: 25
+alwaysStartDirAtZero: true
+hOffset: 0
+alpha: 1
+total_frames: 1
+image: ROOT:data\icons\power.png
+onlyOnNonPreview: true
+imageScale: 0.4
+
+[decal_EMP]
+layer: onTop
+image: SHARED:lightning_shock.png
+total_frames: 14
+frame: int(memory.EMPFrame)
+basePosition=self.getOffsetRelative(dirOffset=memory.EMPDir)
+alpha: 0.5
+imageScale: ${1/43*core.radius*3}
+isVisible: if memory.shockEnabled >= 1
+onlyWhileAlive: true
+
+[decal_armourbroken]
+isVisible: if self.tags(includes='armourBroken1')
+onlyWhileAlive: true
+layer: afterBody
+yOffsetAbsolute: 30
+xOffsetAbsolute: -21
+alwaysStartDirAtZero: true
+hOffset: 0
+alpha: 1
+total_frames: 1
+image: ROOT:data\icons\brokenshield.png
+onlyOnNonPreview: true
+imageScale: 0.44
+
+[decal_BlindingIcon]
+isVisible: if self.tags(includes='superBlind')
+onlyWhileAlive: true
+layer: afterBody
+yOffsetAbsolute: 30
+xOffsetAbsolute: -36
+alwaysStartDirAtZero: true
+hOffset: 0
+alpha: 1
+total_frames: 1
+image: ROOT:data\icons\nosee.png
+onlyOnNonPreview: true
+imageScale: 0.1
+
+
+#==============================     stun    ====================================#
+
+[hiddenAction_hitstunTimer]
+autoTriggerOnEvent: tookdamage(withTag="stun")
+requireConditional: if not self.tags(includes="iamstunned") and not self.tags(includes="idontlikestuns") and not self.tags(includes="50k") and memory.stunDebuff < 1
+setUnitMemory: stunDebuff = 1
+
+[hiddenAction_hitstunDebuff]
+autoTriggerOnEvent: tookDamage(withTag="stun")
+requireConditional: if not self.tags(includes="iamstunned") and not self.tags(includes="idontlikestuns") and not self.tags(includes="50k")
+setUnitStats: moveSpeed = 0
+temporarilyAddTags: iamstunned
+
+[hiddenAction_decrementStunDebuff]
+autoTrigger: if memory.stunDebuff > 0
+setUnitMemory: stunDebuff = memory.stunDebuff -0.5
+
+[hiddenAction_stunDebuffDeactivate]
+autoTrigger: if memory.stunDebuff == 0
+requireConditional: if self.tags(includes="iamstunned")
+setUnitStats: moveSpeed=${movement.moveSpeed}
+temporarilyRemoveTags: iamstunned
+
+#==============================================buffs dynamic values and status Effects==========================================================================#
+
+#Do not divide stats by a value which creates infinite decimals
+#Might cause bug that it cannot be rolled back to old value.
+
+############template to copy
+#[hiddenAction_Timer]
+#autoTriggerOnEvent: tookDamage(withTag="thetag")  
+#requireConditional: if memory.yourmemory < 1 
+#setUnitMemory: yourmemory = 5  #determines time in seconds
+#5 second debuff
+
+#[hiddenAction_hitDebuff]
+#autoTriggerOnEvent: tookDamage(withTag="thetag")  
+#requireConditional: if not self.tags(includes='thetag')  
+#setUnitStats: whateveritis
+#temporarilyAddTags: tagthatprevents it from repeating
+
+#[hiddenAction_decrementDebuff]
+#autoTrigger: if memory.yourmemory > 0
+#setUnitMemory: yourmemory = memory.yourmemory -1
+
+#[hiddenAction_DebuffDeactivate]
+#autoTrigger: if memory.yourmemory == 0
+#requireConditional: if self.tags(includes='thetag')
+#setUnitStats: selfRegenRate+=0.1
+#temporarilyRemoveTags: tag 
+
+
+
+
+###############artilerry percentage debuff##########
+[hiddenAction_concusedTimer]
+autoTriggerOnEvent: tookDamage(withTag="ifc")  
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='Shocked') and memory.concusiondebuff < 1 
+setUnitMemory: concusiondebuff = 1
+
+[hiddenAction_hitconcusedDebuff]
+autoTriggerOnEvent: tookDamage(withTag="ifc")  
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='hitarty') and not self.tags(includes='Shocked')
+setUnitStats: moveSpeed-=${movement.moveSpeed}*0.2
+temporarilyAddTags: hitarty
+
+[hiddenAction_decrementConcusedDebuff]
+autoTrigger: if memory.concusiondebuff > 0
+setUnitMemory: concusiondebuff = memory.concusiondebuff -1
+
+[hiddenAction_DebuffconcusDeactivate]
+autoTrigger: if memory.concusiondebuff == 0
+requireConditional: if self.tags(includes='hitarty')
+setUnitStats: moveSpeed+=${movement.moveSpeed}*0.2
+temporarilyRemoveTags: hitarty
+##30% speed reduction
+
+###############Stage 2 artilerry##################
+[hiddenAction_concused2Timer]
+autoTriggerOnEvent: tookDamage(withTag="ifc2"), newMessage(withTag='ifc2')
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='Shocked') and memory.concusiondebuff2 < 1 
+setUnitMemory: concusiondebuff2 = 1
+
+[hiddenAction_hitconcused2Debuff]
+
+autoTriggerOnEvent: tookDamage(withTag="ifc2"), newMessage(withTag='ifc2')
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='hitarty2') and not self.tags(includes='Shocked')
+setUnitStats: moveSpeed-=${movement.moveSpeed}*0.4
+temporarilyAddTags: hitarty2
+
+[hiddenAction_decrement2ConcusedDebuff]
+autoTrigger: if memory.concusiondebuff2 > 0
+setUnitMemory: concusiondebuff2 = memory.concusiondebuff2 -1
+
+[hiddenAction_Debuffconcus2Deactivate]
+autoTrigger: if memory.concusiondebuff2 == 0
+requireConditional: if self.tags(includes='hitarty2')
+setUnitStats: moveSpeed+=${movement.moveSpeed}*0.4
+temporarilyRemoveTags: hitarty2
+##40% speed reduction
+
+###############Stage 3 slow##################
+[hiddenAction_concused3Timer]
+autoTriggerOnEvent: tookDamage(withTag="ifc3"), newMessage(withTag='ifc3')
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='Shocked') and memory.concusiondebuff3 < 1 
+setUnitMemory: concusiondebuff3 = 1
+
+[hiddenAction_hitconcused3Debuff]
+
+autoTriggerOnEvent: tookDamage(withTag="ifc3"), newMessage(withTag='ifc3')
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='hitarty3') and not self.tags(includes='Shocked')
+setUnitStats: moveSpeed-=${movement.moveSpeed}*0.6
+temporarilyAddTags: hitarty3
+
+[hiddenAction_decrement3ConcusedDebuff]
+autoTrigger: if memory.concusiondebuff3 > 0
+setUnitMemory: concusiondebuff3 = memory.concusiondebuff3 -1
+
+[hiddenAction_Debuffconcus3Deactivate]
+autoTrigger: if memory.concusiondebuff3 == 0
+requireConditional: if self.tags(includes='hitarty3')
+setUnitStats: moveSpeed+=${movement.moveSpeed}*0.6
+temporarilyRemoveTags: hitarty3
+##40% speed reduction
+
+##################SWARMED DEBUFF####################
+[hiddenAction_SwarmedDebuffAcknowledge]
+autoTriggerOnEvent: tookDamage(withTag="BiteLock")
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='Shocked') and memory.BugIFC < 1 
+setUnitMemory: BugIFC = 2
+
+[hiddenAction_SwarmedstatDebuff]
+autoTriggerOnEvent: tookDamage(withTag="BiteLock")
+requireConditional: if not self.tags(includes='exp') and not self.tags(includes='Swarmed') and not self.tags(includes='Shocked')
+setUnitStats: moveSpeed-=${movement.moveSpeed}*0.6
+temporarilyAddTags: Swarmed
+
+[hiddenAction_decrementSwarmedDebuff]
+autoTrigger: if memory.BugIFC > 0
+setUnitMemory: BugIFC = memory.BugIFC -1
+
+[hiddenAction_DebuffSwarmedDeactivate]
+autoTrigger: if memory.BugIFC == 0
+requireConditional: if self.tags(includes='Swarmed')
+setUnitStats: moveSpeed+=${movement.moveSpeed}*0.6
+temporarilyRemoveTags: Swarmed
+##60% speed reduction
+
+
+###++++++++++++++CRIPPLE STATUS++++++++++++++++++++++#######
+################REMOVED UNTIL RW LOGIC BOOLEAN CAN BE REPAIRED ADDED#############
+
+#[hiddenAction_hitCrippleTimer]
+#autoTriggerOnEvent: tookDamage(withTag="inflictcripple")  
+#requireConditional: if memory.crippleDebuff < 1 
+#setUnitMemory: crippleDebuff = 7
+#0.7 second debuff
+
+#[hiddenAction_hitcrippleDebuff]
+#autoTriggerOnEvent: tookDamage(withTag="inflictcripple")  
+##requireConditional: if not self.tags(includes='icantheal')  
+#temporarilyAddTags: icantheal
+#temporarilyRemoveTags: canberepaired
+
+#[hiddenAction_decrementcrippleDebuff]
+#autoTrigger: if memory.crippleDebuff > 0
+#setUnitMemory: crippleDebuff = memory.crippleDebuff -1
+
+#[hiddenAction_crippleDebuffDeactivate]
+#autoTrigger: if memory.crippleDebuff == 0
+#requireConditional: if self.tags(includes='icantheal')
+#temporarilyRemoveTags: icantheal
+#temporarilyAddTags: canberepaired
+
+################REMOVED UNTIL RW LOGIC BOOLEAN CAN BE REPAIRED ADDED#############
+
+
+###+++++++++++++++FIRE STATUS+++++++++++++++###
+[hiddenAction_hitBurnTimer]
+autoTriggerOnEvent: tookDamage(withTag="inflictFire")  
+#requireConditional: if self.shield(lessThan=10)
+setUnitMemory: burningDebuff = 5
+#5 second debuff
+
+[hiddenAction_hitBurnDebuff]
+autoTriggerOnEvent: tookDamage(withTag="inflictFire")  
+requireConditional: if not self.tags(includes='IMONFIRE') and self.shield(lessThan=10)
+setUnitStats: selfRegenRate-=0.1
+temporarilyAddTags: IMONFIRE
+
+[hiddenAction_decrementBurnDebuff]
+autoTrigger: if memory.burningDebuff > 0
+setUnitMemory: burningDebuff = memory.burningDebuff -1
+
+[hiddenAction_BurnDebuffDeactivate]
+autoTrigger: if memory.burningDebuff == 0
+requireConditional: if self.tags(includes='IMONFIRE')
+setUnitStats: selfRegenRate+=0.1
+temporarilyRemoveTags: IMONFIRE
+
+
+###+++++++++++++++FIRE STATUS 222222+++++++++++++++###
+[hiddenAction_hitBurnTimer2]
+autoTriggerOnEvent: tookDamage(withTag="inflictFire2")  
+#requireConditional: if self.shield(lessThan=10)
+setUnitMemory: burningDebuff2 = 5
+#5 second debuff
+
+[hiddenAction_hitBurnDebuff2]
+autoTriggerOnEvent: tookDamage(withTag="inflictFire2")  
+requireConditional: if not self.tags(includes='IMONFIRE2')
+setUnitStats: selfRegenRate-=0.2
+temporarilyAddTags: IMONFIRE2
+
+[hiddenAction_decrementBurnDebuff2]
+autoTrigger: if memory.burningDebuff2 > 0
+setUnitMemory: burningDebuff2 = memory.burningDebuff2 -1
+
+[hiddenAction_BurnDebuffDeactivate2]
+autoTrigger: if memory.burningDebuff2 == 0
+requireConditional: if self.tags(includes='IMONFIRE2')
+setUnitStats: selfRegenRate+=0.2
+temporarilyRemoveTags: IMONFIRE2
+
+#==============Armour Shatter==================#
+
+[hiddenAction_shatterTimer]
+autoTriggerOnEvent: tookDamage(withTag="ARMRBRK")  
+requireConditional: if memory.Shattered < 1 
+setUnitMemory: Shattered = 10  
+10 second debuff
+
+[hiddenAction_hitshatterDebuff]
+autoTriggerOnEvent: tookDamage(withTag="ARMRBRK")  
+requireConditional: if not self.tags(includes='armourBroken1')  
+setUnitStats: armour = 0
+temporarilyAddTags: armourBroken1
+
+[hiddenAction_decrementshatterDebuff]
+autoTrigger: if memory.Shattered > 0
+setUnitMemory: Shattered = memory.Shattered -1
+
+[hiddenAction_DebuffshatterDeactivate]
+autoTrigger: if memory.Shattered == 0
+requireConditional: if self.tags(includes='armourBroken1')
+setUnitStats: armour = (${core.armour})
+temporarilyRemoveTags: armourBroken1
+
+#===================Surpressed/fullofholes armor debuff================#
+
+[hiddenAction_SurpressedTimer]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+#requireConditional: if memory.SurpressedCountdown < 0
+setUnitMemory: SurpressedCountdown = 3  
+temporarilyAddTags: Surpressed
+
+[hiddenAction_hitSurpressedDebuffTally]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+setUnitMemory: SurpressedTallyScore = memory.SurpressedTallyScore +1
+
+
+[hiddenAction_decrementDebuffSurpressed]
+autoTrigger: if memory.SurpressedCountdown > 0
+setUnitMemory: SurpressedCountdown = memory.SurpressedCountdown -1
+
+[hiddenAction_surpressIncreaseDebuff-1]
+autoTrigger: if memory.SurpressedTallyScore >= 10 and memory.SurpressedTallyScore < 50
+setUnitStats: armour = (${core.armour})-1 
+
+[hiddenAction_surpressIncreaseDebuff-2]
+autoTrigger: if memory.SurpressedTallyScore >= 20 and memory.SurpressedTallyScore < 100
+setUnitStats: armour = (${core.armour})-2
+
+[hiddenAction_surpressIncreaseDebuff-3]
+autoTrigger: if memory.SurpressedTallyScore >= 30 and memory.SurpressedTallyScore < 150
+setUnitStats: armour = (${core.armour})-3
+
+[hiddenAction_surpressIncreaseDebuff-4]
+autoTrigger: if memory.SurpressedTallyScore >= 40 and memory.SurpressedTallyScore < 200
+setUnitStats: armour = (${core.armour})-4
+
+[hiddenAction_surpressIncreaseDebuff-5]
+autoTrigger: if memory.SurpressedTallyScore >= 50 and memory.SurpressedTallyScore < 250
+setUnitStats: armour = (${core.armour})-5
+
+[hiddenAction_surpressIncreaseDebuff-6]
+autoTrigger: if memory.SurpressedTallyScore >= 60 and memory.SurpressedTallyScore < 300
+setUnitStats: armour = (${core.armour})-6
+
+[hiddenAction_surpressIncreaseDebuff-7]
+autoTrigger: if memory.SurpressedTallyScore >= 70 and memory.SurpressedTallyScore < 350
+setUnitStats: armour = (${core.armour})-7
+
+[hiddenAction_surpressIncreaseDebuff-8]
+autoTrigger: if memory.SurpressedTallyScore >= 80 and memory.SurpressedTallyScore < 400
+setUnitStats: armour = (${core.armour})-8
+
+[hiddenAction_surpressIncreaseDebuff-9]
+autoTrigger: if memory.SurpressedTallyScore >= 90 and memory.SurpressedTallyScore < 450
+setUnitStats: armour = (${core.armour})-9
+
+[hiddenAction_surpressIncreaseDebuff-10]
+autoTrigger: if memory.SurpressedTallyScore >= 100 and memory.SurpressedTallyScore < 500
+setUnitStats: armour = (${core.armour})-10
+
+[hiddenAction_surpressIncreaseHpLoss-1]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 500 and memory.SurpressedTallyScore < 1000
+setUnitStats: hp-=1
+
+[hiddenAction_surpressIncreaseHpLoss-2]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 1000 and memory.SurpressedTallyScore < 1500
+setUnitStats: hp-=2
+
+[hiddenAction_surpressIncreaseHpLoss-3]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 1500 and memory.SurpressedTallyScore < 2000
+setUnitStats: hp-=3
+
+[hiddenAction_surpressIncreaseHpLoss-4]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 2000 and memory.SurpressedTallyScore < 2500
+setUnitStats: hp-=4
+
+[hiddenAction_surpressIncreaseHpLoss-5]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 2500 and memory.SurpressedTallyScore < 3000
+setUnitStats: hp-=5
+
+[hiddenAction_surpressIncreaseHpLoss-6]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 3000 and memory.SurpressedTallyScore < 3500
+setUnitStats: hp-=6
+
+[hiddenAction_surpressIncreaseHpLoss-7]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 3500 and memory.SurpressedTallyScore < 4000
+setUnitStats: hp-=7
+
+[hiddenAction_surpressIncreaseHpLoss-8]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 4000 and memory.SurpressedTallyScore < 4500
+setUnitStats: hp-=8
+
+[hiddenAction_surpressIncreaseHpLoss-9]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 4500 and memory.SurpressedTallyScore < 5000
+setUnitStats: hp-=9
+
+[hiddenAction_surpressIncreaseHpLoss-10]
+autoTriggerOnEvent: tookDamage(withTag="HeavyMgSurpress")  
+requireConditional: if memory.SurpressedTallyScore >= 5000
+setUnitStats: hp-=10
+
+[hiddenAction_DebuffDeactivate]
+autoTrigger: if memory.SurpressedCountdown == 0
+requireConditional: if not self.tags(includes='armourBroken1')
+setUnitStats: armour = (${core.armour})
+setUnitMemory: SurpressedTallyScore = 0
+temporarilyRemoveTags: Surpressed
+
+#=======high shock status buildup every amount of value will cause your unit to be stunned=========# 
+
+#[hiddenAction_ShockbuildupTimer]
+#autoTriggerOnEvent: tookDamage(withTag="INFShockt3")   
+#setUnitMemory: shocktimer = 3
+
+[hiddenAction_ShockhitbuildUp1]
+autoTriggerOnEvent: tookDamage(withTag="INFShockt1")   
+setUnitMemory: shockvalue = memory.shockvalue + 1
+
+[hiddenAction_ShockhitbuildUp2]
+autoTriggerOnEvent: tookDamage(withTag="INFShockt2")   
+setUnitMemory: shockvalue = memory.shockvalue + 2
+
+[hiddenAction_ShockhitbuildUp3]
+autoTriggerOnEvent: tookDamage(withTag="INFShockt3")   
+setUnitMemory: shockvalue = memory.shockvalue + 3
+
+[hiddenAction_ShockhitbuildUp4]
+autoTriggerOnEvent: tookDamage(withTag="INFShockt4")   
+setUnitMemory: shockvalue = memory.shockvalue + 21
+
+
+[hiddenAction_totalshockValue]
+autoTrigger: if memory.shockvalue >= 20
+setUnitMemory: shockvalue = 0, shockEnabled=2
+setUnitStats: moveSpeed = 0
+temporarilyAddTags: Shocked
+
+[hiddenAction_shockEnabledtimer]
+autoTrigger:if memory.shockEnabled >= 1
+setUnitMemory: shockEnabled = memory.shockEnabled - 1
+#1s shock time when buildup is reached
+
+[hiddenAction_shockEnabledOver]
+autoTrigger: if self.tags(includes='Shocked') and memory.shockEnabled==0
+setUnitMemory: shockEnabled =0
+temporarilyRemoveTags: Shocked
+setUnitStats: moveSpeed =${movement.moveSpeed}
+#requires 
+
+[hiddenAction_decrementDebuff]
+autoTrigger: if memory.shocktimer > 0
+setUnitMemory: shocktimer = memory.shocktimer - 1
+
+[hiddenAction_ShockDebuffDeactivate]
+autoTrigger: if memory.shocktimer == 0
+setUnitMemory: shockvalue = 0
+#=====================IM BLINDED BRO=====================#
+
+
+[hiddenAction_BlindedTimer]
+autoTriggerOnEvent: tookDamage(withTag="INFblind")  
+setUnitMemory: Blinded = 15
+
+[hiddenAction_blindedhitDebuff]
+autoTriggerOnEvent: tookDamage(withTag="INFblind")  
+requireConditional: if not self.tags(includes='superBlind')  
+setUnitStats: fogOfWarSightRange-=${core.fogOfWarSightRange}*0.5
+temporarilyAddTags: superBlind
+
+[hiddenAction_decrementblindedDebuff]
+autoTrigger: if memory.Blinded > 0
+setUnitMemory: Blinded = memory.Blinded -1
+
+[hiddenAction_BlindedDebuffDeactivate]
+autoTrigger: if memory.Blinded == 0
+requireConditional: if self.tags(includes='superBlind')
+setUnitStats: fogOfWarSightRange+=${core.fogOfWarSightRange}*0.5
+temporarilyRemoveTags: superBlind 
+
+#========Iradiated debuff=============#
+
+[hiddenAction_iradiatehitDebuff]
+autoTriggerOnEvent: tookDamage(withTag="Radiation")   
+setUnitStats: maxhp-=10
+
+#=====================map effect debuff SandStorm=================#
+[hiddenAction_SandstormDebuff]
+autoTrigger: if numberOfUnitsInAllTeams(withTag='Sandstorm', greaterThan=0) 
+requireConditional: if not self.tags(includes='broEsandstorm')  
+setUnitStats: fogOfWarSightRange-=${core.fogOfWarSightRange}*0.25
+temporarilyAddTags: broEsandstorm
+
+#===================================================================# nothing
+#[hiddenAction_defensiveBuffed]
+#requireConditional: if not self.tags(includes='defensiveBuffed') 0
+#temporarilyAddTags: defensiveBuffed
+#setUnitStats: hp+=(${core.maxHp}*0.4)*(self.hp/self.maxHp), maxHp+=${core.maxHp}*0.4, maxShield+=(${core.maxShield}*0.4)*((self.shield+1)/(self.maxShield+1)), shield+=${core.maxShield}*0.4
+
+#[hiddenAction_speedBuffed]
+#autoTriggerOnEvent: tookDamage(with
+#requireConditional: if not self.tags(includes='speedBuffed') 
+#temporarilyAddTags: speedBuffed
+#setUnitStats: moveSpeed+=${movement.moveSpeed}*0.5, maxTurnSpeed+=${movement.maxTurnSpeed}*0.5
+
+#[hiddenAction_speedBuffRemove]
+#requireConditional: if self.tags(includes='speedBuffed') 
+#temporarilyRemoveTags: speedBuffed
+#setUnitStats: moveSpeed-=${movement.moveSpeed}*0.5, maxTurnSpeed-=${movement.maxTurnSpeed}*0.5
+#alsoTriggerAction:notBuffed
+
+#ideas    --Burn--, Poisoned, --Frozen--, Slow/concussed, Confused/waypointmisplace, Stunned, Blind, Soaked, shocked, electrified\zaps friendlys, surpressed/more bullets=less armor/ crippled no more healing. weapon disabled, IRADIATED, reduces maxHpshieldatkspandspeed, stasis mine,

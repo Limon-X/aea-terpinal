@@ -1,0 +1,19 @@
+[core]
+#disableDeathOnZeroHp: true 
+[hiddenAction_spawnController]
+autoTriggerOnEvent: destroyed
+requireConditional: if self.globalTeamTags(includes="FFA") and self.hp==0 and not self.tags(includes="spawnedFun") and self.globalTeamTags(includes="ghostFFA")
+fireTurretXAtGround: spawnFun
+fireTurretXAtGround_withOffset: 0,0
+deleteSelf: true
+#debugMessage: spawnController
+temporarilyAddTags: funSpawned
+[turret_spawnFun]
+x: 0
+y: 0
+projectile: fun1
+canShoot: false
+[projectile_fun1]
+spawnUnit: funControllerNotWiped
+directDamage: 0
+life: 300

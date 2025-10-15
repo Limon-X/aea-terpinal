@@ -1,0 +1,76 @@
+[effect_bioWave]
+priority:veryhigh
+color: #bb99ff99
+stripIndex:shockwave
+life: 45
+scaleFrom: 0.5
+scaleTo: 2.5
+[effect_bioWaveLarge]
+@copyFromSection: effect_bioWave
+priority:critical
+life: 55
+scaleFrom: 0.7
+scaleTo: 3
+[effect_bioWaveUltra]
+@copyFromSection: effect_bioWave
+priority:critical
+life: 65
+scaleFrom: 1
+scaleTo: 4
+[effect_bioWaveSmall]
+@copyFromSection: effect_bioWave
+life: 35
+scaleFrom: 0.35
+scaleTo: 1.75
+
+
+[effect_projectileTrailBug]
+image: SHARED:light_50.png
+life: 40
+fadeOut: true
+attachedToUnit: false
+color: #FF66FF66
+fadeInTime:2
+scaleFrom: 0.45
+scaleTo: 0.45
+alpha: 0.5
+[effect_projectileTrailBugLarge]
+@copyFromSection: effect_projectileTrailBug
+scaleFrom: 0.55
+scaleTo: 0.55
+
+
+[effect_bioSmoke]
+priority:veryhigh
+frameIndex: 0
+stripIndex: smoke_white
+life: 65
+fadeOut: true
+attachedToUnit: false
+color: #99ff99
+fadeInTime:10
+scaleFrom: 0.85
+scaleTo: 1.7
+alpha: 0.45
+drawUnderUnits:false
+liveAfterAttachedDies: false
+hSpeed:1
+atmospheric: true
+xSpeedAbsoluteRandom:1.4
+ySpeedAbsoluteRandom:1.4
+[effect_bioSmokeLarge]
+@copyFromSection: effect_bioSmoke
+life: 85
+scaleFrom: 1.1
+scaleTo: 2.2
+alpha: 0.5
+xSpeedAbsoluteRandom:1.75
+ySpeedAbsoluteRandom:1.75
+[effect_bioSmokeUltra]
+@copyFromSection: effect_bioSmoke
+priority:veryhigh
+scaleFrom: 1.8
+scaleTo: 3.6
+alpha: 0.55
+hSpeed:1.2
+xSpeedAbsoluteRandom:1.4

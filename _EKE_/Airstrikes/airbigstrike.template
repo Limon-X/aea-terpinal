@@ -1,0 +1,177 @@
+[template_noJacas]
+#=================== lock not for u hacky wacky
+isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
+isLockedAltMessage: Unauthorized
+isLockedAltMessage_ru: Нет связи со штабом!
+isLockedAltMessage_zh: 未授权！
+
+isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
+isLockedAltMessage: Air Strike Disabled
+isLockedAltMessage_ru: Воздушная поддержка отключена
+isLockedAltMessage_zh: 空袭被禁用
+##########################ORBITAL STRIKES FROM SPACE STATION###########################################################
+[action_kineticStrike]
+@copyFromSection: template_noJacas
+
+fireTurretXAtGround: kineticStrike
+displayRemainingStockpile: true
+price: 30000, uranium=1800, power=800
+ai_isDisabled: true
+text: Kinetic Strike
+description: - Giant metal rod orbital dropped from the outer atmpsphere\n- 450 Targeting range\n- 8000 Area damage, 240 area radius
+text_ru: Чапалах со скоростью света
+description_ru: - Большая дубина падает с неба прямиком тебе в табло\n- Сообщает огромное количество кинетической энергии для формирования кратковременной П-бозонной реакции\n- Наносит 8000 урона в радиусе 240\n Радиус вызова: 450
+text_zh: 动能打击
+description_zh: -巨型金属棒轨道从外大气层坠落\n-射程450 \n-8000范围伤害，240伤害半径
+
+displayType: action
+buildSpeed: 4s
+pos: 1.1
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+
+iconImage: icon2_kinetic.png
+addActionCooldownTime: 60s
+allowMultipleInQueue: false
+
+[action_dysonBeam]
+@copyFromSection: template_noJacas
+
+fireTurretXAtGround: dysonBeam
+price: 350000, uranium=20000, power=3000
+ai_isDisabled: true
+text: Nicoll Dyson Beam
+description: \n-Solar energy directed and focused into a narrow beam by an array of satellites \n-Lasts for 10 seconds before dissapearing \n-Can be given orders to redirect the beam
+text_ru: Божья кара
+description_ru: - Сфокусированный луч направленной Божественной силы\n- Работает 10 секунд перед отдыхом\n- Луч можно корректировать.
+text_zh: 尼科尔·戴森光束
+description_zh: \n-太阳能被卫星阵列定向并聚焦到窄光束中\n-持续10秒，然后消失\n-可以通过命令光束以进行重新索敌
+
+displayType: action
+buildSpeed: 15s
+pos: 1.1
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+
+iconImage: icon2_laser.png
+
+[action_dirtyBomb]
+@copyFromSection: template_noJacas
+
+fireTurretXAtGround: dirtyBomb
+displayRemainingStockpile: true
+price: 20000, uranium=4000, power=1000
+ai_isDisabled: true
+text: Dirty Bomb
+description: - Drops radioactive dust in a large area, lasts for 4 minutes\n- Does light damage over time, does not effect allies\n- Deploy range 600
+text_ru: Подушка пердушка
+description_ru: - Нестандартное оружие со маленькой взрывной мощью\n- Предназначена для активного выделения пердежа в атмосферу,\n чтобы создать смертельное облако вонищи(Вонище пофиг на 5-жи щиты!)\n- Этот эффект длится 4 минуты, затем облако улетучивается\nРадиус вызова: 600\n[СТАТУСНЫЙ ЭФФЕКТ]\n снимает максимальное здоровье бомжей вплоть до -2400(При этом, соответственно, нанося урон)\n Эффект постоянен и фатален для проперженных
+text_zh: 脏弹
+description_zh: -在大范围内投掷放射性尘，持续4分钟\n-随时间流逝造成轻微伤害，不影响盟友单位\n-发射射程600
+
+displayType: action
+buildSpeed: 5s
+pos: 1.2
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+addActionCooldownTime: 180s
+allowMultipleInQueue: false
+iconImage: icon2_fallout.png
+
+[action_mirv]
+@copyFromSection: template_noJacas
+
+fireTurretXAtGround: mirv
+price: 68000, uranium=5000, power=1500
+#text: M.I.R.V.
+text: The Big One.
+description: - Drops a very powerful nuke on target location\n- Targeting range 450\n- Does 15,000 nuclear damage over a 600 radius area\n- Long delay
+text_ru: Личина
+description_ru: - Сбрасывает большую личину на выбранную локацию\n- Наносит дофига урона в большом радиусе\n- Долго летит в пункт назначения\n Радиус вызова: 450
+text_zh: 大.的.那.个.
+description_zh: -在目标位置投掷一枚威力强大的核弹\n-射程450 \n-对600范围内的敌人造成12000点核伤害\n-延迟过长
+
+ai_isDisabled: true
+#description:  \n-Multiple independent reentry vehicle \n-Launches 8 miniaturized warheads that scatter across the target area \n-Weak on their own, but able to overload defense systems
+#text_ru: M.I.R.V.
+#description_ru: \n-Система множественного ракетного поноса\n-Как вдова с ее ракетной завесой, но их 8\n-Маломощный, но обладает большой сильностью
+addActionCooldownTime: 220s
+allowMultipleInQueue: false
+displayType: action
+buildSpeed: 10s
+pos: 1.1
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+
+#iconImage: icon2_mirv.png
+iconImage: SHARED:icon_attack_point.png
+
+
+#
+[turret_kineticStrike]
+x: 0
+y: 0
+projectile: kineticStrike
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:450
+
+[turret_dysonBeam]
+x: 0
+y: 0
+projectile: dysonBeam
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:600
+
+[turret_dirtyBomb]
+x: 0
+y: 0
+projectile: dirtyBomb
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:600
+
+[turret_mirv]
+x: 0
+y: 0
+projectile: mirv
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:450
+
+[projectile_kineticStrike]
+life: 60
+deflectionPower: -1
+spawnUnit: EkKineticSpawner, kineticping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[projectile_dysonBeam]
+life: 60
+deflectionPower: -1
+spawnUnit: EkLaserSpawner, holyshtping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[projectile_dirtyBomb]
+life: 60
+deflectionPower: -1
+spawnUnit: EkDirtybombSpawner, chemping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[projectile_mirv]
+life: 60
+deflectionPower: -1
+spawnUnit: EkMirvSpawner, mirvping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true

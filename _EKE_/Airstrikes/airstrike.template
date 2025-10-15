@@ -1,0 +1,262 @@
+[template_noJacas]
+#=================== lock not for u hacky wacky
+isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
+isLockedAltMessage: Unauthorized
+isLockedAltMessage_ru: Нет связи со штабом!
+isLockedAltMessage_zh: 未授权！
+
+isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
+isLockedAltMessage: Air Strike Disabled
+isLockedAltMessage_ru: Воздушная поддержка отключена
+isLockedAltMessage_zh: 空袭被禁用
+#===================================================
+
+
+##########################   AIR STRIKE CODE   #####################
+#-----------------------air support down
+[action_a]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: a
+price: 400, Power=30
+text: air support down
+description: Drops a bomb on target location\n- Does 800 damage, area radius 75\n- Targeting Range 360
+text_ru: Плюха вниз
+description_ru: Сбрасывает плюху в указанную точку\n- Сносит мелких бомжей\n Радиус вызова: 360
+text_zh: 空中支援[方向下]
+description_zh: 向目标位置投掷炸弹\n-造成800点伤害，区域半径75\n-投放范围360
+text_zh: 空中支援[方向下]
+description_zh: 向目标位置投掷炸弹\n-造成800点伤害，区域半径75\n-投放范围360
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\down.png
+displayType: action
+buildSpeed: 1.7s
+pos: 1.1
+highPriorityQueue: true
+allowMultipleInQueue: true
+[turret_a]
+x: 0
+y: 0
+projectile: a
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange: 360
+[projectile_a]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDbombdown, bombping(offsetDir=180, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+explodeEffect: NONE
+explodeEffectOnShield: NONE
+#-----------------------air support up
+[action_up]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: up
+price: 400, Power=30 
+text: air support up
+description: Drops a bomb on target location\n- Does 800 damage, area radius 75\n- Targeting Range 360
+text_ru: Плюха вверх
+description_ru: Сбрасывает плюху в указанную точку\n- Сносит мелких бомжей\n Радиус вызова: 360
+text_zh: 空中支援[方向上]
+description_zh: 向目标位置投掷炸弹\n-造成800点伤害，区域半径75\n-投放范围360
+
+
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\up.png
+displayType: action
+buildSpeed: 1.3s
+pos: 1.1
+highPriorityQueue: true
+
+[turret_up]
+x: 0
+y: 0
+projectile: up
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange: 360
+[projectile_up]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDbombup, bombping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+explodeEffect: NONE
+explodeEffectOnShield: NONE
+#-----------------------
+[action_cl2]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: cl2
+price: 5000, Power=200
+text: Vertical Carbet Bombing
+description: Carpet bombs a Vertical straight line\n- Does 375 - 755dmg in a line, depending on where the bombs hit\n- Targeting range 360
+text_ru: Вертикальная дорожка
+description_ru: Направление: сверху-вниз\n- Сбрасывает плюхи дорожкой\n Радиус вызова: 360
+text_zh: 垂直地毯轰炸
+description_zh: 地毯轰炸垂直直线\n-根据炸弹击中的位置，一条直线的轰炸量为375至755伤害 \n-释放范围360
+
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\bommba - Copy.png
+displayType: action
+buildSpeed: 1s
+pos: 1.1
+highPriorityQueue: true
+addActionCooldownTime: 15s
+allowMultipleInQueue: false
+[turret_cl2]
+x: 0
+y: 0
+limitingRange: 360
+projectile: cl2
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+[projectile_cl2]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDcarpet2, carpetpingV(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[action_cl3]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: cl3
+price: 5000, Power=200
+text: Horizontal Carpet Bombing
+description: Carpet bombs a horizontal straight line\n- Does 375 - 755dmg in a line, depending on where the bombs hit\n- Targeting range 360
+text_ru: Горизонтальная дорожка
+description_ru: Направление: справа-налево\n- Сбрасывает плюхи дорожкой\n Радиус вызова: 360
+text_zh: 水平地毯轰炸
+description_zh: 水平轰炸直线\n-根据炸弹击中的位置，一条直线的轰炸量为375至755伤害 \n-释放范围360
+
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\bommba.png
+displayType: action
+buildSpeed: 1s
+pos: 1.1
+highPriorityQueue: true
+addActionCooldownTime: 15s
+allowMultipleInQueue: false
+[turret_cl3]
+x: 0
+y: 0
+limitingRange: 360
+projectile: cl3
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+[projectile_cl3]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDcarpet, carpetpingV(offsetDir=180, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+
+[action_AAT]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: AAT
+price: 1000, Power=50
+text: Anti Air Strike
+description: Shoots a quick cluster of missiles in target area\n- Each missile does about 200dmg\n- Targeting range 360
+text_ru: ПВА дымок
+description_ru: - Запускает дымок в помеченную точку\n- В общем дымок отпердеживает 1050 урона\n Радиус вызова: 360
+text_zh: 反空军
+description_zh: 在目标区域快速发射一组导弹\n-每枚导弹的射程约为200伤害\n-释放范围360
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\RADIO\antiair.png
+displayType: action
+buildSpeed: 1.3s
+pos: 1.1
+highPriorityQueue: true
+
+[turret_AAT]
+x: 0
+y: 0
+projectile: AAT
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange: 360
+[projectile_AAT]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDairtoair, AAinterceptping(offsetDir=120, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[action_Np]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: Np
+price: 3000, Power=100
+text: Napalm Strike
+description: Burns large target area, does minor damage over time\n- Reduced damage to structures
+text_ru: Огненные поля
+description_ru: - Поджигает указанную местность, заставляя противников уплясывать оттуда,\nОбжигает технику и здания\n- Не атакует кислород, но способен атаковать глубинную воду\nРадиус вызова: 360
+text_zh: 凝固汽油弹
+description_zh: 燃烧大的目标区域，随着时间的推移造成轻微破坏\n-减少对建筑的损坏
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\napalm.png
+displayType: action
+buildSpeed: 2s
+pos: 1.1
+highPriorityQueue: true
+addActionCooldownTime: 45s
+allowMultipleInQueue: false
+[turret_Np]
+x: 0
+y: 0
+projectile: Np
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange: 360
+
+[projectile_Np]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDnapalm, napalmping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+[action_bb]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: bb
+price: 6000, Uranium=100, Power=200 
+text: Bunker Buster
+description: Does 7,000 dmg to structures\n- Not effective VS units\n- Targeting range 360
+text_ru: Бетонобойка
+description_ru: - Откладывает плюху на препятствия противника\n- Не работает с техникой\n- Радиус вызова: 360
+text_zh: 碉堡克星
+description_zh: 对建筑物造成7000伤害\n-对单位无效\n-释放范围360
+iconImage: ROOT:_EKE_\Airstrikes\bombing runs\target.png
+displayType: action
+buildSpeed: 5s
+allowMultipleInQueue: false
+pos: 1.1
+highPriorityQueue: true
+addActionCooldownTime: 15s
+whenBuilding_cannotMove: true
+[turret_bb]
+x: 0
+y: 0
+projectile: bb
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange: 360
+[projectile_bb]
+life: 60
+deflectionPower: -1
+spawnUnit: TCAIDbuster, bunkebusterping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true

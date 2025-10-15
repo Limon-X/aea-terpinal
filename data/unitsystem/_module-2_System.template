@@ -1,0 +1,623 @@
+#_rexon
+#ROOT:data\unitsystem\_module-2_System.template
+[core]
+[template_moduleselector]
+@define modSlot: 0
+buildSpeed:0
+pos:20
+displayType: infoOnly
+canPlayerCancel: false
+allowMultipleInQueue: false
+extraLagHidingInUI: true
+alwaysSinglePress: true
+highPriorityQueue: true
+#=====================================================================
+text: [
+textAddUnitName: unitRef self.attachment(slot="module_${modSlot}")
+textPostFix: ] Slot: ${modSlot}
+textPostFix_zh: ] 槽: ${modSlot}
+text_ru: [
+textAddUnitName: unitRef self.attachment(slot="module_${modSlot}")
+textPostFix_ru: ] Слот: ${modSlot}
+descriptionAddFromUnit: unitRef self.attachment(slot="module_${modSlot}")
+descriptionAddUnitStats: unitRef self.attachment(slot="module_${modSlot}")
+unitShownInUI: unitRef self.attachment(slot="module_${modSlot}")
+#=====================================================================
+iconExtraImage: ROOT:data\icons\select.png
+[action_press1]
+@copyFromSection: template_moduleselector
+@define modSlot: 1
+isVisible: if self.hasResources(select1=1)
+isGuiBlinking: if not self.hasFlag(id=1)
+iconExtraIsVisible: if not self.hasFlag(id=1)
+addResources: unsetFlag=1
+[action_press2]
+@copyFromSection: template_moduleselector
+@define modSlot: 2
+isVisible: if self.hasResources(select1=1)
+isGuiBlinking: if self.hasFlag(id=1)
+iconExtraIsVisible: if self.hasFlag(id=1)
+addResources: setFlag=1
+#-------------------------------
+[action_moduleunhide]
+isActive: true
+isVisible: if not self.hasResources(select1=1)
+text_zh:  安装 模块 II
+description_zh: 有两个模块插槽
+text: Install Module II
+description: Has two module slot
+text_ru: Установить Модули II
+description_ru: Можно установить 2 модуля
+buildSpeed: 0s
+addResources: select1=1
+iconImage: ROOT:data\icons\module.png
+iconExtraImage: ROOT:data\icons\module_1.png
+iconExtraIsVisible: if self.numberOfAttachedUnits(withTag='module+')>0
+iconExtraColor: #96f9e0
+pos:20
+[action_modulehide]
+isActive: true
+isVisible: if self.hasResources(select1=1)
+text_zh: [ 返回 ]
+text: [ Back ]
+text_ru: [ Назад ]
+buildSpeed: 0s
+addResources: select1=-1
+iconImage: ROOT:data\icons\back.png
+pos:20
+#-------------------------------
+[resource_select1]
+displayName: se
+hidden: true
+[resource_select2]
+displayName: se
+hidden: true
+#######################################################################
+[hiddenAction_moduleInstalled_1]
+autoTriggerOnEvent: newMessage(withTag="moduleInstalled_1")
+requireConditional: if self.hasResources(moduleLock_1=1)
+addResources: moduleLock_1=-1
+[hiddenAction_moduleInstalled_2]
+autoTriggerOnEvent: newMessage(withTag="moduleInstalled_2")
+requireConditional: if self.hasResources(moduleLock_2=1)
+addResources: moduleLock_2=-1
+[resource_moduleLock_1]
+displayName: lock 1
+hidden: true
+[resource_moduleLock_2]
+displayName: lock 2
+hidden: true
+###################################### Cancel
+[action_CancelQueue_1]
+@define moduleLock: 1
+isVisible: if self.hasResources(select1=1) and not self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}',greaterThan=0) and not self.hasFlag(id=1)
+requireConditional: if self.hasResources(moduleLock_${moduleLock}=1)
+isGuiBlinking: if self.hasResources(moduleLock_${moduleLock}=1)
+text_zh: 取消安装 \n [模块插槽: ${moduleLock}]
+text: Cancel Installation \n [module slot: ${moduleLock}]
+text_ru: Отменить установку\n[Слот модуля: ${moduleLock}]
+buildSpeed: 0s
+sendMessageTo: unitRef self.attachment(slot="module_${moduleLock}", withTag="module_attachment")
+sendMessageWithTags: moduleCancelQueue_${moduleLock}
+addResources: moduleLock_${moduleLock}=-1
+highPriorityQueue: true
+alwaysSinglePress: true
+iconImage: ROOT:data\icons\stop.png
+[action_CancelQueue_2]
+@copyFromSection: action_CancelQueue_1
+@define moduleLock: 2
+isVisible: if self.hasResources(select1=1) and not self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}',greaterThan=0) and self.hasFlag(id=1)
+[action_ReclaimModule_1]
+@define moduleLock: 1
+isVisible: if self.hasResources(select1=1) and self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}',greaterThan=0) and not self.hasFlag(id=1)
+text: Uninstall Module \n[module slot: ${moduleLock}] 
+description: - Free up slot for another module type.\n- Refund 50% 
+text_zh: 卸载模块\n[模块插槽：${moduleLock}]
+description_zh: -为其他模块类型释放插槽。\n-退款50%
+text_ru: Убрать Модуль\n[Слот модуля: ${moduleLock}]
+description_ru: - Освобождает слот для установки другого модуля\n- Возмещает 50% ресурсов.
+buildSpeed: 0s
+sendMessageTo: unitRef self.attachment(slot="module_${moduleLock}", withTag="module+")
+sendMessageWithTags: moduleUninstall_${moduleLock}
+highPriorityQueue: true
+alwaysSinglePress: true
+addActionCooldownTime: 5s
+
+[action_ReclaimModule_2]
+@copyFromSection: action_ReclaimModule_1
+@define moduleLock: 2
+isVisible: if self.hasResources(select1=1) and self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}',greaterThan=0) and self.hasFlag(id=1)
+#showQuickWarLogToPlayer: message Sent
+###################################### Template
+[template_moduleSelector]
+	@define modsTag: 			NA
+	@define moduleT: 			NA
+	@define modTrig: 			NA
+	@define modName:		 	NA
+	@define moduleLock: 	NA
+	
+	displayType: action
+	#isActive: if not self.hasResources(moduleLock_${moduleLock}=1)
+	#isLockedMessage: Installing module
+	#isLockedMessage_ru: Установка модуля...
+	
+		highPriorityQueue: true
+		allowMultipleInQueue: false
+		alwaysSinglePress: true
+	
+	text_zh: 安装 [ ${modName_zh} ] \n[模块插槽：${moduleLock}]
+	text: Install [ ${modName} ] \n[module slot: ${moduleLock}] 
+	text_ru: Установить [ ${modName_ru} ]\n[Слот модуля: ${moduleLock}]
+	
+	descriptionAddFromUnit: ${moduleT}
+	#descriptionAddUnitStats: ${moduleT}
+	unitShownInUI: ${moduleT}
+	#iconExtraImage: 
+	
+	#addResources: moduleLock=1
+	buildSpeed: 0s
+	sendMessageTo: unitRef self.attachment(slot="module_${moduleLock}", withTag="module_attachment")
+	sendMessageWithTags: ${modTrig}
+	showQuickWarLogToPlayer_zh: 模块安装中: ${modName}
+	showQuickWarLogToPlayer: Installing module: ${modName}
+	showQuickWarLogToPlayer_ru: Установка модуля: ${modName_ru}
+	alsoTriggerAction: modLock_1, modLock_2
+	
+[hiddenAction_modLock_1]
+requireConditional: if not self.hasResources(moduleLock_1=1) and not self.hasFlag(id=1)
+addResources: moduleLock_1=1
+[hiddenAction_modLock_2]
+requireConditional: if not self.hasResources(moduleLock_2=1) and self.hasFlag(id=1)
+addResources: moduleLock_2=1
+[template_temModLock_1]
+@define moduleLock: 1
+isVisible: if self.hasResources(select1=1) and self.tags(includes='${modsTag}') and self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}')<1 and not self.hasFlag(id=1)
+isActive: if not self.hasResources(moduleLock_${moduleLock}=1)
+[template_temModLock_2]
+@define moduleLock: 2
+isVisible: if self.hasResources(select1=1) and self.tags(includes='${modsTag}') and self.numberOfAttachedUnits(withTag='moduleSel_${moduleLock}')<1 and self.hasFlag(id=1)
+isActive: if not self.hasResources(moduleLock_${moduleLock}=1)
+[template_lockT2]	
+	#-----------------
+	isLocked: if not self.globalTeamTags(includes='module_I')
+	isLockedMessage_zh: 需要研究：模块 Tech-I 
+	isLockedMessage: Requires research: Module I 
+	isLockedMessage_ru: Необходимо исследование: Модули I
+	#-----------------
+[template_lockT3]	
+  #-----------------
+  isLocked: if not self.globalTeamTags(includes='module_I')
+  isLockedMessage: Requires research: Module I 
+  isLockedMessage_zh: 需要研究：模块 Tech-I 
+  isLockedMessage_ru: Необходимо исследование: Модули I
+  #-----------------
+  isLockedAlt: if not self.globalTeamTags(includes='module_II')
+  isLockedAltMessage_zh: 需要研究：模块 Tech-II 
+  isLockedAltMessage: Requires research: Module II 
+  isLockedAltMessage_ru: Необходимо исследование: Модули II
+  #-----------------
+#_________________Modules ####################################################################### module slot 1
+[action_install_module_LMG_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		lightMG
+	@define moduleT: 		module_lightMG
+	@define modTrig: 		TRIGGER_LMG_1
+	@define modName_zh: 		轻机枪
+	@define modName: 		Light MG
+	@define modName_ru:		Лёгкий Пулемёт
+	price: ${Mprice_I}
+[action_install_mechBuilder_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		mechBuilder
+	@define moduleT: 		module_mechBuildert1
+	@define modTrig: 		TRIGGER_MECHBUILDER_1
+	@define modName_zh: 		机甲建造者
+	@define modName: 		Mech Builder
+	@define modName_ru:		Мини-Завод
+	price: ${Mprice_I2}
+[action_install_module_repairbot_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		RepairBot
+	@define moduleT: 		module_RepairBot
+	@define modTrig: 		TRIGGER_REPAIR_1
+	@define modName_zh: 		修复程序
+	@define modName: 		Repair Bot
+	@define modName_ru:		Рем. Бот
+	price: ${Mprice_II}
+[action_install_module_repairbay_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		exRepairBay
+	@define moduleT: 		module_ex_RepairBay
+	@define modTrig: 		TRIGGER_REPAIRBAY_1
+	@define modName_zh: 		修复站
+	@define modName: 		Repair Bay
+	@define modName_ru:		Рем. Станция
+	price: ${Mprice_IIa}		
+[action_install_module_shurikenS_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		ShuriSwarmer
+	@define moduleT: 		swarmer
+	@define modTrig: 		TRIGGER_SHURIKEN_1
+	@define modName: 		Shuriken Swarmer
+	@define modName_zh: 		手里剑蜂群
+	@define modName_ru:		Гнездо Сюрикенов
+	price: ${Mprice_II2}
+[action_install_module_shieldgenerator_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		Shieldgenerator
+	@define moduleT: 		module_shieldGen
+	@define modTrig: 		TRIGGER_SHIELDGENERATOR_1
+	@define modName: 		Shield Generator
+	@define modName_zh: 		护盾发生器
+	@define modName_ru:		Генератор Щита
+	price: ${Mprice_VI}
+[action_install_module_IonDeath_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		Iondetonator
+	@define moduleT: 		module_ionDeath
+	@define modTrig: 		TRIGGER_IONDEATH_1
+	@define modName: 		Ion Detonator
+	@define modName_zh: 		离子雷管
+	@define modName_ru:		Ионный Взрыватель
+	price: ${Mprice_XI}
+[action_install_module_redShell_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_1
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Красный Сюрикен
+	price: ${Mprice_III}
+[action_install_module_laser_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		laserDef
+	@define moduleT: 		module_laserDefence
+	@define modTrig: 		TRIGGER_LASERDEFENSE_1
+	@define modName: 		Laser Defense
+	@define modName_zh: 		激光防御
+	@define modName_ru:		Лазерная Защита
+	price: ${Mprice_IV}
+[action_install_module_eCharger_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		Energycharger
+	@define moduleT: 		Energy_charger
+	@define modTrig: 		TRIGGER_ENERGYCHARGER_1
+	@define modName: 		Energy Charger
+	@define modName_zh: 		能量充能器
+	@define modName_ru:		Зарядник
+	price: ${Mprice_V}
+[action_install_module_turtle_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		Turtlecore
+	@define moduleT: 		shield_laser_defenseGen
+	@define modTrig: 		TRIGGER_TURTLECORE_1
+	@define modName: 		Turtle Core
+	@define modName_zh: 		龟核
+	@define modName_ru:		Черепашье Ядро
+	price: ${Mprice_VII}
+[action_install_module_precisionB_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		precisionB
+	@define moduleT: 		module_precisionBeam
+	@define modTrig: 		TRIGGER_PRECISION_1
+	@define modName_zh: 		精密光线
+	@define modName: 		Precision Beam
+	@define modName_ru:		ЛМНД
+	price: ${Mprice_VIII}
+[action_install_module_particleB_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		aaPBeam
+	@define moduleT: 		module_aaparctileBeam
+	@define modTrig: 		TRIGGER_PARTICLE_1
+	@define modName_zh: 		粒子束
+	@define modName: 		Particle Beam
+	@define modName_ru:		ЛМВД
+	price: ${Mprice_IX}
+[action_install_module_Demo_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		demo
+	@define moduleT: 		module_demo
+	@define modTrig: 		TRIGGER_DEMOCHARGE_1
+	@define modName: 		Demo Charge
+	@define modName_zh: 		炸药包
+	@define modName_ru:		Заряд Взрывчатки
+	price: ${Mprice_XII}
+[action_install_module_RepairPulse_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT3
+	@define modsTag: 		repairPulse
+	@define moduleT: 		module_repaipulse
+	@define modTrig: 		TRIGGER_REPAIRPULSE_1
+	@define modName_zh: 		修复脉冲
+	@define modName: 		Repair Pulse
+	@define modName_ru:		Рем-Пульсация
+	price: ${Mprice_X}
+[action_install_module_Nuke_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1
+	@define modsTag: 		NuclearPayload
+	@define moduleT: 		module_nuke
+	@define modTrig: 		TRIGGER_NUKE_1
+	@define modName_zh: 		核能有效载荷
+	@define modName: 		Nuke Payload
+	@define modName_ru:		Ядерный Заряд
+	price: ${Mprice_XIII}
+  #-----------------
+  isLocked: if not game.nukesEnabled()
+  isLockedMessage: Oh no... No nuke this time
+  isLockedMessage_ru: Ядерки запрещены!
+  isLockedMessage_zh:哦不....这次没有核弹
+  #-----------------
+  isLockedAlt: if not self.globalTeamTags(includes='module_I')
+  isLockedAltMessage: Requires research: Module I 
+  isLockedAltMessage_zh: 需要研究：模块 Tech-I
+  isLockedAltMessage_ru: Необходимо исследование: Модули I
+  #-----------------
+  isLockedAlt2: if not self.globalTeamTags(includes='module_II')
+  isLockedAlt2Message: Requires research: Module II 
+  isLockedAlt2Message_zh: 需要研究：模块 Tech-II
+  isLockedAlt2Message_ru: Необходимо исследование: Модули II
+  #-----------------
+[action_install_moduleMax_repairbot_A]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_1
+	@define modsTag: 		RepairBot
+	@define moduleT: 		module_RepairBot
+	@define modTrig: 		TRIGGER_REPAIR_1_max
+	@define modName_zh: 		MAX修复程序
+	@define modName: 		Max Repair Bot
+	@define modName_ru:		Макс. Рем. Бот
+	price: ${Mprice_II+3200}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
+	iconExtraColor: #fffd00
+[action_install_moduleMax_repairbAy_A]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_1
+	@define modsTag: 		exRepairBay
+	@define moduleT: 		module_ex_RepairBay
+	@define modTrig: 		TRIGGER_REPAIRBAY_1_max
+	@define modName_zh: 		MAX修复站
+	@define modName: 		Max Repair Bay
+	@define modName_ru:		Макс. Рем. Станция
+	price: ${Mprice_IIa+3200}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
+	iconExtraColor: #fffd00
+[action_install_moduleMax_turtlecore_A]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_1
+	@define modsTag: 		Turtlecore
+	@define moduleT: 		shield_laser_defenseGen
+	@define modTrig: 		TRIGGER_TURTLECORE_1_max
+	@define modName_zh: 		MAX龟核
+	@define modName: 		Max Turtle Core
+	@define modName_ru:		Макс. Черепашье Ядро
+	price: ${Mprice_VII+1700+2700}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
+	iconExtraColor: #fffd00	
+#_________________Modules ####################################################################### module slot 2
+[action_install_module_LMG_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		lightMG
+	@define moduleT: 		module_lightMG
+	@define modTrig: 		TRIGGER_LMG_2
+	@define modName_zh: 		轻机枪
+	@define modName: 		Light MG
+	@define modName_ru:		Лёгкий Пулемёт
+	price: ${Mprice_I}
+[action_install_mechBuilder_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		mechBuilder
+	@define moduleT: 		module_mechBuildert1
+	@define modTrig: 		TRIGGER_MECHBUILDER_2
+	@define modName: 		Mech Builder
+	@define modName_zh: 		机甲建造者
+	@define modName_ru:		Мини-Завод
+	price: ${Mprice_I2}
+[action_install_module_repairbot_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		RepairBot
+	@define moduleT: 		module_RepairBot
+	@define modTrig: 		TRIGGER_REPAIR_2
+	@define modName_zh: 		修复程序
+	@define modName: 		Repair Bot
+	@define modName_ru:		Рем. Бот
+	price: ${Mprice_II}
+[action_install_module_repairbay_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		exRepairBay
+	@define moduleT: 		module_ex_RepairBay
+	@define modTrig: 		TRIGGER_REPAIRBAY_2
+	@define modName_zh: 		修复站
+	@define modName: 		Repair Bay
+	@define modName_ru:		Рем. Станция
+	price: ${Mprice_IIa}		
+[action_install_module_shurikenS_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		ShuriSwarmer
+	@define moduleT: 		swarmer
+	@define modTrig: 		TRIGGER_SHURIKEN_2
+	@define modName_zh: 		手里剑蜂群
+	@define modName: 		Shuriken Swarmer
+	@define modName_ru:		Гнездо Сюрикенов
+	price: ${Mprice_II2}
+[action_install_module_shieldgenerator_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		Shieldgenerator
+	@define moduleT: 		module_shieldGen
+	@define modTrig: 		TRIGGER_SHIELDGENERATOR_2
+	@define modName: 		Shield Generator
+	@define modName_zh: 		护盾发生器
+	@define modName_ru:		Генератор Щита
+	price: ${Mprice_VI}
+[action_install_module_IonDeath_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		Iondetonator
+	@define moduleT: 		module_ionDeath
+	@define modTrig: 		TRIGGER_IONDEATH_2
+	@define modName: 		Ion Detonator
+	@define modName_zh: 		离子雷管
+	@define modName_ru:		Ионный Взрыватель
+	price: ${Mprice_XI}
+[action_install_module_redShell_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_2
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Красный Сюрикен
+	price: ${Mprice_III}
+[action_install_module_laser_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		laserDef
+	@define moduleT: 		module_laserDefence
+	@define modTrig: 		TRIGGER_LASERDEFENSE_2
+	@define modName: 		Laser Defense
+	@define modName_zh: 		激光防御
+	@define modName_ru:		Лазерная Защита
+	price: ${Mprice_IV}
+[action_install_module_eCharger_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		Energycharger
+	@define moduleT: 		Energy_charger
+	@define modTrig: 		TRIGGER_ENERGYCHARGER_2
+	@define modName: 		Energy Charger
+	@define modName_zh: 		能量充能器
+	@define modName_ru:		Зарядник
+	price: ${Mprice_V}
+[action_install_module_turtle_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		Turtlecore
+	@define moduleT: 		shield_laser_defenseGen
+	@define modTrig: 		TRIGGER_TURTLECORE_2
+	@define modName_zh: 		龟核
+	@define modName: 		Turtle Core
+	@define modName_ru:		Черепашье Ядро
+	price: ${Mprice_VII}
+[action_install_module_precisionB_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		precisionB
+	@define moduleT: 		module_precisionBeam
+	@define modTrig: 		TRIGGER_PRECISION_2
+	@define modName_zh: 		精密光线
+	@define modName: 		Precision Beam
+	@define modName_ru:		ЛМНД
+	price: ${Mprice_VIII}
+[action_install_module_particleB_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		aaPBeam
+	@define moduleT: 		module_aaparctileBeam
+	@define modTrig: 		TRIGGER_PARTICLE_2
+	@define modName_zh: 		粒子束
+	@define modName: 		Particle Beam
+	@define modName_ru:		ЛМВД
+	price: ${Mprice_IX}
+[action_install_module_Demo_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		demo
+	@define moduleT: 		module_demo
+	@define modTrig: 		TRIGGER_DEMOCHARGE_2
+	@define modName_zh: 		炸药包
+	@define modName: 		Demo Charge
+	@define modName_ru:		Заряд Взрывчатки
+	price: ${Mprice_XII}
+[action_install_module_RepairPulse_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT3
+	@define modsTag: 		repairPulse
+	@define moduleT: 		module_repaipulse
+	@define modTrig: 		TRIGGER_REPAIRPULSE_2
+	@define modName_zh: 		修复脉冲
+	@define modName: 		Repair Pulse
+	@define modName_ru:		Рем-Пульсация
+	price: ${Mprice_X}
+[action_install_module_Nuke_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2
+	@define modsTag: 		NuclearPayload
+	@define moduleT: 		module_nuke
+	@define modTrig: 		TRIGGER_NUKE_2
+	@define modName_zh: 		核能有效载荷
+	@define modName: 		Nuke Payload
+	@define modName_ru:		Ядерный Заряд
+	price: ${Mprice_XIII}
+  #-----------------
+  isLocked: if not game.nukesEnabled()
+  isLockedMessage: Oh no... No nuke this time
+  isLockedMessage_ru: Ядерки запрещены!
+  isLockedMessage_zh:哦不....这次没有核弹
+  #-----------------
+  isLockedAlt: if not self.globalTeamTags(includes='module_I')
+  isLockedAltMessage: Requires research: Module I 
+  isLockedAltMessage_zh: 需要研究：模块 Tech-I
+  isLockedAltMessage_ru: Необходимо исследование: Модули I
+  #-----------------
+  isLockedAlt2: if not self.globalTeamTags(includes='module_II')
+  isLockedAlt2Message: Requires research: Module II 
+  isLockedAlt2Message_zh: 需要研究：模块 Tech-II
+  isLockedAlt2Message_ru: Необходимо исследование: Модули II
+  #-----------------
+[action_install_moduleMax_repairbot_B]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_2
+	@define modsTag: 		RepairBot
+	@define moduleT: 		module_RepairBot
+	@define modTrig: 		TRIGGER_REPAIR_2_max
+	@define modName_zh: 		MAX修复程序
+	@define modName: 		Max Repair Bot
+	@define modName_ru:		Макс. Рем. Бот
+	price: ${Mprice_II+3200}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
+	iconExtraColor: #fffd00
+[action_install_moduleMax_repairbAy_B]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_2
+	@define modsTag: 		exRepairBay
+	@define moduleT: 		module_ex_RepairBay
+	@define modTrig: 		TRIGGER_REPAIRBAY_2_max
+	@define modName_zh: 		MAX修复站
+	@define modName: 		Max Repair Bay
+	@define modName_ru:		Макс. Рем. Станция
+	price: ${Mprice_IIa+3200}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
+	iconExtraColor: #fffd00
+[action_install_moduleMax_turtlecore_B]
+	@copyFromSection: template_moduleSelector, template_lockT3, template_temModLock_2
+	@define modsTag: 		Turtlecore
+	@define moduleT: 		shield_laser_defenseGen
+	@define modTrig: 		TRIGGER_TURTLECORE_2_max
+	@define modName_zh: 		MAX龟核
+	@define modName: 		Max Turtle Core
+	@define modName_ru:		Макс. Черепашье Ядро
+	price: ${Mprice_VII+1700+2700}
+	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
+	iconExtraColor: #fffd00	
+####################################################################### END
+[attachment_module_1]
+redirectDamageToParent: false
+redirectDamageToParent_shieldOnly: false
+x: 0
+y: 0
+#idleDir:0
+idleDir:0
+#idleDirReversing:180
+#-----------------------
+onCreateSpawnUnitOf:module_attachment_1
+#-----------------------
+addTransportedUnits: true
+setDrawLayerOnTop: true
+lockLegMovement:false
+keepAliveWhenParentDies: false
+canBeAttackedAndDamaged: false
+isUnselectable: true
+showAllActionsFrom: if self.hasResources(select1=1) and self.numberOfAttachedUnits(withTag='moduleSel_1')>0 and not self.hasFlag(id=1)
+#showAllActionsFrom: if self.hasResources(select1=1) and not self.hasFlag(id=1)
+#resetRotationWhenNotAttacking:true
+lockRotation: true
+createIncompleteIfParentIs: false
+redirectDamageToParent: true
+redirectDamageToParent_shieldOnly: true
+[attachment_module_2]
+redirectDamageToParent: false
+redirectDamageToParent_shieldOnly: false
+x: 0
+y: 0
+idleDir: 180
+@copyFromSection: attachment_module_1
+showAllActionsFrom: if self.hasResources(select1=1) and self.numberOfAttachedUnits(withTag='moduleSel_2')>0 and self.hasFlag(id=1)
+#showAllActionsFrom: if self.hasResources(select1=1) and self.hasFlag(id=1)
+#-----------------------
+onCreateSpawnUnitOf:module_attachment_2
+#-----------------------

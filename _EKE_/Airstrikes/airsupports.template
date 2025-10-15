@@ -1,0 +1,91 @@
+[template_noJacas]
+#=================== lock not for u hacky wacky
+isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
+isLockedAltMessage: Unauthorized
+isLockedAltMessage_ru: Фиг тебе, а не небесная канцелярия!
+isLockedAltMessage_zh: 未授权！
+
+isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
+isLockedAltMessage: Air Strike Disabled
+isLockedAltMessage_ru: Небесную канцелярию глушат
+isLockedAltMessage_zh: 空袭被禁用
+#===================================================
+
+[action_shieldJammer]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: shieldJammer
+price: 5000, uranium=400, power=300
+ai_isDisabled: true
+text: Shield Jammer
+description: \n-An orbiting power station will bombard the area with resonating electromagnetic waves \n-Overloads all shield systems in the target area for 20 seconds
+text_ru: Глушилка связи
+description_ru: - Насылает на врагов пролятие поноса и перекрывает связь\n- Все 5-жи щиты в зоне поражения ломаются\n Радиус вызова: приблизительно 400
+text_zh: 护盾干扰
+description_zh: \n-轨道发电站将用共振电磁波轰炸该地区\n-使目标地区的所有护盾系统过载20秒
+addActionCooldownTime: 60s
+allowMultipleInQueue: false
+displayType: action
+buildSpeed: 2s
+pos: 1.1
+displayRemainingStockpile: true
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+
+iconImage: ROOT:_EKE_\Airstrikes\orbital Strikes\icon2_jammer.png
+
+[action_nanoBeam]
+@copyFromSection: template_noJacas
+#---------------------------------
+fireTurretXAtGround: nanoBeam
+price: 5000, uranium=300, power=200
+ai_isDisabled: true
+text: Nano Overcharge
+description: Heals 180 radius area 600hp per second\n- Lasts for about 11 seconds\n- Targeting range 600
+text_ru: Чилл-зона
+description_ru: - Запускает наномашинки в небольшом радиусе,\n в котором земля регенерирует по 250 ОЗ в сек.\n- Длится примерно 11 сек.\n Радиус вызова: 600
+text_zh: 纳米过载
+description_zh: 每秒恢复180范围内的单位250耐久\n-持续约11秒\n-发射范围600
+
+displayType: action
+buildSpeed: 1s
+pos: 1.1
+highPriorityQueue: true
+onlyOneUnitAtATime: true
+iconImage: ROOT:_EKE_\Airstrikes\orbital Strikes\icon2_nano.png
+addActionCooldownTime: 60s
+allowMultipleInQueue: false
+
+[turret_shieldJammer]
+x: 0
+y: 0
+projectile: shieldJammer
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:400
+
+[turret_nanoBeam]
+x: 0
+y: 0
+projectile: nanoBeam
+size: 1
+turnSpeed: 15
+canShoot:false
+invisible: true
+limitingRange:600
+
+[projectile_shieldJammer]
+life: 60
+deflectionPower: -1
+spawnUnit: EkShieldJammer, emping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true
+
+[projectile_nanoBeam]
+life: 60
+deflectionPower: -1
+spawnUnit: EkNanoBeamSpawner, nanoping(offsetDir=0, alwayStartDirAtZero=true)
+directDamage: 0
+instant: true

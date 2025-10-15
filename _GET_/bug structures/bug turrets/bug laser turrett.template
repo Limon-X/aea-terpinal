@@ -1,0 +1,53 @@
+[core]
+name: bug_big_laser_turret
+copyFrom: ROOT:/attach_turrets/turret.ini
+
+
+[graphics]
+drawLayer: air
+image_turret:  turret.png
+turretImageScale:1.08
+
+
+[attack]
+canAttack: true
+canAttackFlyingUnits: true
+canAttackLandUnits:   true
+canAttackUnderwaterUnits: false
+maxAttackRange:600
+
+
+[turret_beam]
+x: 0
+y: 0
+turnSpeed:8
+turnSpeedAcceleration: 1
+delay:4
+size: 25
+projectile:beam
+altProjectile: beam2
+altProjectileCondition: if self.attacking.isFlying()
+aimOffsetSpread: 0
+
+
+[projectile_beam]
+life: 6
+instant:true
+instantReuseLast: true
+instantReuseLast_alsoChangeTurretAim: true
+moveWithParent: true
+beamImage:      SHARED:beam3.png
+beamImageEnd:   SHARED:beam1_end.png
+beamImageStart: SHARED:beam1_start.png
+beamImageOffsetRate: 2
+explodeEffect: NONE
+explodeEffectOnShield: NONE
+directDamage: 24
+shieldDamageMultiplier: 0.5
+sweepOffsetFromTargetRadius:0.5
+sweepSpeed:10
+color: #22dd22
+
+[projectile_beam2]
+@copyFromSection: projectile_beam
+directDamage: 30

@@ -1,0 +1,586 @@
+#Test fetch VIII imma choke u 
+[core]
+strictLevel: 0
+#=======
+
+#================= DEV only = Unit show on sandbox
+#showInEditor: ${????} doesnt work " :> "
+@global AEA_units: true
+@global AEA_spawn: true
+#----------------------
+@global BGC_units: true
+@global BGC_spawn: true
+#----------------------
+@global EKE_units: true
+@global EKE_spawn: true
+#----------------------
+@global neutrals: true
+
+name: uranium
+tags: uranium, canberepaired
+#resourceRate: 1
+generation_delay: 40
+isBuilding: false
+
+#=====================buff/debuff, memorys=================================#
+@memory burningDebuff:number
+@memory crippleDebuff:number
+@memory concusiondebuff:number
+@memory concusiondebuff2:number
+@memory Shattered:number
+@memory SurpressedTallyScore:number
+@memory SurpressedCountdown:number
+@memory shockbuildup:number
+@memory shockEnabled:number
+@memory shocktimer:number
+@memory shockvalue:number
+@memory Blinded:number
+@memory BugIFC:number
+@memory stunDebuff:number
+@memory burningDebuff2:number
+@memory concusiondebuff3:number
+#[hiddenAction_IHAVETHEFOOKINGREPAIRTAGNEIGGA]
+#Coconut.png
+#autoTriggerOnEvent: created
+#temporarilyAddTags: canberepaired
+#DO NOT REMOVE THiS OR THE ENTIRE MOD WILL STOP WORKING
+
+#-------------------------Timer
+[template_timer]
+displayPos: 1
+displayWhenZero: true
+displayColor: #83bb03
+hidden: true
+displayTextPrefix:
+#________________________     Hour
+[global_resource_t_hours_a]
+@copyFromSection: template_timer
+hidden: false
+displayTextAppendResource: t_hours_b
+displayTextPrefix:Time [ 
+displayTextPrefix_ru:Время [
+[global_resource_t_hours_b]
+@copyFromSection: template_timer
+displayTextAppendResource: t_minutes_a 
+displayTextPostfix:
+displayTextPostfix_ru: ч
+#________________________     Minute
+[global_resource_t_minutes_a]
+@copyFromSection: template_timer
+displayTextPrefix: :
+displayTextPrefix_ru: ас:
+displayTextAppendResource: t_minutes_b
+[global_resource_t_minutes_b]
+@copyFromSection: template_timer
+displayTextAppendResource: t_seconds_a 
+displayTextPostfix:
+displayTextPostfix_ru: м
+#________________________     Second
+[global_resource_t_seconds_a]
+@copyFromSection: template_timer
+displayTextAppendResource: t_seconds_b 
+displayTextPrefix: :
+displayTextPrefix_ru: ин:
+[global_resource_t_seconds_b]
+@copyFromSection: template_timer
+displayTextPostfix:  ]
+displayTextPostfix_ru: с]
+displayTextAppendResource: uranium 
+displayTextAppendResourceWithGap: true
+#-------------------------Credit Transfer
+[global_resource_transferredCredit]
+# ↑ ↓
+displayName:Transferred Credit
+hidden: true
+displayColor: #83bb03
+displayWhenZero: true
+#displayNameHideWhenIconShownInText: true
+#displayNameHideWhenIconShownInHUD: true
+displayTextAppendResource: receivedCredit
+displayTextPrefix: Tfr ($ 
+[global_resource_receivedCredit]
+displayName:Received Credit
+hidden: true
+displayColor: #83bb03
+displayWhenZero: true
+displayTextPrefix: ) / Rcv ($
+displayTextPostfix:  )
+displayTextAppendResource: uranium
+displayTextAppendResourceWithGap: true
+#========================================================AEA Stuff=========================================================
+
+[global_resource_uranium]
+displayName: Uranium
+displayName_ru: Скуфедрон
+displayName_zh: 铀
+displayNameShort: U
+displayNameShort_ru: У
+hidden:true
+#displayPos: 1
+displayWhenZero: true
+displayColor:#008e54
+displayTextPrefix: Uranium:  
+displayTextPrefix_ru: Скуфедрон: 
+displayNameHideWhenIconShownInText: true
+displayNameHideWhenIconShownInHUD: true
+iconImage: ROOT:data\icons\u.png
+
+#[global_resource_uranium]
+##global resource to all factions, exp units
+#displayName: Uranium
+#displayNameShort: U
+#priority: 1
+##displayPos: 1
+#displayWhenZero: true
+#displayColor:#007b49
+#hidden:true
+#displayNameHideWhenIconShownInText: true
+#displayNameHideWhenIconShownInHUD: true
+#iconImage: ROOT:data\icons\u.png
+#displayTextPrefix: [ 
+#displayTextPostfix:  ]
+
+
+
+#reference to by price: t=1000
+#========================================================EKE Stuff=========================================================
+[global_resource_Power]
+displayName: Power
+displayName_ru: Энергия
+displayName_zh: 电力
+displayNameShort: P
+displayNameShort_ru: Э
+displayColor: #FFFF33
+displayPos: 2
+#priority: 1
+displayRoundedDown:true
+displayWhenZero:false
+displayTextAppendResource:maxpower 
+iconImage: ROOT:data\icons\power.png
+[global_resource_maxpower]
+#global resource, shared with all units on team
+displayName:MAX
+displayName_ru: МАКС
+hidden: false
+hidden: true
+displayColor: #FFFF33
+#iconImage:
+displayTextPrefix: |
+displayTextPostfix: 
+displayTextPostfix_ru: ед.
+
+[global_resource_darkmatter]
+#global resource, shared with all units on team
+displayName:DarkMatter
+displayName_ru: Чёрная Материя
+displayName_zh:暗物质
+displayNameShort: Ω
+displayNameShort_ru: Ω
+hidden: false
+displayColor: #000000
+#iconImage:
+displayTextPrefix: Ω:
+displayTextPostfix: 
+
+[global_resource_maxFabs]
+#new fabricator limit
+displayPos: 3
+displayName: maxfabs
+hidden: false
+displayNameShort: Eco Limit
+displayNameShort_ru: Эко-Лимит
+displayName_zh: 最大数量资源制造仪
+displayColor: #f9a602
+displayWhenZero: false
+displayTextPrefix: LIMIT 
+displayTextPostfix: $
+hidden:true
+#========================================================BGC Stuff=========================================================
+#================================BlackGuard Prices =====Donut touch dis
+# Tier I
+#---------------        builder > prerequisite: Dark Drone research
+@global darkDrone:      700
+#---------------        ---
+@global mmt:            400
+@global beamCrab:       500
+@global mist:           575
+@global lightningBug:   700
+@global basicMech2:     850
+@global miniMLRS:       1000
+@global miniVLS:        1000
+@global miniBertha:     1200
+@global strider:        1000
+@global reparatorMech:  1500
+@global miniNapalm:     1300
+@global miniSamurai:    1800, MSamurai=1
+# Tier II
+#---------------        Air > prerequisite: T2 Mech gantry/Langley
+@global lighFlyingMecg: 1300
+@global comanche:       2750
+@global bgBomberMech:   4500
+#---------------        ---
+@global modMech:        3000
+@global honeyBadger:    3000
+@global langley:        5000
+@global gunMech:        5500
+@global ionMech:        5800
+@global brokenMech:     6400
+@global mediumMT:       5500
+@global leyte:          7200
+@global ritter:         7200
+@global AArocketMech:   6000
+@global heavyAAMech:    8500
+@global type2Mech:      8000
+# Tier III
+@global athena:         7000
+@global tacticalMech:   7000
+@global rama:           9000
+@global odogaron:       12300
+@global heavyMT:        14000
+@global ATMech:         6000
+@global CamperMech:     13000
+# Tier IV
+@global type3Mech:      12000
+@global vigorous:       23000
+@global plasmaBeetle:   23000
+@global type4:          23000, uranium=75
+@global SamuraiX: 21000, uranium=1000
+# Tier V
+@global T4okhotnik:     55000, uranium=2750
+@global T4shokaku:      37500, uranium=800, SoaringCrane=1
+@global T5warpMech:     30000, uranium=750
+@global apolloOldPrice: 65000, uranium=3200
+# Experimental
+@global orion1: 8500, uranium=100
+@global shikishinaPr:   44000, uranium=1666, samuraiSoulL=1     
+@global konig: 15000, uranium=400
+#================================Module Prices =====Donut touch dis
+#-------light MG
+@global Mprice_I:    400
+#-------mech builder
+@global Mprice_I2:   500
+#-------repair bot
+@global Mprice_II:   1000
+@global Mprice_IIa:  1500
+#-------Shuriken Swarmer
+@global Mprice_II2:    1500
+#-------red shell
+@global Mprice_III:  2100
+#-------laser defense
+@global Mprice_IV:   1000
+#-------energy charger
+@global Mprice_V:    1900
+#-------shield generator
+@global Mprice_VI:   2000
+#-------turtle core
+@global Mprice_VII:  3900
+#-------precision beam
+@global Mprice_VIII: 4750
+#-------particle beam
+@global Mprice_IX:   4000
+#-------repair pulse
+@global Mprice_X:    6000
+#-------ion death
+@global Mprice_XI:   900
+#-------demo charge
+@global Mprice_XII:  4000
+#-------nuke payload
+@global Mprice_XIII: 12000
+#================================Module Prices  END
+#========Setting==========
+#Setting this to false will diactivates credits(Special thanks), default true
+@global creditsNames: true
+#Allow ai to option force build all mechGantry when widow is attacking 
+@global aiForceBuild: true
+#time interval ai force build, default 120s
+@global aiForceBuildcool: 120
+@global aiForceBuildcoolnUM: 4
+#Ai Build Build Build Build
+#========Apollo nkII==========
+#Setting this to false ai connot build APOLLO, default true
+@global AIapolloMkII: true
+#Allow ai use nuke on apollo...., default false..... false means they can use nukes
+@global AIapolloMkIIAiNuke: false
+#time interval ai build apollo, default 300s (5min)
+@global AIapolloMkIIcool: 300
+#Ai apollo limit, defaul: 5
+@global AIapolloMkII_PlayerAiLimit: 2
+#Human apollo limit, defaul: 5
+@global AIapolloMkIIcool_PlayerHumanLimit: 2
+#========Shokaku===========
+#Player Shokaku limit, defaul: 10
+@global shokaku_Limit: 10
+#========Widow===========
+#Player widow limit, defaul: 5
+@global widow_Limit: 5
+#========blackJack===========
+#Player blackJack limit, defaul: 6
+@global blackJack_Limit: 10
+#========miniSamurai===========
+#Player miniSamurai limit, defaul: 15
+@global Msamurai_Limit: 15
+#========landcruiser===========
+#Player landcruiser limit, defaul: 4
+@global landcruiser_Limit: 4
+# limit, defaul: 5
+@global typhoon_l: 5
+@global samurai_l: 1
+@global generator_l: 8
+#========UnitSkin==========
+#Black Jack camouflage, Option: 0 or 1
+# 0 -Default
+# 1 -German Iron Cross Camo
+@global camo_BlackJack: 0
+#Apollo mk II, Option: Barrel: 0, 1, 2     GunHouse: 0, 1
+#barrel                   GunHouse
+# 0 -Default              0 -Default 
+# 1 -Plasma Crytal        1 -Classic 'concept'
+# 2 -Plasma classic
+@global camo_ApolloII_barreal: 0
+@global camo_ApolloII_gunHouse: 0
+#Built mech stop moving for sec..... timer for how long they wait till the gantry fully opened
+@global mechGantryHalttimer: 2
+#========Global Resources=======
+[global_resource_DeltaCore]
+#Apollo's core
+displayPos: 2
+displayName:Delta Core
+displayName_ru: Дельта-Ядро
+hidden:false
+displayNameShort:Delta-C
+displayNameShort_ru:Д-Ядро
+displayColor:#f9a602
+displayWhenZero: false
+iconImage: ROOT:data\icons\module_shieldUpS.png
+displayNameHideWhenIconShownInText: true
+displayNameHideWhenIconShownInHUD: true
+displayTextAppendResource:Widow
+[global_resource_Widow]
+@copyFromSection: global_resource_DeltaCore 
+#widow
+displayName: Arachnid Core
+displayName_ru: Арахнидное Ядро
+displayNameShort: Arc-Core
+displayNameShort_ru: А-Ядро
+hidden:true
+iconImage: ROOT:data\icons\module_shieldUp.png
+displayTextAppendResource:samuraiSoulL
+displayTextPostfix: 
+[global_resource_samuraiSoulL]
+@copyFromSection: global_resource_DeltaCore
+displayName: Samurai Soul
+displayName_ru: Душа Самурая
+displayNameShort: Soul
+displayNameShort_ru: Душа
+hidden:true
+iconImage: ROOT:data\icons\module_energyUp.png
+displayTextAppendResource: IGNORE
+displayTextPostfix: 
+
+#------------------------------------drone carrier
+[global_resource_MechCarrier]
+displayPos: 3
+displayName:Mech Carrier
+displayName_ru:Шагоход-Авианосец
+hidden:true
+displayColor: #44eaea
+#displayWhenZero: true
+displayNameHideWhenIconShownInText: true
+displayNameHideWhenIconShownInHUD: true
+displayTextAppendResource: PhaseMechCarrier
+displayTextPrefix: [
+iconImage: ROOT:data\icons\droneicon.png
+[global_resource_PhaseMechCarrier]
+displayName:Shokaku
+displayName_ru:Сёкаку
+hidden:true
+displayColor: #44eaea
+#displayWhenZero: true
+displayTextPrefix: |
+displayTextPostfix: ]
+#iconImage: ROOT:data\icons\module_energyUp.png
+#------------------------------------
+
+
+[global_resource_typhoon]
+#@copyFromSection: global_resource_DeltaCore
+displayName: Typhoon
+displayName_ru: Тайфун
+displayNameShort: Typhoon
+displayNameShort_ru: Тайфун
+hidden: true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_generatorL]
+#@copyFromSection: global_resource_DeltaCore
+displayName: Generator
+displayName_ru: Генератор
+displayNameShort: Generator
+displayNameShort_ru: Генератор
+hidden:true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_SoaringCrane]
+#@copyFromSection: global_resource_DeltaCore 
+#Apollo's shikishina
+displayName: Battle-Carrier
+displayName_ru: Боевой Авианосец
+displayNameShort: CV-B
+displayNameShort_ru: БА-Ядро
+hidden:true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_Widow_BJ]
+#@copyFromSection: global_resource_DeltaCore 
+#widow
+displayName: Arachnid Core+
+displayName_ru: Арахнидное Ядро+
+displayNameShort: Arc-Core+
+displayNameShort_ru: А-Ядро+
+hidden:true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_MSamurai]
+#@copyFromSection: global_resource_DeltaCore 
+#widow
+displayName: Mini Samurai
+displayName_ru: Мини Самурай
+displayNameShort: Mini Sam
+displayNameShort_ru: Мини Сам.
+hidden:true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_landcruiser]
+#@copyFromSection: global_resource_DeltaCore 
+displayName: core
+displayNameShort: core
+hidden:true
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+#------=-=-=-=-=------Ai build rush
+[global_resource_mGantryT1]
+#@copyFromSection: global_resource_DeltaCore
+displayName:Ai FBMT1
+displayColor:#3e4fff
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_mGantryT2]
+#@copyFromSection: global_resource_mGantryT1
+displayName:Ai FBMT2
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_mGantryT3]
+#@copyFromSection: global_resource_mGantryT1
+displayName:Ai FBMT3
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_mGantryT4]
+#@copyFromSection: global_resource_mGantryT1
+displayName:Ai FBMT4
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+[global_resource_mGantryT5]
+#@copyFromSection: global_resource_mGantryT1
+displayName:Ai FBMT5
+displayWhenZero: false
+displayTextAppendResource: IGNORE
+#========================================================BlackGuard Stuff=========================================================
+
+
+#========================================================password code============================================================
+[global_resource_1X]
+displayName: 1X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 1x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_2X]
+displayName: 2X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 2x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_3X]
+displayName: 3X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 3x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_4X]
+displayName: 4X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 4x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_5X]
+displayName: 5X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 5x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_6X]
+displayName: 6X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 6x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_7X]
+displayName: 7X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 7x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_8X]
+displayName: 8X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 8x(
+displayTextPostfix: )
+#iconImage: NONE
+
+[global_resource_9X]
+displayName: 9X
+hidden:true
+displayColor: #FFFFFF
+
+displayTextPrefix: 9x(
+displayTextPostfix: )
+#iconImage: NONE
+
+
+#                                                           nightmare ai
+[hiddenAction_NAI_checkForAI#12312312]
+autoTriggerOnEvent: created
+requireConditional: if self.globalTeamTags(includes="NightmareAI") and (${core.isBuilding}!=true)
+temporarilyAddTags: NAI_Unit
+
+[hiddenAction_nai_checkifcanapplytag]
+autoTrigger: if self.globalTeamTags(includes="NightmareAI") and self.hp<=self.maxHp*0.4 and self.tags(includes="exp")
+autoTriggerCheckRate: every8Frames
+temporarilyAddTags: repairmepls
+[hiddenAction_nai_checkifcanremovetag]
+autoTrigger: if self.globalTeamTags(includes="NightmareAI") and self.tags(includes="repairmepls") and self.hp>=(self.maxHp*0.9)
+autoTriggerCheckRate: every8Frames
+temporarilyRemoveTags: repairmepls

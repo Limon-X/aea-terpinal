@@ -1,0 +1,1 @@
+add effect template to unit code on completion

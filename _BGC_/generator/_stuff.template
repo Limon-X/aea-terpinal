@@ -1,0 +1,13 @@
+
+#_stuff.template
+[core]
+#borrowResourcesWhileAlive: generatorL=1
+[arm_1]
+x: -0.4
+y: 0
+image_end: genBase_glow.png
+drawOverBody: true
+[arm_2]
+@copyFromSection: arm_1
+image_end: genBase_top.png
+#pingPong:true 

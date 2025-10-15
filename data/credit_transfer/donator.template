@@ -1,0 +1,374 @@
+[core]
+# CTtimeToUnlock = 30 min
+@global CTexpUnit_tag: None
+@global CTtimeToUnlock: 3
+
+defineUnitMemory: unit rf0, unit rf1, unit rf2, unit rf3, unit rf4, unit rf5, unit rf6, unit rf7, unit rf8, float selected_amount, string selected_resource
+
+autoTriggerCooldownTime: 0.1s
+autoTriggerCooldownTime_allowDangerousHighCPU: true
+
+@global default_selected_amount: 100
+@global default_selected_resource: credits
+@memory timerUnlock: float
+
+
+#[action_testTimer_a]
+#text: add 1 minute
+#buildSpeed: 0
+#addResources: t_minutes_b=1
+#isVisible: true
+#[action_testTimer_b]
+#text: add 5 minute
+#buildSpeed: 0
+#addResources: t_minutes_b=5
+#isVisible: true
+#[action_testTimer_c]
+#text: add 10 minute
+#buildSpeed: 0
+#addResources: t_seconds_a=10
+#isVisible: true
+
+
+[hiddenAction_setTimerUnlock_a]
+autoTrigger: if self.resource(type='t_minutes_a')==${CTtimeToUnlock} and memory.timerUnlock == 1
+setUnitMemory: timerUnlock=2
+showMessageToPlayer: Credit Transfer Unlocked!
+showMessageToPlayer_ru: Ресурсо отправитель разблокирован!
+[hiddenAction_setTimerUnlock_b]
+autoTrigger: if self.hasFlag(id=31)
+addResources: unsetFlag=31
+setUnitMemory: timerUnlock=1
+
+[action_intro_creditsTransfer]
+#isVisible: if ((self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')<1 and self.resource(type='t_minutes')<${CTtimeToUnlock}) or (self.resource(type='t_minutes')<${CTtimeToUnlock} and self.resource(type='t_hours')<1)) or (self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')<1 and self.resource(type='t_hours')<1 )
+#isVisible: if self.resource(type='t_minutes')<${CTtimeToUnlock} or (self.resource(type='t_minutes')<${CTtimeToUnlock} and self.resource(type='t_hours')<1) or self.resource(type='t_hours')<1
+isVisible: if memory.timerUnlock==1
+isActive: false
+displayType: infoOnly
+text: Credit Transfer \n [ Locked ]
+description: Transfer credits to the allies \n Time to unlock [ 30 min ]
+text_ru: Ресурсо Отправитель \n [НЕДОСТУПЕН]
+description_ru: Передаёт ресурсы союзникам \n Чтобы открыть, необходимо подождать 30 минут
+text_zh: 资金转移\n[锁定]
+description_zh: 向盟友转移资金\n解锁时间[30分钟]
+buildSpeed: 0
+pos: 40
+
+[hiddenAction_notice_me]
+autoTriggerOnEvent: created
+setUnitMemory: selected_amount=${default_selected_amount}, selected_resource="${default_selected_resource}"
+alsoQueueAction: actually_get_noticed
+[hiddenAction_notice_me2]
+autoTrigger: if self.hasFlag(id=30)
+addResources: unsetFlag=30
+setUnitMemory: selected_amount=${default_selected_amount}, selected_resource="${default_selected_resource}"
+alsoQueueAction: actually_get_noticed
+
+[hiddenAction_actually_get_noticed]
+buildSpeed: 0.1
+sendMessageTo: globalSearchForFirstUnit(withTag="CT_controller")
+sendMessageWithTags: donator
+sendMessageWithData: donator=self
+
+
+[hiddenAction_receive_references]
+@define c1: eventData(name="
+@define c2: ", type="unit")
+autoTriggerOnEvent: newMessage(withTag="donators")
+setUnitMemory: rf0=${c1}rf0${c2}, rf1=${c1}rf1${c2}, rf2=${c1}rf2${c2}, rf3=${c1}rf3${c2}, rf4=${c1}rf4${c2}, rf5=${c1}rf5${c2}, rf6=${c1}rf6${c2}, rf7=${c1}rf7${c2}, rf8=${c1}rf8${c2}
+
+
+[action_selected_amount_info]
+text: [ %{memory.selected_amount} ]\n %{memory.selected_resource}
+text_ru: [ %{memory.selected_amount} ]\n ресурсов
+description: Amount of %{memory.selected_resource} to be sent \n TRF = Transfer $| RCV = Receive $
+description_zh:要发送的%{memory.selected_resource}数量\n TRF=传输$|RCV=接收$
+description_ru: Количество ресурсов на отправку
+displayType: infoOnly
+buildSpeed: 0
+
+isActive: false
+#isVisible: if self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')>0 and (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
+#isVisible: if (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
+isVisible: if memory.timerUnlock==2
+pos: 41
+[action_sl_0]
+@define sl_am: 100
+@define resource: credits
+text: ${sl_am} %{memory.selected_resource}
+text_ru: ${sl_am} ресурсов
+description: Select ${sl_am} %{memory.selected_resource} to send
+description_ru: Выбрать ${sl_am} ресурсов на отправку
+description_zh: 选择要发送的${sl_am}至%{memory.selected_resources｝
+displayType: upgrade
+buildSpeed: 0
+pos: 42
+setUnitMemory: selected_amount = ${sl_am}
+
+isLocked: if self.resource(type="${resource}") < memory.selected_amount and memory.selected_amount == ${sl_am} or self.resource(type="${resource}") < ${sl_am}
+isLockedMessage: Not enough of %{memory.selected_resource}
+isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_zh:没有足够的 %{memory.selected_resource}
+
+#isVisible: if self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')>0 and (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
+#isVisible: if (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
+isVisible: if memory.timerUnlock==2
+isGuiBlinking: if memory.selected_amount == ${sl_am}
+alwaysSinglePress: true
+highPriorityQueue: true
+ai_isDisabled: true
+
+[action_sl_1]
+@copyFromSection: action_sl_0
+@define sl_am: 500
+
+[action_sl_2]
+@copyFromSection: action_sl_0
+@define sl_am: 1000
+
+[action_sl_3]
+@copyFromSection: action_sl_0
+@define sl_am: 5000
+
+[action_sl_4]
+@copyFromSection: action_sl_0
+@define sl_am: 10000
+
+
+[action_send_rf0_0]
+@define number: 0
+@define resource: credits
+
+@define AI_minimum_amount: 10000
+@define ally_target_amount: 5000
+ai_isDisabled: true
+pos: 43
+#isVisible: if memory.selected_resource == "${resource}" and memory.rf${number} != null and memory.rf${number}.teamName() == self.teamName() and self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')>0 and (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
+isVisible: if memory.selected_resource == "${resource}" and memory.rf${number} != null and memory.rf${number}.teamName() == self.teamName() and memory.timerUnlock==2
+
+isLocked: if self.resource(type="${resource}") < memory.selected_amount or self.queueSize > 0
+isLockedMessage: Not enough of %{memory.selected_resource}
+isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_zh:没有足够的 %{memory.selected_resource}
+
+text: Send to %{memory.rf${number}.playerName()}
+description: Send %{memory.selected_amount} %{memory.selected_resource} to %{memory.rf${number}.playerName()}
+text_ru: Отправить к %{memory.rf${number}.playerName()}
+text_zh:发送给%{memory.rf${number}.playerName()}
+description_ru: Отправить %{memory.selected_amount} ресурсов к %{memory.rf${number}.playerName()}
+
+buildSpeed: 0
+alwaysSinglePress: true
+highPriorityQueue: true
+
+setResourcesWithLogic: ${resource}=self.resource(type="${resource}")-memory.selected_amount
+sendMessageTo: memory.rf${number}
+sendMessageWithTags: donation
+sendMessageWithData: donation=memory.selected_amount, resource="${resource}", donator=self
+alsoTriggerAction: tfr_a1, tfr_a2, tfr_a3, tfr_a4, tfr_a5
+
+addActionCooldownTime: 15s
+
+[action_send_rf0_1]
+@copyFromSection: action_send_rf0_0
+@define number: 1
+
+[action_send_rf0_2]
+@copyFromSection: action_send_rf0_0
+@define number: 2
+
+[action_send_rf0_3]
+@copyFromSection: action_send_rf0_0
+@define number: 3
+
+[action_send_rf0_4]
+@copyFromSection: action_send_rf0_0
+@define number: 4
+
+[action_send_rf0_5]
+@copyFromSection: action_send_rf0_0
+@define number: 5
+
+[action_send_rf0_6]
+@copyFromSection: action_send_rf0_0
+@define number: 6
+
+[action_send_rf0_7]
+@copyFromSection: action_send_rf0_0
+@define number: 7
+
+[action_send_rf0_8]
+@copyFromSection: action_send_rf0_0
+@define number: 8
+
+#======-
+[hiddenAction_tfr_a1]
+@define sl_am: 100
+requireConditional: if memory.selected_amount == ${sl_am}
+addResources: transferredCredit=${sl_am}
+spawnEffects: CUSTOM:credit_a${sl_am}
+[hiddenAction_tfr_a2]
+@copyFromSection: hiddenAction_tfr_a1
+@define sl_am: 500
+[hiddenAction_tfr_a3]
+@copyFromSection: hiddenAction_tfr_a1
+@define sl_am: 1000
+[hiddenAction_tfr_a4]
+@copyFromSection: hiddenAction_tfr_a1
+@define sl_am: 5000
+[hiddenAction_tfr_a5]
+@copyFromSection: hiddenAction_tfr_a1
+@define sl_am: 10000
+
+[effect_credit_a100]
+alsoEmitEffects: CUSTOM:credit_donated
+life: 100
+priority: critical
+hOffset: 15
+hSpeed: 1
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\credit_100.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+[effect_credit_a500]
+@copyFromSection: effect_credit_a100
+image: ROOT:data\icons\credit_500.png
+[effect_credit_a1000]
+@copyFromSection: effect_credit_a100
+image: ROOT:data\icons\credit_1000.png
+[effect_credit_a5000]
+@copyFromSection: effect_credit_a100
+image: ROOT:data\icons\credit_5000.png
+[effect_credit_a10000]
+@copyFromSection: effect_credit_a100
+image: ROOT:data\icons\credit_10000.png
+[effect_credit_donated]
+life: 100
+priority: critical
+hOffset: 7
+hSpeed: 1
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\donated.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+
+[hiddenAction_c0]
+@define number: 0
+autoTrigger: if memory.rf${number}.hp() <= 0
+setUnitMemory=rf${number}=null
+
+[hiddenAction_c1]
+@copyFromSection: hiddenAction_c0
+@define number: 1
+
+[hiddenAction_c2]
+@copyFromSection: hiddenAction_c0
+@define number: 2
+
+[hiddenAction_c3]
+@copyFromSection: hiddenAction_c0
+@define number: 3
+
+[hiddenAction_c4]
+@copyFromSection: hiddenAction_c0
+@define number: 4
+
+[hiddenAction_c5]
+@copyFromSection: hiddenAction_c0
+@define number: 5
+
+[hiddenAction_c6]
+@copyFromSection: hiddenAction_c0
+@define number: 6
+
+[hiddenAction_c7]
+@copyFromSection: hiddenAction_c0
+@define number: 7
+
+[hiddenAction_c8]
+@copyFromSection: hiddenAction_c0
+@define number: 8
+
+
+[hiddenAction_receive_0]
+@define resource: credits
+autoTriggerOnEvent: newMessage(withTag="donation")
+requireConditional: if eventData(name="resource", type="string") == "${resource}"
+addResourcesWithLogic: ${resource}=eventData(name="donation", type="float"), receivedCredit=eventData(name="donation", type="float")
+showMessageToPlayer: %{eventData(name="donator", type="unit").playerName()} has transfered %{eventData(name="donation", type="float")} ${resource} over to you
+showMessageToPlayer_ru: %{eventData(name="donator", type="unit").playerName()} передал %{eventData(name="donation", type="float")} ресурсов тебе
+alsoTriggerAction: rcv_1, rcv_2, rcv_3, rcv_4, rcv_5
+[hiddenAction_rcv_1]
+@define sl_am: 100
+requireConditional: if eventData(name="donation", type="float") == ${sl_am}
+spawnEffects: CUSTOM:credit_r${sl_am}
+[hiddenAction_rcv_2]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 500
+[hiddenAction_rcv_3]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 1000
+[hiddenAction_rcv_4]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 5000
+[hiddenAction_rcv_5]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 10000
+
+[effect_credit_r100]
+alsoEmitEffects: CUSTOM:credit_received
+life: 100
+priority: critical
+hOffset: 75
+hSpeed: -0.8
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\credit_r100.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+[effect_credit_r500]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r500.png
+[effect_credit_r1000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r1000.png
+[effect_credit_r5000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r5000.png
+[effect_credit_r10000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r10000.png
+[effect_credit_received]
+life: 100
+priority: critical
+hOffset: 68
+hSpeed: -0.8
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\received.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+
+
+#[hiddenAction_defeated]
+#autoTrigger: if self.teamDefeatedTech
+#deleteSelf: true

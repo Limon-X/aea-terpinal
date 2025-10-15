@@ -1,0 +1,209 @@
+
+[core]
+@global spin: 1
+name: Uconverter
+class: CustomUnitMetadata
+price: 30000
+maxHp: 2500
+mass: 9000
+
+displayText: Resource Converter
+displayDescription: - The core purpose of the Resource Converter is to convert\n Credits into Uranium or Uranium into Credits\n- Goes Nuclear on death
+displayText_ru: Ресурсный Разменник
+displayDescription_ru: - Служит для преобразования ресурсов в уран и наоборот\n- Взрывается при уничтожении. 
+displayText_zh: 资源转换器
+displayDescription_zh: -资源转换器的核心功能是将资金转换为铀\n-或将铀转换为资金\n-在被摧毁时触发核爆
+
+
+footprint: 							-2,-1,1,1
+constructionFootprint: 	-2,-1,1,1
+displayFootprint: 			-2,-1,1,1
+#buildingSelectionOffset: 4
+buildingToFootprintOffsetY: 4
+buildingToFootprintOffsetX: 4
+
+techLevel: 1
+buildSpeed: 0.00025
+#availableInDemo: true
+
+radius: 35
+#displayRadius: 25
+isBio: false
+isBuilding: true
+
+
+nukeOnDeath: false
+nukeOnDeathRange: 90
+nukeOnDeathDamage: 1000
+nukeOnDeathDisableWhenNoNuke: false
+
+# orginaly one (1)
+autoTriggerCooldownTime: 0.2s
+autoTriggerCooldownTime_allowDangerousHighCPU: true
+#uranium ratio 4:1
+#500 > 125 per second | 
+#125 > 31.25 per 0.25 sec
+#50 > 12.5
+
+#description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates 125U and consume $500 per second\n If resource runs out it automatically shutdown
+#-------------------------------------
+[template_press]
+isVisible: true
+buildSpeed: 0s
+alwaysSinglePress: true
+highPriorityQueue: true
+allowMultipleInQueue: false
+########################
+[action_CreditToUranium]
+@copyFromSection: template_press
+text: Credits to Uranium
+text_ru: Ресурсы в Уран 
+text_zh: 资金换铀
+isLocked: if self.resource(type='credits')<500
+isLockedMessage: Credits low
+isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_zh: 钱太少了你个穷逼
+description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates 125U and consume $500 per second\n If resource runs out it automatically shutdown
+description_ru:[КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ: Нажмите еще раз, чтобы прекратить преобразование] \n - Генерирует 125 урана в секунду и потребляет 500 ресурсов в секунду \n - При нехватке ресурсов автоматически приостановит преобразование
+description_zh:[切换开关：再次按下可停工]\n-生成125铀并每秒消耗500资金\n-如果资源耗尽，则自动关闭
+isGuiBlinking: if self.hasFlag(id=1)
+ai_isHighPriority: if self.resource.uranium < 25000
+
+addResources: setFlag=1, unsetFlag=2
+alsoTriggerAction: DU
+[hiddenAction_DU]
+convertTo: Uconverter_DU
+[action_UraniumToCredit]
+@copyFromSection: template_press
+text: Uranium to Credits
+text_ru: Уран в Ресурсы
+text_zh: 铀换资金
+isLocked: if self.resource(type='uranium')<125
+isLockedMessage: Uranium low
+isLockedMessage_ru: Недостаточно урана
+isLockedMessage_zh: 你缺铀
+description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates $500 and consume 125U per second\n If resource runs out it automatically shutdown
+description_ru:[КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ: Нажмите еще раз, чтобы прекратить преобразование] \n - Генерирует 500 ресурсов в секунду и потребляет 125 урана  в секунду \n - При нехватке ресурсов автоматически приостановит преобразование
+description_zh:[切换开关：再次按下可停工]\n-生成500资金并每秒消耗125铀\n-如果资源耗尽，它将自动关闭
+isGuiBlinking: if self.hasFlag(id=2)
+
+addResources: setFlag=2, unsetFlag=1
+alsoTriggerAction: UD
+[hiddenAction_UD]
+convertTo: Uconverter_UD
+[action_SHUTTHEFUCKUP_GODDAMN_N***A]
+@copyFromSection: template_press
+#isLocked: if not self.hasFlag(id=1) and self.hasFlag(id=2) or self.hasFlag(id=1) and not self.hasFlag(id=2)
+#isLockedMessage: No Active Conversion
+text: Shutdown
+text_ru: Остановить
+ai_isHighPriority: if self.resource.uranium > 25000
+addResources: unsetFlag=1-2
+alsoTriggerAction: S
+[hiddenAction_S]
+convertTo: Uconverter_S
+
+[hiddenAction_shutDown_a]
+autoTrigger: if self.hasFlag(id=1) and self.resource(type='credits')<500
+addResources: unsetFlag=1-2
+convertTo: Uconverter_S
+showMessageToPlayer: Conversion disable 
+showMessageToPlayer_ru: Преобразование отключено
+showQuickWarLogToPlayer: Credits low
+showQuickWarLogToPlayer_ru: Недостаточно Ресурсов
+showMessageToPlayer_zh:停工
+showQuickWarLogToPlayer_zh: 钱太少啦你个穷逼
+[hiddenAction_shutDown_b]
+autoTrigger: if self.hasFlag(id=2) and self.resource(type='uranium')<125
+addResources: unsetFlag=1-2
+convertTo: Uconverter_S
+showMessageToPlayer: Conversion disable 
+showMessageToPlayer_ru: Преобразование отключено
+showQuickWarLogToPlayer: Uranium low
+showQuickWarLogToPlayer_ru: Недостаточно Урана
+showMessageToPlayer_zh:停工
+showQuickWarLogToPlayer_zh: 缺铀
+#-------------------------------------
+
+[arm_1]
+x: -13.3
+y: 0
+image_end: spin_0.png
+drawOverBody: true
+spinRate: ${spin}
+[arm_2]
+@copyFromSection: arm_1
+y: 2
+image_end: spin_1.png
+[arm_3]
+@copyFromSection: arm_2
+y: 4
+[arm_4]
+@copyFromSection: arm_2
+y: 6
+[arm_5]
+@copyFromSection: arm_2
+y: 8
+[arm_6]
+@copyFromSection: arm_2
+y: 10
+[arm_7]
+@copyFromSection: arm_2
+y: 12
+[arm_8]
+@copyFromSection: arm_2
+y: 14
+[arm_9]
+@copyFromSection: arm_2
+y: 16
+[arm_20]
+x: -0.4
+y: 0
+image_end: base_top.png
+drawOverBody: true
+
+[graphics]
+total_frames: 1
+image: base.png
+image_wreak:  base_dead.png
+
+image_shadow: NONE
+shadowOffsetX:1
+shadowOffsetY:1
+
+
+#[animation_idle]
+#onActions : idle
+
+
+[attack]
+canAttack: false
+canAttackFlyingUnits: false
+canAttackLandUnits:   false
+canAttackUnderwaterUnits: false
+maxAttackRange: 0
+
+
+[movement]
+movementType: NONE
+moveSpeed: 0
+moveAccelerationSpeed: 0.01
+moveDecelerationSpeed: 0.01
+maxTurnSpeed: 0
+turnAcceleration: 0.1
+
+
+[ai]
+
+buildPriority: 0.1
+
+noneInBaseExtraPriority: 0.1
+
+noneGlobalExtraPriority: 0.4
+
+maxGlobal: 3
+maxEachBase: 2
+
+
+
+

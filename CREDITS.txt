@@ -1,0 +1,58 @@
+**CREDITS**
+
+(Note: Every unit has been either edited, re-coded, balanced, or otherwise reimagined by SkaarjLord, with help from Horseman and the entire AEA Community.)
+
+(Many projectile graphical improvements by Hawko)
+
+Infantry: 
+ - Mortar and Snipers by Sushimaki 
+ - Xan Commander, Hacker original sprite by EKVideoGames, edited  by Lemons
+ - All other infantry from EKVideoGames
+
+Land Factory: 
+ - Saber, Comet, Buffalo, Duster, Achillies, Zephyr from Moo's  Defence Agency
+ - Demo Truck, Radar truck by Uber
+ - Behemoth Tank, Combat EngineerX by SkaarjLord
+ 
+Mech Factory:
+ - All non-vanilla mechs, and mech/mech factory remakes by Uber 
+
+Air Factory: 
+ - Phantom scout original sprite by Moregen Shtern
+ - Grandslam Bomber original sprite from Moo's Defence Agency, reimagined by Devas Terror
+ - Heavy Missile Aircraft and S1 by Ekcja
+ - S2 by RaMK3
+ - Kirov Bomber by Endan
+ - MAE, Attack Jet, Swallow Tail by Moo's Defnece 
+ - Apache Helicopter original sprite by EKVideoGames
+
+Sea Factory:
+ - Anti-Air Ship, Corvette, Frigate, Destroyer, Battle Cruiser by  Tactical UnitZ
+ - Thunderhead, Recon Sub, Amphibious Warship, Naval Carrier, Selenium by EKVideoGames
+ - Dreadnaught original sprite by Tactical UnitZ, recreated by  Lemons
+ - Mooclass by Moo's Defence Agency
+
+Experimentals: 
+ - Apocalypse tank, Experimental Mech, Experimental Gunship by Uber
+ - Nuclear Drone original Sprite by Ekcja
+ - Experimental SAM tank, Leviathan by Lithium and Skaarjlord
+ - Shielded Hovertank remade by Lemons
+ - Zeus by Lithium and Lea (Nova)
+ - Experimental Turtle, Science Vessel by Sushimaki
+ - Exp Spider by SkaarjLord
+ - Mothership by RaMK3
+ - Titan by EKVideoGames
+ - PCW by Uber, landing animation by Lithium
+ 
+Structures: 
+ - Rocket Turret, Light/heavy cannon, Radar, and Credit Factorys   by Moo's Defence
+ - Sub Turrets by Tactical UnitZ
+ - Landmines by Lemons and SkaarjLord
+ - Bunker Turret, Barracks by EKVideoGames
+ - EMP AA by SkaarjLord (in a fit of rage)
+ - Resource Converter, T2 Repairbay by Uber
+ - Chronoshift sprite by Lithium
+ - Extractor additions by Lemons, edited by Horseman
+
+Special Thanks to: Horseman, Lemons, Lithium, Uber, EKVideoGames, Sushimaki, Luke, Mitch, Waffz, RaMK3, Lea(Nova), Kira, KingKazma, Paper, Vox, and the entire AEA Community. None of this would of been possible without all of you. Years of constant play testing have gone into this mod, and the results show. Long live the AEA Community, and thank you all for being awesome. Game on!
+ 

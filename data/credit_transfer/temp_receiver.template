@@ -1,0 +1,86 @@
+[hiddenAction_notice_me]
+autoTriggerOnEvent: created
+sendMessageTo: globalSearchForFirstUnit(withTag="CT_controller")
+sendMessageWithTags: donator
+sendMessageWithData: donator=self
+
+[action_intro_creditsReceiver]
+#isVisible: if self.numberOfUnitsInTeam(withTag='exp2')<1
+isVisible: true
+isActive: false
+displayType: infoOnly
+text: Credit Receiver 
+description: Credit transfer receiver\n incase if the cc is destroyed \n Note: cannot donate credits
+text_ru: Ресурсоприёмник
+description_ru: Принимает ресурсы от ресурсо отправителя\n если штаб/врата уничтожены, может выполнять их обязанности в роли приёмника\n Примечание: Не может отправлять ресурсы
+text_zh: 资金接收人
+description_zh:-资金转账接收人\n-以防止基地被摧毁\n-注意：不能销毁资金
+buildSpeed: 0
+
+[hiddenAction_receive_0]
+@define resource: credits
+@define resource_ru: ресурсы
+autoTriggerOnEvent: newMessage(withTag="donation")
+requireConditional: if eventData(name="resource", type="string") == "${resource}"
+addResourcesWithLogic: ${resource}=eventData(name="donation", type="float"), receivedCredit=eventData(name="donation", type="float")
+showMessageToPlayer: %{eventData(name="donator", type="unit").playerName()} has transfered %{eventData(name="donation", type="float")} ${resource} over to you
+showMessageToPlayer_ru: %{eventData(name="donator", type="unit").playerName()} передал %{eventData(name="donation", type="float")} ${resource} тебе
+alsoTriggerAction: rcv_1, rcv_2, rcv_3, rcv_4, rcv_5
+[hiddenAction_rcv_1]
+@define sl_am: 100
+requireConditional: if eventData(name="donation", type="float") == ${sl_am}
+spawnEffects: CUSTOM:credit_r${sl_am}
+[hiddenAction_rcv_2]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 500
+[hiddenAction_rcv_3]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 1000
+[hiddenAction_rcv_4]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 5000
+[hiddenAction_rcv_5]
+@copyFromSection: hiddenAction_rcv_1
+@define sl_am: 10000
+[effect_credit_r100]
+alsoEmitEffects: CUSTOM:credit_received
+life: 100
+priority: critical
+hOffset: 75
+hSpeed: -0.8
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\credit_r100.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+[effect_credit_r500]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r500.png
+[effect_credit_r1000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r1000.png
+[effect_credit_r5000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r5000.png
+[effect_credit_r10000]
+@copyFromSection: effect_credit_r100
+image: ROOT:data\icons\credit_r10000.png
+[effect_credit_received]
+life: 100
+priority: critical
+hOffset: 68
+hSpeed: -0.8
+scaleFrom:0.7
+scaleTo: 0.7
+yOffsetRelative:20
+image: ROOT:data\icons\received.png
+fadeOut: true
+alpha:1
+dirOffset: 0
+dirSpeed: 0
+alwayStartDirAtZero:true
+

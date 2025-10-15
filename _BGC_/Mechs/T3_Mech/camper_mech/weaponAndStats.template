@@ -1,0 +1,14 @@
+
+[core]
+
+@global MainCannonRange: 280
+@global BuffRange: 340
+
+@global MaxSpeed: 0.5
+@global ReduSpeed: 0.2
+
+@global MaxShieldRegen: 0.3
+@global ReduShieldRegen: -1.25
+
+@global ShortDelay: 1
+@global HighDelay: 1.1

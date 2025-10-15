@@ -1,0 +1,34 @@
+#_transportSlot
+#ROOT:data\_transportSlot.template
+
+[template_unitLoad]
+@define slotId: 0
+isActive: if ((not self.isOverLiquid() and not self.isMoving() and not self.isFlying()) or not self.isOverLiquid()) and self.isOverPassableTile()
+displayType: infoOnlyStockpile
+isVisible: if self.transportingCount(greaterThan=${slotId})
+text: Unload \n[
+textAddUnitName: unitRef self.transporting(slot=${slotId})
+textPostFix: ]
+text_ru: Выгрузить \n[
+text_zh: 卸载 \n[
+textAddUnitName: unitRef self.transporting(slot=${slotId})
+textPostFix: ]
+descriptionAddFromUnit: unitRef self.transporting(slot=${slotId})
+descriptionAddUnitStats: unitRef self.transporting(slot=${slotId})
+unitShownInUI: unitRef self.transporting(slot=${slotId})
+
+buildSpeed: 0
+ai_isDisabled: true
+
+pos: 5
+
+iconExtraIsVisible: if self.transportingCount(greaterThan=${slotId})
+iconExtraImage: ROOT:data/icons/select2.png
+
+forceUnloadTransportNow: true
+forceUnloadTransportNow_onlyOnSlot: ${slotId}
+
+isLocked: if self.transportingUnitWithTags(includes='hacker')
+isLockedMessage: No no! I ain't jump'n 
+isLockedMessage_ru: Нет, я не могу спрыгивать!
+isLockedMessage_zh: 不不！我不会跳

@@ -1,0 +1,105 @@
+
+#_Ubeshieldr.template
+[core]
+autoTriggerCooldownTime: 0.1s
+autoTriggerCooldownTime_allowDangerousHighCPU: true
+################################################ sHIELD
+[action_sheildCapacityOverload]
+isVisible: if self.numberOfAttachedUnits(withTag='repBay2')>0
+displayType: action
+text: Shield Overload
+description:- Releases a powerful pulse that repairs shield only\n- Max shield distribution: 2000 | personal Shield: 6000 | duration: 2s | range: 300\n- Cooldown: 60s
+text_ru: Энергетический Всплеск
+description_ru: Восполняет/даёт силовой щит всей ближайшей технике и строениям в радиусе 250\n Если щита изначально у строения/техники нет, то щит пропадёт через 15 секунд\n Перезарядка: 60 секунд
+text_zh: 护盾超载
+description_zh:-释放一个强大的脉冲，脉冲快速修复护盾\n-最大护盾分配：2000 |持续时间：2秒|影响范围：250 \n-冷却：60秒
+buildSpeed: 0s
+iconImage: ROOT:data\icons\RhinoXT2Shi.png
+addActionCooldownTime: 60s
+highPriorityQueue: true
+alwaysSinglePress: true
+setUnitStats: maxEnergy+=20, energy+=20
+temporarilyAddTags: shieldOverload
+[hiddenAction_shieldPulse]
+autoTrigger: if self.energy()>0
+fireTurretXAtGround: sheild_t
+fireTurretXAtGround_withOffset: 0,0
+addResources: energy=-1, shield=200
+alsoTriggerAction: shieldPulse_oof
+[hiddenAction_shieldPulse_oof]
+requireConditional: if self.energy()<1
+setUnitStats: maxEnergy-=20, energy-=20
+temporarilyRemoveTags: shieldOverload
+[turret_sheild_t]
+x: 0
+y: 0
+invisible: true
+canAttackFlyingUnits: false
+canAttackLandUnits: false
+canAttackUnderwaterUnits: false
+projectile: sheild_p
+turnSpeed: 5.0
+shoot_sound:NONE
+shoot_sound_vol:0.5
+#shoot_flame:
+shoot_flame:NONE
+canShoot: true
+size: 0
+delay: 0
+warmup:0
+[projectile_sheild_p]
+areaDamage: -100
+areaRadius: 300
+targetGround: true
+areaExpandTime: 1
+areaHitAirAndLandAtSameTime: true
+areaDamageNoFalloff: true
+speed: 0
+life: 0
+instant: false
+largeHitEffect: true
+explodeOnEndOfLife: true
+deflectionPower: -1
+
+hullDamageMultiplier: 0
+shieldDamageMultiplier: 1
+buildingDamageMultiplier: 1
+friendlyFire: only-ignoreEnemy
+explodeEffect: CUSTOM:shieldEffec_a
+[effect_shieldEffec_a]
+alsoEmitEffects: CUSTOM:shieldEffec_b, CUSTOM:shieldEffec_spin
+priority:veryhigh
+image:ROOT:data\images\shockwave.png
+life: 20
+fadeOut: true
+attachedToUnit: true
+color:#38cdc8
+fadeInTime: 0
+scaleFrom: 0.3
+scaleTo: 5
+alpha:  0.2
+dirSpeedRandom: 30
+drawUnderUnits: true
+[effect_shieldEffec_b]
+@copyFromSection: effect_shieldEffec_a
+life: 120
+alsoEmitEffects: NONE
+scaleFrom: 0.3
+scaleTo: 5
+alpha:  0.1
+color:#3ffff9
+[effect_shieldEffec_spin]
+life: 90
+priority: low
+hOffset: 0
+dirSpeed: 5
+scaleFrom: 8
+scaleTo: 0.3
+fadeInTime: 120
+fadeOut: true
+attachedToUnit: true
+image: ROOT:data\images\deracinator.png
+drawUnderUnits: true
+alpha:0.8
+color: #71fff6
+################################################ END

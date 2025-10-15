@@ -1,0 +1,174 @@
+#WARNING 1.15 CODE IS UNSTABLE, ACTIVATING MULTIPLE BUFFS IN RAPID SCUCCESION OFTEN BREAKS RUSTED WARFARE SETSTAT CODE
+#buff icon , are you confused?
+####################################################TEMPLATE
+[template_globalbuffIcon]
+#template for global upgrade from Evolotion chamber and etc
+@define upName: 		na
+@define upLvl:  		na
+@define upIcon:		 	na
+@define upType:			na
+isActive: false
+text: ${upName} buff T${upLvl}
+iconImage: ROOT:data\icons\${upIcon}.png
+iconExtraImage: ROOT:data\icons\T${upLvl}.png
+iconExtraColor: #00ff99
+iconExtraIsVisible: true
+buildSpeed: 0s
+displayType: infoOnlyNoBox
+isAlsoViewableByAllies: true
+isAlsoViewableByEnemies: true
+pos: 1
+[template_buffIcon_1]
+isVisible: if self.globalTeamTags(includes='T1${upType}') and not self.globalTeamTags(includes='T2${upType}') and not self.globalTeamTags(includes='T3${upType}') 
+[template_buffIcon_2]
+isVisible: if self.globalTeamTags(includes='T1${upType}') and self.globalTeamTags(includes='T2${upType}') and not self.globalTeamTags(includes='T3${upType}') 
+[template_buffIcon_3]
+isVisible: if self.globalTeamTags(includes='T1${upType}') and self.globalTeamTags(includes='T2${upType}') and self.globalTeamTags(includes='T3${upType}') 
+
+
+[template_areabuffIcon]
+#template for spore, king, queen and unit with area buff
+@define buffName: 		na
+@define buffIcon:		 	na
+@define buffTAG:		 	na
+@define buffArea:		 	na
+isActive: false
+text: Spore ${buffName} buff
+isVisible: if numberOfUnitsInTeam(withTag='${buffTAG}', withinRange=${buffArea}, greaterThan=0)
+iconImage: ROOT:data\icons\${buffIcon}.png
+iconExtraImage: ROOT:data\icons\${buffIcon}.png
+iconExtraColor: #00ff99
+iconExtraIsVisible: true
+buildSpeed: 0s
+displayType: infoOnlyNoBox
+isAlsoViewableByAllies: true
+isAlsoViewableByEnemies: true
+pos: 2
+####################################################Sproe
+[action_SmogHpBoost_buffIcon]
+@copyFromSection: template_areabuffIcon
+@define buffName: 			stat
+@define buffIcon:		 		bugIcon_sporeBuff
+@define buffTAG:		 	omnispore
+@define buffArea:		 	350
+
+
+
+
+
+####################################################START OF DAMAGE UPGRADES################################
+[action_T1damageUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		Damage
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_damageUp
+@define upType:	    BugDamageUp
+description: -Improve the damage output
+#---------------------------------------------
+[action_T2damageUpgrade_buffIcon]
+@copyFromSection: action_T1damageUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3damageUpgrade_buffIcon]
+@copyFromSection: action_T1damageUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+####################################################START OF HEALTH UPGRADES################################
+[action_T1HealthUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		Health
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_healthUp
+@define upType:	    BugHealthUp
+description: -Increase Hp pool
+#---------------------------------------------
+[action_T2HealthUpgrade_buffIcon]
+@copyFromSection: action_T1HealthUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3HealthUpgrade_buffIcon]
+@copyFromSection: action_T1HealthUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+####################################################START OF SPEED UPGRADES################################
+[action_T1speedUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		Speed
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_speedUp
+@define upType:	    BugspeedUp
+description: -Increase total speed 
+#---------------------------------------------
+[action_T2speedUpgrade_buffIcon]
+@copyFromSection: action_T1speedUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3speedUpgrade_buffIcon]
+@copyFromSection: action_T1speedUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+####################################################START OF ARMOR UPGRADES################################
+[action_T1armourUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		Armor
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_armorUp
+@define upType:	    BugarmourUp
+description: -Increase armor
+#---------------------------------------------
+[action_T2armourUpgrade_buffIcon]
+@copyFromSection: action_T1armourUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3armourUpgrade_buffIcon]
+@copyFromSection: action_T1armourUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+####################################################START OF RANGE UPGRADES################################
+[action_T1rangeUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		Range
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_rangeUp
+@define upType:	    BugrangeUp
+description: -Increase max range
+#---------------------------------------------
+[action_T2rangeUpgrade_buffIcon]
+@copyFromSection: action_T1rangeUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3rangeUpgrade_buffIcon]
+@copyFromSection: action_T1rangeUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+####################################################START OF EXO UPGRADES################################
+[action_T1shieldUpgrade_buffIcon]
+@copyFromSection: template_globalbuffIcon, template_buffIcon_1
+@define upName: 		ExoSkeleton
+@define upLvl:  		1
+@define upIcon:		 	bugIcon_exoUp
+@define upType:	    BugshieldUp
+text: ${upName} T${upLvl}
+description: -Gains Exoskeleton
+#---------------------------------------------
+[action_T2shieldUpgrade_buffIcon]
+@copyFromSection: action_T1shieldUpgrade_buffIcon, template_buffIcon_2
+@define upLvl:  		2
+#---------------------------------------------
+[action_T3shieldUpgrade_buffIcon]
+@copyFromSection: action_T1shieldUpgrade_buffIcon, template_buffIcon_3
+@define upLvl:  		3
+
+
+
+
+
+
+
+
+

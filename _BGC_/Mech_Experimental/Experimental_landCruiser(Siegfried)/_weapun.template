@@ -1,0 +1,43 @@
+
+#_weapun.template
+[core]
+@global Raildamage_A: 100
+@global Raildamage_B: 150
+@global RailAoE: 40
+@global RailHDM: 1
+@global RailBDM: 1
+@global RailSDM: 0.9
+@global RailPEN: 30
+#Main gun cannot fire upclose
+@global mainLimitRng: 90
+#Secondary cannon range------------
+@global secondaryRange: 320
+@global secondarynDmg: 260
+@global secondaryDelay: 5
+#SecondaryII cannon range------------
+@global secondaryRangeII: 250
+@global secondarynDmgII: 100
+@global secondaryDelayII: 1.1
+#Napalm canister damage------------
+@global NPD: 22
+#@global NPD: 50 #original
+@global NPDAoE: 90
+@global NPDtick: 0.5
+#@global NPDtick: 0.25 #original
+@global DMGpenalty: 0.3
+@global NPDduration: 1
+#---------------------------------
+#@global unitPrice_I: 700
+@global unitBTime_I: 6.9
+#------------------
+#@global unitPrice_II: 1300
+@global unitBTime_II: 15
+#------------------
+#@global unitPrice_III: 2750
+@global unitBTime_III: 12.8
+#------------------
+#@global unitPrice_IV: 4000
+@global unitBTime_IV: 42.8
+#------------------
+
+nanoFactorySpeed: 5

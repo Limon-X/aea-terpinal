@@ -1,0 +1,19 @@
+#debuff eyeballs
+
+#ROOT:data\_kashtan_debuffRadar.template
+
+[hiddenAction_kashtan_debuffFogOfWarSightRange_A]
+@global buffR: 82
+autoTrigger: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and not self.hasFlag(id=27)
+addResources: setFlag=27
+setUnitStats: fogOfWarSightRange-=${core.fogOfWarSightRange-6}
+showQuickWarLogToPlayer: Warning! ${core.name}'s radar disabled!
+showQuickWarLogToPlayer_ru: Внимание! Радар ${core.name} отключен! 
+showQuickWarLogToPlayer_zh: 警告! ${core.name}的雷达掉线!
+[hiddenAction_kashtan_debuffFogOfWarSightRange_B]
+autoTrigger: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) < 1 and self.hasFlag(id=27)
+addResources: unsetFlag=27
+setUnitStats: fogOfWarSightRange+=${core.fogOfWarSightRange-6}
+showQuickWarLogToPlayer: ${core.name}'s radar back online!
+showQuickWarLogToPlayer_ru: Радар ${core.name} снова включен! 
+showQuickWarLogToPlayer_zh: ${core.name}的雷达重新上线！

@@ -1,0 +1,29 @@
+#_rexon
+#ROOT:data\unitsystem\_shieldguard.template
+[core]
+[hiddenAction_shieldOverload_on]
+autoTrigger: if self.numberOfUnitsInTeam(withTag='shieldOverload', withinRange=300)>0 and self.queueSize()<1 and not self.hasFlag(id=30)
+addResources: setFlag=30
+isVisible: false
+setUnitStats: maxShield+=2000
+resetCustomTimer: true
+[hiddenAction_shieldOverload_expired]
+autoTrigger: if self.hasFlag(id=30) and self.customTimer(laterThanSeconds=20)
+addResources: unsetFlag=30
+setUnitStats: maxShield-=2000
+[action_shieldOverload_passive]
+isVisible: if self.numberOfUnitsInTeam(withTag='repBay', withinRange=300)>0
+buildSpeed:0
+pos: 30
+isVisible: false
+displayType: infoOnlyNoBox
+text: Shield Overload 
+text_ru: Энергетический Всплеск
+iconImage: ROOT:data\icons\RhinoXT2Shi.png
+iconExtraColor: #96f9e0
+iconExtraImage: ROOT:data\icons\RhinoXT2Shi.png
+iconExtraIsVisible: if self.numberOfUnitsInTeam(withTag='shieldOverload', withinRange=300)>0
+description: Once the Shield Overload is activated all nearby\nstructures within 300 range granted a 2000 shield pool for 20 seconds
+description_ru: Восполняет/даёт силовой щит всей ближайшей технике и строениям в радиусе 300\n Если щита изначально у строения/техники нет, то щит пропадёт через 20 секунд
+text_zh: 护盾超载
+description_zh:- 一旦护盾过载被激活，\n 250范围内的所有附近建筑将获得1500单位的护盾值15秒

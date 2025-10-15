@@ -1,0 +1,452 @@
+[core]
+#Percent
+@global tariff: 0
+@global moduleSlot: 0
+#Module visibility tags
+#Turtlecore
+#Energycharger
+#Shieldgenerator
+#Iondetonator
+#NuclearPayload
+#RepairBot
+copyFrom: ROOT:data\effects\shieldEffect.template
+name: module_attachment_${moduleSlot}
+altNames: module_attachment
+class: CustomUnitMetadata
+#price: 2
+price: 10
+tags: module_attachment
+displayText: Module?
+displayDescription: Select module to install??
+displayText_ru: Модуль?
+displayDescription_ru: Выбрать модуль для установки
+displayText_zh: 模块?
+displayDescription_zh: 选择一个模块安装??
+showInEditor: false
+maxHp: 3000
+#don't keep damage
+selfRegenRate:3000
+mass: 90000
+techLevel: 1
+buildSpeed: 0.0002
+radius: 20
+fogOfWarSightRange:5
+transportSlotsNeeded: 1
+softCollisionOnAll: 3
+canNotBeDirectlyAttacked: true
+isUnrepairableUnit: true
+showOnMinimap: false
+ignoreInUnitCapCalculation: true
+isUnselectable: true
+disableDeathOnZeroHp: true
+energyMax: 10
+energyRegen: 0
+energyStartingPercentage: 0
+#tags: Turtlecore, Energycharger, Shieldgenerator, Iondetonator, RepairBot, laserDef, repairPulse, NuclearPayload
+[hiddenAction_createCreditsMessage]
+@copyFrom_skipThisSection: true
+#------------------------------------------Cancel
+[core]
+[resource_deposit]
+hidden: true
+[hiddenAction_cancelQueue_receiver]
+autoTriggerOnEvent: newMessage(withTag="moduleCancelQueue_${moduleSlot}")
+#showQuickWarLogToPlayer: message recieve
+alsoTriggerAction: cancelQueue_execute
+addResourcesWithLogic: credits=parent.resource.deposit
+sendMessageTo: unitRef parent
+sendMessageWithTags: depositClear
+#debugMessage: nigger %{parent.resource.deposit}
+[hiddenAction_cancelQueue_execute]
+requireConditional: if self.queueSize()>0
+refundAllQueuedItems: true
+showQuickWarLogToPlayer: Module installation Cancelled
+showQuickWarLogToPlayer_ru: Установка модуля отменена.
+showQuickWarLogToPlayer_zh: 模块安装已取消
+#------------------------------------------Install
+[hiddenAction_triggerInstall_LMG]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_LMG_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='lightMG') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: lightMG
+#showQuickWarLogToPlayer: test tetstetsats
+[hiddenAction_triggerInstall_mechBuilder]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_MECHBUILDER_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='mechBuilder') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: mechBuilder
+[hiddenAction_triggerInstall_repair]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REPAIR_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='RepairBot') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: repair
+[hiddenAction_triggerInstall_repairBAY]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REPAIRBAY_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='exRepairBay') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: repairbay
+[hiddenAction_triggerInstall_shurikenS]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_SHURIKEN_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='ShuriSwarmer') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: shuriSwarmer
+[hiddenAction_triggerInstall_ShieldG]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_SHIELDGENERATOR_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='Shieldgenerator') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: shieldGen
+[hiddenAction_triggerInstall_IonDeath]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_IONDEATH_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='Iondetonator') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: ionDewath
+[hiddenAction_triggerInstall_RedTurtle]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REDTURTLE_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='RedTurtle') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: redShell
+[hiddenAction_triggerInstall_LaserD]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_LASERDEFENSE_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='laserDef') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: laser
+[hiddenAction_triggerInstall_EnergyC]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_ENERGYCHARGER_${moduleSlot}")
+requireConditional: if self.hasParent(withTag='Energycharger') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: energyGharger
+[hiddenAction_triggerInstall_turtleCore]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_TURTLECORE_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='Turtlecore') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_I')
+alsoQueueAction: ShieldDefGen
+[hiddenAction_triggerInstall_PrecisionB]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_PRECISION_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='precisionB') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_I')
+alsoQueueAction: precisionBeam
+[hiddenAction_triggerInstall_ParticleB]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_PARTICLE_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='aaPBeam') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_I')
+alsoQueueAction: particleBeam
+[hiddenAction_triggerInstall_RepairPulse]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REPAIRPULSE_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='repairPulse') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_II')
+alsoQueueAction: repairPulse1
+[hiddenAction_triggerInstall_DemoCharge]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_DEMOCHARGE_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='demo') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_I')
+alsoQueueAction: Demo
+[hiddenAction_triggerInstall_NukePay]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_NUKE_${moduleSlot}")
+requireConditional: if (self.hasParent(withTag='NuclearPayload') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_II') and game.nukesEnabled()
+alsoQueueAction: Nuke
+#=------------------------------- maxed module 
+[hiddenAction_triggerInstall_repair_maxed]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REPAIR_${moduleSlot}_max")
+requireConditional: if self.hasParent(withTag='RepairBot') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: repair_max
+[hiddenAction_triggerInstall_repairBAY_maxed]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_REPAIRBAY_${moduleSlot}_max")
+requireConditional: if self.hasParent(withTag='exRepairBay') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: repairbay_max
+[hiddenAction_triggerInstall_laser_maxed]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_LASER_${moduleSlot}_max")
+requireConditional: if self.hasParent(withTag='exRepairBay') or self.hasParent(withTag='ConcealedMod')
+alsoQueueAction: laser_max
+[hiddenAction_triggerInstall_turtleCore_maxed]
+autoTriggerOnEvent: newMessage(withTag="TRIGGER_TURTLECORE_${moduleSlot}_max")
+requireConditional: if (self.hasParent(withTag='Turtlecore') or self.hasParent(withTag='ConcealedMod')) and self.globalTeamTags(includes='module_I')
+alsoQueueAction: ShieldDefGen_max
+#========================================Module
+#Note: AutoInstall has been added ... double check the module prices 
+[template_buildTurret]
+extraLagHidingInUI:FALSE 
+buildSpeed: 3s
+playSoundAtUnit: ROOT:data\soundFx\interface_instal1.ogg
+spawnEffects: CUSTOM:ShieldParticle*5,CUSTOM:ShieldParticle2*5,CUSTOM:shieldwave,CUSTOM:Light
+sendMessageTo: unitRef customTarget1
+sendMessageWithTags: moduleInstalled_${moduleSlot}
+isVisible: false
+alsoTriggerAction: moduleSlot_slot
+[hiddenAction_moduleSlot_slot]
+addResources: setFlag=${20+moduleSlot}
+[action_lightMG]
+#----------------------------nEW
+@copyFromSection: template_buildTurret
+#@define price: 900
+isVisible: if self.hasParent(withTag='lightMG')
+buildSpeed: 5s
+convertTo: module_lightMG
+price: ${Mprice_I}
+[action_mechBuilder]
+#----------------------------nEW
+@copyFromSection: template_buildTurret
+#@define price: 900
+isVisible: if self.hasParent(withTag='mechBuilder')
+buildSpeed: 0.0019
+convertTo: module_mechBuildert1
+price: ${Mprice_I2}
+#=======================Bonus
+takeResources: shield=-500
+takeResources_includeParent: true
+takeResources_discardCollected: true
+[action_repair]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='RepairBot')
+buildSpeed: 13s
+convertTo: module_RepairBot
+price: ${Mprice_II}
+[action_repairbay]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='exRepairBay')
+buildSpeed: 30s
+convertTo: module_ex_RepairBay
+price: ${Mprice_IIa}
+[action_shuriSwarmer]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='ShuriSwarmer')
+buildSpeed: 7s
+convertTo: swarmer
+addResources: energy=15
+price: ${Mprice_II2}
+[action_shieldGen]
+@copyFromSection: template_buildTurret
+#@define price: 2000
+isVisible: if self.hasParent(withTag='Shieldgenerator')
+buildSpeed: 15s
+convertTo: module_shieldGen
+price: ${Mprice_VI}
+addResources: unsetFlag=0-31
+#=======================Bonus
+takeResources: shield=-500
+takeResources_includeParent: true
+takeResources_discardCollected: true
+[action_ionDewath]
+@copyFromSection: template_buildTurret
+#@define price: 900
+isVisible: if self.hasParent(withTag='Iondetonator')
+buildSpeed: 2s
+convertTo: module_ionDeath
+price: ${Mprice_XI}
+#addResources: unsetFlag=0-31
+[action_redShell]
+#----------------------------nEW
+@copyFromSection: template_buildTurret
+#@define price: 2100
+#isVisible: true
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I
+isLockedMessage_ru: Необходимо исследование: Модули I 
+isLockedMessage_zh: 需要研究: 模块 Tech-I 
+#-----------------
+isVisible: if self.hasParent(withTag='RedTurtle')
+buildSpeed: 17s
+convertTo: module_redShell
+addResources: energy=6
+price: ${Mprice_III}
+#=======================Bonus
+takeResources: shield=-500
+takeResources_includeParent: true
+takeResources_discardCollected: true
+[action_laser]
+@copyFromSection: template_buildTurret
+#@define price: 1800
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I 
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I 
+#-----------------
+isVisible: if self.hasParent(withTag='laserDef')
+buildSpeed: 15s
+convertTo: module_laserDefence
+addResources: energy=10
+price: ${Mprice_IV}
+[action_energyGharger]
+@copyFromSection: template_buildTurret
+#@define price: 1900
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I 
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I 
+#-----------------
+isVisible: if self.hasParent(withTag='Energycharger')
+buildSpeed: 10s
+convertTo: Energy_charger
+#addResources: unsetFlag=0-31
+price: ${Mprice_V}
+[action_ShieldDefGen]
+@copyFromSection: template_buildTurret
+#@define price: 3900
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I 
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I 
+#-----------------
+isVisible: if self.hasParent(withTag='Turtlecore')
+buildSpeed: 25s
+convertTo: shield_laser_defenseGen
+#addResources: unsetFlag=0-31
+price: ${Mprice_VII}
+#=======================Bonus
+takeResources: shield=-500
+takeResources_includeParent: true
+takeResources_discardCollected: true
+[action_precisionBeam]
+#----------------------------nEW
+@copyFromSection: template_buildTurret
+#@define price: 4750
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_II')
+isLockedMessage: Requires research: Module II 
+isLockedMessage_ru: Необходимо исследование: Модули II
+isLockedMessage_zh: 需要研究: 模块 Tech-II
+#-----------------
+isVisible: if self.hasParent(withTag='precisionB')
+buildSpeed: 24s
+convertTo: module_precisionBeam
+price: ${Mprice_VIII}
+[action_particleBeam]
+#----------------------------nEW
+@copyFromSection: template_buildTurret
+#@define price: 4750
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_II')
+isLockedMessage: Requires research: Module II
+isLockedMessage_ru: Необходимо исследование: Модули II
+isLockedMessage_zh: 需要研究: 模块 Tech-II
+#-----------------
+isVisible: if self.hasParent(withTag='aaPBeam')
+buildSpeed: 26s
+convertTo: module_aaparctileBeam
+price: ${Mprice_IX}
+[action_repairPulse1]
+@copyFromSection: template_buildTurret
+#@define price: 6000
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I
+#-----------------
+isVisible: if self.hasParent(withTag='repairPulse')
+buildSpeed: 20s
+convertTo: module_repaipulse
+resetCustomTimer:true
+price: ${Mprice_X}
+[action_Demo]
+@copyFromSection: template_buildTurret
+#@define price: 3500
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I
+isLockedAlt: if not self.globalTeamTags(includes='jihad') and self.hasParent(withTag='strider') and self.hasParent(withTag='demo')
+isLockedAltMessage: Requires research: Jihad Strider 
+isLockedAltMessage_ru: Необходимо исследование: Бродяга Шахид
+#-----------------
+isVisible: if self.hasParent(withTag='demo')
+buildSpeed: 15s
+convertTo: module_demo
+price: ${Mprice_XII}
+[action_Nuke]
+@copyFromSection: template_buildTurret
+#@define price: 9000
+#-----------------
+isLocked: if not game.nukesEnabled()
+isLockedMessage: Oh no... No nuke this time
+isLockedMessage_ru: Ядерки запрещены!
+isLockedMessage_zh: 哦不...本局游戏没有核武器
+#-----------------
+isLockedAlt: if not self.globalTeamTags(includes='module_I')
+isLockedAltMessage: Requires research: Module I 
+isLockedAltMessage_zh: 需要研究: 模块 Tech-I
+isLockedMessage_ru: Необходимо исследование: Модули I
+#-----------------
+isLockedAlt2: if not self.globalTeamTags(includes='module_II')
+isLockedAlt2Message: Requires research: Module II 
+isLockedAlt2Message_zh: 需要研究: 模块 Tech-II
+isLockedMessage_ru: Необходимо исследование: Модули II
+#-----------------
+isVisible: if self.hasParent(withTag='NuclearPayload')
+buildSpeed: 35s
+convertTo: module_nuke
+price: ${Mprice_XIII}
+#------------------ maxed
+[action_repair_max]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='RepairBot')
+buildSpeed: 36s
+convertTo: module_RepairBot_T2
+price: ${Mprice_II+3200}
+[action_repairbay_max]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='exRepairBay')
+buildSpeed: 69s
+convertTo: module_ex_RepairBay_T2
+price: ${Mprice_IIa+3200}
+[action_laser_max]
+@copyFromSection: template_buildTurret
+#@define price: 1000
+isVisible: if self.hasParent(withTag='laserDef')
+buildSpeed: 45s
+convertTo: module_laserDefence_t2
+price: ${Mprice_IV+2200}
+[action_ShieldDefGen_max]
+@copyFromSection: template_buildTurret
+#@define price: 3900
+#-----------------
+isLocked: if not self.globalTeamTags(includes='module_I')
+isLockedMessage: Requires research: Module I 
+isLockedMessage_ru: Необходимо исследование: Модули I
+isLockedMessage_zh: 需要研究: 模块 Tech-I
+#-----------------
+isVisible: if self.hasParent(withTag='Turtlecore')
+buildSpeed: 45s
+convertTo: shield_laser_defenseGen
+addResources: setFlag=10-11
+price: ${Mprice_VII+1700+2700}
+#=======================Bonus
+takeResources: shield=-500
+takeResources_includeParent: true
+takeResources_discardCollected: true
+[graphics]
+drawLayer: experimentals
+total_frames: 1
+image:        SHARED:blank.png
+image_wreak:  NONE
+image_turret: NONE
+image_shadow: NONE
+shadowOffsetX:3
+shadowOffsetY:3
+icon_zoomed_out_neverShow: true
+showHealthBar: false
+showEnergyBar: false
+[attack]
+canAttack: false
+[movement]
+movementType:NONE
+[effect_ShieldParticle]
+drawUnderUnits:false
+scaleFrom:0.5
+scaleTo:0.1
+[effect_ShieldParticle2]
+drawUnderUnits:false
+scaleFrom:0.5
+scaleTo:0.1
+[effect_shieldwave]
+drawUnderUnits:false
+scaleFrom: 0.5
+scaleTo: 0
+[effect_Light]
+drawUnderUnits:false
+scaleFrom: 1
+scaleTo: 1
+[ai]
+ai_upgradePriority: 0.2
+[arm_1]
+x:0
+y:0
+endDirOffset: -90
+image_end:nodule_empty_alpha8.0.png
+drawOverBody: true
+hidden:if self.hasParent()
+image_end_teamColors: true
