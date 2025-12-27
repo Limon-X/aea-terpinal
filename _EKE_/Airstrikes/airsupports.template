@@ -2,12 +2,12 @@
 #=================== lock not for u hacky wacky
 isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
 isLockedAltMessage: Unauthorized
-isLockedAltMessage_ru: Фиг тебе, а не небесная канцелярия!
+isLockedAltMessage_ru: Былинный отказ!
 isLockedAltMessage_zh: 未授权！
 
 isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
 isLockedAltMessage: Air Strike Disabled
-isLockedAltMessage_ru: Небесную канцелярию глушат
+isLockedAltMessage_ru: Умный артур рататуй глушит связь с небесной канцелярией.
 isLockedAltMessage_zh: 空袭被禁用
 #===================================================
 
