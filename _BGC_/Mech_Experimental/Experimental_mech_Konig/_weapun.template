@@ -1,9 +1,9 @@
 
 #_weapun.template
 [core]
-@global dmg: 700
+@global dmg: 675
 @global range: 310
-@global delay: 120
+@global delay: 115
 @global warmup: 1
 @global limitingRange: 140
 @global acidRange: 180

@@ -69,14 +69,14 @@ instantReuseLast: true
 
 color:#FF3695ff
 
-areaDamage: 10000
-areaRadius: 150
+areaDamage: 12500
+areaRadius: 225
 
 largeHitEffect: true
 lightColor: #FF3695ff
 lightSize: 0.95
 
-buildingDamageMultiplier: 1.35
+buildingDamageMultiplier: 1.1
 image: railgun_projectile.png
 
 hitSound: true

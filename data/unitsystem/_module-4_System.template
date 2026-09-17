@@ -335,7 +335,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_1
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}
 [action_install_mechBuilder_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -344,7 +344,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_1
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 [action_install_module_repairbot_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -353,7 +353,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_1
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 [action_install_module_repairbay_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -362,7 +362,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_1
 	@define modName_zh: 		修复站
 	@define modName: 		Repair Bay
-	@define modName_ru:		Рем. Станция
+	@define modName_ru:		Ремонтная почка
 	price: ${Mprice_IIa}		
 [action_install_module_shurikenS_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -380,7 +380,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_1
 	@define modName: 		Shield Generator
 	@define modName_zh: 		护盾发生器
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 [action_install_module_IonDeath_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -389,7 +389,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_IONDEATH_1
 	@define modName: 		Ion Detonator
 	@define modName_zh: 		离子雷管
-	@define modName_ru:		Ионный Взрыватель
+	@define modName_ru:		Взрыватель на основе ионов
 	price: ${Mprice_XI}
 [action_install_module_redShell_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -398,7 +398,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REDTURTLE_1
 	@define modName: 		Red Shuriken
 	@define modName_zh: 		红色手里剑
-	@define modName_ru:		Красный Сюрикен
+	@define modName_ru:		Спиннерекс
 	price: ${Mprice_III}
 [action_install_module_laser_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -407,7 +407,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_1
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 [action_install_module_eCharger_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -425,7 +425,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_1
 	@define modName: 		Turtle Core
 	@define modName_zh: 		龟核
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 [action_install_module_precisionB_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -434,7 +434,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PRECISION_1
 	@define modName_zh: 		精密光线
 	@define modName: 		Precision Beam
-	@define modName_ru:		ЛМНД
+	@define modName_ru:		МЛЧД
 	price: ${Mprice_VIII}
 [action_install_module_particleB_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -443,7 +443,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PARTICLE_1
 	@define modName_zh: 		粒子束
 	@define modName: 		Particle Beam
-	@define modName_ru:		ЛМВД
+	@define modName_ru:		МЛВД
 	price: ${Mprice_IX}
 [action_install_module_Demo_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
@@ -452,7 +452,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_DEMOCHARGE_1
 	@define modName: 		Demo Charge
 	@define modName_zh: 		炸药包
-	@define modName_ru:		Заряд Взрывчатки
+	@define modName_ru:		Пукательный заряд
 	price: ${Mprice_XII}
 [action_install_module_RepairPulse_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT3
@@ -461,7 +461,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRPULSE_1
 	@define modName_zh: 		修复脉冲
 	@define modName: 		Repair Pulse
-	@define modName_ru:		Рем-Пульсация
+	@define modName_ru:		Импульс здравия
 	price: ${Mprice_X}
 [action_install_module_Nuke_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
@@ -470,7 +470,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_NUKE_1
 	@define modName_zh: 		核能有效载荷
 	@define modName: 		Nuke Payload
-	@define modName_ru:		Ядерный Заряд
+	@define modName_ru:		Ядрёнов пук
 	price: ${Mprice_XIII}
   #-----------------
   isLocked: if not game.nukesEnabled()
@@ -495,7 +495,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_1_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -506,8 +506,8 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_1_max
 	@define modName_zh: 		MAX修复站
 	@define modName: 		Max Repair Bay
-	@define modName_ru:		Макс. Рем. Станция
-	price: ${Mprice_IIa+3200}
+	@define modName_ru:		МАКС. Рем. Почка
+	price: ${Mprice_IIa+3000}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
 [action_install_moduleMax_turtlecore_A]
@@ -517,7 +517,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_1_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00			
@@ -529,7 +529,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_2
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}
 [action_install_mechBuilder_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -538,7 +538,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_2
 	@define modName: 		Mech Builder
 	@define modName_zh: 		机甲建造者
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 [action_install_module_repairbot_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -547,7 +547,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_2
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 [action_install_module_repairbay_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -556,7 +556,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_2
 	@define modName_zh: 		修复站
 	@define modName: 		Repair Bay
-	@define modName_ru:		Рем. Станция
+	@define modName_ru:		Ремонтная почка
 	price: ${Mprice_IIa}		
 [action_install_module_shurikenS_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -574,7 +574,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_2
 	@define modName: 		Shield Generator
 	@define modName_zh: 		护盾发生器
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 [action_install_module_IonDeath_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -583,7 +583,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_IONDEATH_2
 	@define modName: 		Ion Detonator
 	@define modName_zh: 		离子雷管
-	@define modName_ru:		Ионный Взрыватель
+	@define modName_ru:		Взрыватель на основе ионов
 	price: ${Mprice_XI}
 [action_install_module_redShell_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -592,7 +592,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REDTURTLE_2
 	@define modName: 		Red Shuriken
 	@define modName_zh: 		红色手里剑
-	@define modName_ru:		Красный Сюрикен
+	@define modName_ru:		Спиннерекс
 	price: ${Mprice_III}
 [action_install_module_laser_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -601,7 +601,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_2
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 [action_install_module_eCharger_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -619,7 +619,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_2
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 [action_install_module_precisionB_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -628,7 +628,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PRECISION_2
 	@define modName_zh: 		精密光线
 	@define modName: 		Precision Beam
-	@define modName_ru:		ЛМНД
+	@define modName_ru:		МЛЧД
 	price: ${Mprice_VIII}
 [action_install_module_particleB_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -637,7 +637,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PARTICLE_2
 	@define modName_zh: 		粒子束
 	@define modName: 		Particle Beam
-	@define modName_ru:		ЛМВД
+	@define modName_ru:		МЛВД
 	price: ${Mprice_IX}
 [action_install_module_Demo_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
@@ -646,7 +646,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_DEMOCHARGE_2
 	@define modName_zh: 		炸药包
 	@define modName: 		Demo Charge
-	@define modName_ru:		Заряд Взрывчатки
+	@define modName_ru:		Пукательный заряд
 	price: ${Mprice_XII}
 [action_install_module_RepairPulse_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT3
@@ -655,7 +655,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRPULSE_2
 	@define modName_zh: 		修复脉冲
 	@define modName: 		Repair Pulse
-	@define modName_ru:		Рем-Пульсация
+	@define modName_ru:		Импульс здравия
 	price: ${Mprice_X}
 [action_install_module_Nuke_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
@@ -664,7 +664,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_NUKE_2
 	@define modName_zh: 		核能有效载荷
 	@define modName: 		Nuke Payload
-	@define modName_ru:		Ядерный Заряд
+	@define modName_ru:		Ядрёнов пук
 	price: ${Mprice_XIII}
   #-----------------
   isLocked: if not game.nukesEnabled()
@@ -689,7 +689,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_2_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -700,8 +700,8 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_2_max
 	@define modName_zh: 		MAX修复站
 	@define modName: 		Max Repair Bay
-	@define modName_ru:		Макс. Рем. Станция
-	price: ${Mprice_IIa+3200}
+	@define modName_ru:		МАКС. Рем. Почка
+	price: ${Mprice_IIa+3000}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
 [action_install_moduleMax_turtlecore_B]
@@ -711,7 +711,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_2_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00	
@@ -723,7 +723,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_3
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}	
 [action_install_mechBuilder_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -732,7 +732,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_3
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 [action_install_module_repairbot_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -741,7 +741,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_3
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 [action_install_module_repairbay_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -750,7 +750,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_3
 	@define modName_zh: 		修复站
 	@define modName: 		Repair Bay
-	@define modName_ru:		Рем. Станция
+	@define modName_ru:		Ремонтная почка
 	price: ${Mprice_IIa}		
 [action_install_module_shurikenS_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -768,7 +768,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_3
 	@define modName_zh: 		护盾发生器
 	@define modName: 		Shield Generator
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 [action_install_module_IonDeath_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -777,7 +777,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_IONDEATH_3
 	@define modName_zh: 		离子雷管
 	@define modName: 		Ion Detonator
-	@define modName_ru:		Ионный Взрыватель
+	@define modName_ru:		Взрыватель на основе ионов
 	price: ${Mprice_XI}
 [action_install_module_redShell_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -786,7 +786,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REDTURTLE_3
 	@define modName_zh: 		红色手里剑
 	@define modName: 		Red Shuriken
-	@define modName_ru:		Красный Сюрикен
+	@define modName_ru:		Спиннерекс
 	price: ${Mprice_III}
 [action_install_module_laser_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -795,7 +795,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_3
 	@define modName_zh: 		激光防御
 	@define modName: 		Laser Defense
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 [action_install_module_eCharger_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -813,7 +813,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_3
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 [action_install_module_precisionB_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -822,7 +822,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PRECISION_3
 	@define modName_zh: 		精密光线
 	@define modName: 		Precision Beam
-	@define modName_ru:		ЛМНД
+	@define modName_ru:		МЛЧД
 	price: ${Mprice_VIII}
 [action_install_module_particleB_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -831,7 +831,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PARTICLE_3
 	@define modName_zh: 		粒子束
 	@define modName: 		Particle Beam
-	@define modName_ru:		ЛМВД
+	@define modName_ru:		МЛВД
 	price: ${Mprice_IX}
 [action_install_module_Demo_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
@@ -840,7 +840,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_DEMOCHARGE_3
 	@define modName_zh: 		炸药包
 	@define modName: 		Demo Charge
-	@define modName_ru:		Заряд Взрывчатки
+	@define modName_ru:		Пукательный заряд
 	price: ${Mprice_XII}
 [action_install_module_RepairPulse_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT3
@@ -849,7 +849,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRPULSE_3
 	@define modName_zh: 		修复脉冲
 	@define modName: 		Repair Pulse
-	@define modName_ru:		Рем-Пульсация
+	@define modName_ru:		Импульс здравия
 	price: ${Mprice_X}
 [action_install_module_Nuke_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
@@ -858,7 +858,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_NUKE_3
 	@define modName_zh: 		核能有效载荷
 	@define modName: 		Nuke Payload
-	@define modName_ru:		Ядерный Заряд
+	@define modName_ru:		Ядрёнов пук
 	price: ${Mprice_XIII}
   #-----------------
   isLocked: if not game.nukesEnabled()
@@ -883,7 +883,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_3_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -894,8 +894,8 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_3_max
 	@define modName_zh: 		MAX修复站
 	@define modName: 		Max Repair Bay
-	@define modName_ru:		Макс. Рем. Станция
-	price: ${Mprice_IIa+3200}
+	@define modName_ru:		МАКС. Рем. Почка
+	price: ${Mprice_IIa+3000}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
 [action_install_moduleMax_turtlecore_C]
@@ -905,7 +905,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_3_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00	
@@ -917,7 +917,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_4
 	@define modName: 		Light MG
 	@define modName_zh: 		轻机枪
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}	
 [action_install_mechBuilder_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -926,7 +926,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_4
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 [action_install_module_repairbot_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -935,7 +935,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_4
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 [action_install_module_repairbay_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -944,7 +944,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_4
 	@define modName_zh: 		修复站
 	@define modName: 		Repair Bay
-	@define modName_ru:		Рем. Станция
+	@define modName_ru:		Ремонтная почка
 	price: ${Mprice_IIa}		
 [action_install_module_shurikenS_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -962,7 +962,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_4
 	@define modName_zh: 		护盾发生器
 	@define modName: 		Shield Generator
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 [action_install_module_IonDeath_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -971,7 +971,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_IONDEATH_4
 	@define modName_zh: 		离子雷管
 	@define modName: 		Ion Detonator
-	@define modName_ru:		Ионный Взрыватель
+	@define modName_ru:		Взрыватель на основе ионов
 	price: ${Mprice_XI}
 [action_install_module_redShell_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -980,7 +980,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REDTURTLE_4
 	@define modName_zh: 		红色手里剑
 	@define modName: 		Red Shuriken
-	@define modName_ru:		Красный Сюрикен
+	@define modName_ru:		Спиннерекс
 	price: ${Mprice_III}
 [action_install_module_laser_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -989,7 +989,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_4
 	@define modName_zh: 		激光防御
 	@define modName: 		Laser Defense
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 [action_install_module_eCharger_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -1007,7 +1007,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_4
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 [action_install_module_precisionB_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -1016,7 +1016,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PRECISION_4
 	@define modName_zh: 		精密光线
 	@define modName: 		Precision Beam
-	@define modName_ru:		ЛМНД
+	@define modName_ru:		МЛЧД
 	price: ${Mprice_VIII}
 [action_install_module_particleB_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -1025,7 +1025,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_PARTICLE_4
 	@define modName_zh: 		粒子束
 	@define modName: 		Particle Beam
-	@define modName_ru:		ЛМВД
+	@define modName_ru:		МЛВД
 	price: ${Mprice_IX}
 [action_install_module_Demo_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
@@ -1034,7 +1034,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_DEMOCHARGE_4
 	@define modName_zh: 		炸药包
 	@define modName: 		Demo Charge
-	@define modName_ru:		Заряд Взрывчатки
+	@define modName_ru:		Пукательный заряд
 	price: ${Mprice_XII}
 [action_install_module_RepairPulse_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT3
@@ -1043,7 +1043,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRPULSE_4
 	@define modName_zh: 		修复脉冲
 	@define modName: 		Repair Pulse
-	@define modName_ru:		Рем-Пульсация
+	@define modName_ru:		Импульс здравия
 	price: ${Mprice_X}
 [action_install_module_Nuke_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
@@ -1052,7 +1052,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_NUKE_4
 	@define modName_zh: 		核能有效载荷
 	@define modName: 		Nuke Payload
-	@define modName_ru:		Ядерный Заряд
+	@define modName_ru:		Ядрёнов пук
 	price: ${Mprice_XIII}
   #-----------------
   isLocked: if not game.nukesEnabled()
@@ -1077,7 +1077,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_4_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -1088,8 +1088,8 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIRBAY_4_max
 	@define modName_zh: 		MAX修复站
 	@define modName: 		Max Repair Bay
-	@define modName_ru:		Макс. Рем. Станция
-	price: ${Mprice_IIa+3200}
+	@define modName_ru:		МАКС. Рем. Почка
+	price: ${Mprice_IIa+3000}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
 [action_install_moduleMax_turtlecore_D]
@@ -1099,7 +1099,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_4_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00		

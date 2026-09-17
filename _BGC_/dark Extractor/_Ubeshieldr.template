@@ -9,8 +9,8 @@ isVisible: if self.numberOfAttachedUnits(withTag='repBay2')>0
 displayType: action
 text: Shield Overload
 description:- Releases a powerful pulse that repairs shield only\n- Max shield distribution: 2000 | personal Shield: 6000 | duration: 2s | range: 300\n- Cooldown: 60s
-text_ru: Энергетический Всплеск
-description_ru: Восполняет/даёт силовой щит всей ближайшей технике и строениям в радиусе 250\n Если щита изначально у строения/техники нет, то щит пропадёт через 15 секунд\n Перезарядка: 60 секунд
+text_ru: Энергонахрюк
+description_ru: Выпускает мощную ауру 5G, способную восстановить любой щищт в округе до фулла \n- Большой рейндж хрюка \n- Всем, кто не имеет щита (в частности строениям), предоставляет временный на 2к хп \n- О, не работает на союзников
 text_zh: 护盾超载
 description_zh:-释放一个强大的脉冲，脉冲快速修复护盾\n-最大护盾分配：2000 |持续时间：2秒|影响范围：250 \n-冷却：60秒
 buildSpeed: 0s

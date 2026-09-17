@@ -43,11 +43,11 @@
 #MG
 @global mgRnage: 500
 #----------------------weapon set IV
-@global meteor_Dmg: 500
-@global meteor_AoE: 180
+@global meteor_Dmg: 850
+@global meteor_AoE: 280
 @global meteor_EnergyChrg: 0.3
 @global meteor_EnergyP: 8
-@global range_IV: 200
+@global range_IV: 220
 @global exDelay: 2
 
 #----------------------weapon set END

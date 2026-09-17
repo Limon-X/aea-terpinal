@@ -2,12 +2,12 @@
 #=================== lock not for u hacky wacky
 isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
 isLockedAltMessage: Unauthorized
-isLockedAltMessage_ru: Былинный отказ!
+isLockedAltMessage_ru: Нет связи со штабом!
 isLockedAltMessage_zh: 未授权！
 
-isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
+isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=1000) > 0 and self.hasTags(includes='airStriker')
 isLockedAltMessage: Air Strike Disabled
-isLockedAltMessage_ru: Умный артур рататуй глушит связь с небесной канцелярией.
+isLockedAltMessage_ru: Воздушная поддержка отключена
 isLockedAltMessage_zh: 空袭被禁用
 ##########################ORBITAL STRIKES FROM SPACE STATION###########################################################
 [action_kineticStrike]
@@ -38,7 +38,7 @@ allowMultipleInQueue: false
 @copyFromSection: template_noJacas
 
 fireTurretXAtGround: dysonBeam
-price: 350000, uranium=20000, power=3000
+price: 500000, uranium=20000, power=3000
 ai_isDisabled: true
 text: Nicoll Dyson Beam
 description: \n-Solar energy directed and focused into a narrow beam by an array of satellites \n-Lasts for 10 seconds before dissapearing \n-Can be given orders to redirect the beam
@@ -64,8 +64,8 @@ price: 20000, uranium=4000, power=1000
 ai_isDisabled: true
 text: Dirty Bomb
 description: - Drops radioactive dust in a large area, lasts for 4 minutes\n- Does light damage over time, does not effect allies\n- Deploy range 600
-text_ru: Подушка пердушка
-description_ru: - Нестандартное оружие со маленькой взрывной мощью\n- Предназначена для активного выделения пердежа в атмосферу,\n чтобы создать смертельное облако вонищи(Вонище пофиг на 5-жи щиты!)\n- Этот эффект длится 4 минуты, затем облако улетучивается\nРадиус вызова: 600\n[СТАТУСНЫЙ ЭФФЕКТ]\n снимает максимальное здоровье бомжей вплоть до -2400(При этом, соответственно, нанося урон)\n Эффект постоянен и фатален для проперженных
+text_ru: Пускание газиков
+description_ru: - Нестандартное оружие с маленькой взрывной мощью\n- Предназначена для активного выделения газа в атмосферу,\n чтобы создать смертельное облако (Газу пофиг на 5G!)\n- Этот эффект длится 4 минуты, затем облако улетучивается\nРадиус вызова: 600\n[СТАТУСНЫЙ ЭФФЕКТ]\n снимает максимальное здоровье бомжей вплоть до -2400(При этом, соответственно, нанося урон)\n Эффект постоянен и фатален для прогазованных
 text_zh: 脏弹
 description_zh: -在大范围内投掷放射性尘，持续4分钟\n-随时间流逝造成轻微伤害，不影响盟友单位\n-发射射程600
 
@@ -82,12 +82,12 @@ iconImage: icon2_fallout.png
 @copyFromSection: template_noJacas
 
 fireTurretXAtGround: mirv
-price: 68000, uranium=5000, power=1500
+price: 250000, uranium=5000, power=1500
 #text: M.I.R.V.
 text: The Big One.
 description: - Drops a very powerful nuke on target location\n- Targeting range 450\n- Does 15,000 nuclear damage over a 600 radius area\n- Long delay
 text_ru: Личина
-description_ru: - Сбрасывает большую личину на выбранную локацию\n- Наносит дофига урона в большом радиусе\n- Долго летит в пункт назначения\n Радиус вызова: 450
+description_ru: - Сбрасывает гигаличину на выбранную локацию\n- Улучшенная ядерка, развоплощающая ВСЁ\n- Долго летит в пункт назначения\n Радиус вызова: 450
 text_zh: 大.的.那.个.
 description_zh: -在目标位置投掷一枚威力强大的核弹\n-射程450 \n-对600范围内的敌人造成12000点核伤害\n-延迟过长
 

@@ -13,7 +13,7 @@ slave: true
 projectile: 1
 size: 38
 turnSpeed: 0
-delay: 5s
+delay: 10s
 canAttackFlyingUnits: false
 canAttackLandUnits:   true
 canAttackUnderwaterUnits: false
@@ -26,10 +26,10 @@ shoot_light:#FFEECCCC
 aimOffsetSpread: 0
 image: main_gun_A.png
 canShoot: true
-warmup:0.5s
+warmup:5s
 recoilOffset: -8
 recoilOutTime: 5
-recoilReturnTime: 160
+recoilReturnTime: 200
 limitingMinRange: ${mainLimitRng}
 [turret_maincannon_B]
 @copyFromSection: turret_maincannon_A
@@ -99,8 +99,8 @@ largeHitEffect: true
 lightColor: #13e0c3
 lightSize: 0.7
 [projectile_1]
-areaDamage: 250
-areaRadius: 70
+areaDamage: 20
+areaRadius: 10
 life: 0
 frame: 9
 speed: 20
@@ -114,9 +114,9 @@ lightCastOnGround: true
 spawnUnit: SiegrailProjectile
 spawnProjectilesOnCreate: 1A
 [projectile_1A]
-directDamage: 750
+directDamage: 800
 life: 200
-speed: 20
+speed: 30
 drawSize: 0
 color: #46ebff
 lightColor: #46ebff

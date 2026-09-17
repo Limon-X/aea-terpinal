@@ -1,5 +1,28 @@
 **CREDITS**
 
+Товарищи переводчики и ребалансеры те ещё твари, потому решили вклеить себя в оригинальные кредиты мода. 
+
+AUE REfI - AUE Rebalanced Edition from I.
+
+Лицо и воплощение REfI, его, собственно, зачинатель:
+Essence_Of_A_Child
+
+Так себе ребалансер, поддержатель штанов и волшебник, но классный переводчик (а ещё нытик на статы):
+StupidProgetto
+
+Товарищ, создавший для AUE перевода GitHub (тоже участвовал в ранних версиях, но сейчас спит):
+Limon-X
+
+Самый большой нытик из всех (неимоверное спасибо данной персоне за нововведения на уровне Т2, Т4 и нытье на ванильную экономику AEA):
+Черная Принцесса
+
+И, конечно же, благодарность другим тестерам. Они хоть и были так себе в измерении навыка, но они тоже повлияли весомо на то, во что превратился REfI!
+
+Всё, что использовано непосредственно в REfI (а, может быть, и перекочевало из оригинального AUE), принадлежит своим создателям (музыка, звуки и т.д.). Мы просто типичные пользователи интернета, для которых это всё шутка. Никого не оскорбляем и не обижаем.
+А если нужны кредитс самого оригинального мода, то вот:
+
+
+
 (Note: Every unit has been either edited, re-coded, balanced, or otherwise reimagined by SkaarjLord, with help from Horseman and the entire AEA Community.)
 
 (Many projectile graphical improvements by Hawko)
@@ -45,7 +68,7 @@ Experimentals:
  - PCW by Uber, landing animation by Lithium
  
 Structures: 
- - Rocket Turret, Light/heavy cannon, Radar, and Credit Factorys   by Moo's Defence
+ - Rocket Turret, Light/heavy cannon, Radar, and Credit Factorys by Moo's Defence
  - Sub Turrets by Tactical UnitZ
  - Landmines by Lemons and SkaarjLord
  - Bunker Turret, Barracks by EKVideoGames
@@ -55,6 +78,4 @@ Structures:
  - Extractor additions by Lemons, edited by Horseman
 
 Special Thanks to: Horseman, Lemons, Lithium, Uber, EKVideoGames, Sushimaki, Luke, Mitch, Waffz, RaMK3, Lea(Nova), Kira, KingKazma, Paper, Vox, and the entire AEA Community. None of this would of been possible without all of you. Years of constant play testing have gone into this mod, and the results show. Long live the AEA Community, and thank you all for being awesome. Game on!
-
-
-ну и какие-то ебланы хуйнули перевод
+ 

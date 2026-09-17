@@ -3,7 +3,7 @@
 [core]
 @global skin: 0
 
-@global quadCannonRng: 310
+@global quadCannonRng: 345
 @global quadCannonDmg: 175
 @global quadCannonDelay: 160
 
@@ -12,7 +12,7 @@
 @global VLSwarmup: 2
 @global VLSlimitingRng: 200
 
-@global secondaryRange: 250
+@global secondaryRange: 270
 @global secondaryAutoCDmg: 130
 @global secondaryAutoCDelay: 1
 @global secondaryAutoCAmmo: 30

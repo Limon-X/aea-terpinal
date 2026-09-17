@@ -31,7 +31,7 @@ spawnProjectilesOnCreate: lightning
 shieldDamageMultiplier: 2
 shieldDefectionMultiplier: 0
 
-buildingDamageMultiplier: 0.4
+buildingDamageMultiplier: 0.05
 
 explodeEffect:CUSTOM:lightningShock, CUSTOM:sparks*8
 
@@ -55,10 +55,10 @@ largeHitEffect: true
 
 wobbleAmplitude: 12
 wobbleFrequency: 1
-shieldDamageMultiplier: 1.5
+shieldDamageMultiplier: 2
 shieldDefectionMultiplier: 0.1
 
-buildingDamageMultiplier: 0.5
+buildingDamageMultiplier: 0.1
 
 explodeEffect:CUSTOM:lightningShock, CUSTOM:sparks*8
 

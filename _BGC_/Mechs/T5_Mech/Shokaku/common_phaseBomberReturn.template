@@ -36,7 +36,7 @@ playSoundAtUnit:
 [hiddenAction_returnToParent]
 isActive:true
 text: return
-text_ru: Телепортировать
+text_ru: Вернуть
 clearActiveWaypoint: true
 
 

@@ -135,8 +135,8 @@ isVisible: if self.isControlledByAI()
 #=====================================================================
 text: Light MG
 description: Light Machine Gun is good for single target\nChanging weapon type reduce energy by 2\n\nTarget: Land\Air, Dmg: ${LMachineG}, Ammo: 60, Rng: 250\n40% vs Structure, 100% vs units
-text_ru: Пулесерун
-description_ru: Снаряжает летуна пулешмётом \n- Атакует оба пространства \n- Имеет пониженный урон по бетону
+text_ru: Лёгкий Пулемёт
+description_ru: Дрон с пулемётом, который может атаковать воздушные и наземные войска\n Примечание:\n Имеет пониженный урон по зданиям.
 
 #=====================================================================
 
@@ -162,8 +162,9 @@ showQuickWarLogToPlayer_ru: Загрузка дрона изменена! | Лё
 @copyFromSection: action_press1
 text: HE Bomb
 description: High Explosive Bomb is good for multiple targets and subs\n 10% chance deal critical damage and penetrates shield and armor \nChanging weapon type reduce energy by 2\n\nTarget: Land\Subs, Dmg: ${bombLand}\${bombDC}, Ammo: 1, Rng: 310\n120% vs Structure, 100% vs units
-text_ru: Фугасы
-description_ru: Заряжает фугасы для атаки по бетону \n- Возможна атака по подводному пространству
+text_ru: ОФ Бомба
+description_ru: Дрон с осколочно-фугасной бомбой, которая имеет наземный урон по области, а также повышенный урон по зданиям\n Примечания:\n- С 10% шансом может пробить броню и щит\n- Атакует подлодки.
+
 temporarilyAddTags: weaponT_2
 temporarilyRemoveTags: weaponT_1, weaponT_3, weaponT_4
 
@@ -174,8 +175,8 @@ showQuickWarLogToPlayer_ru: Загрузка дрона изменена! | ОФ
 @copyFromSection: action_press1
 text: Micro Missile
 description: Micro Missile is good for multiple or single targets\n Ignore shield and 15% chance to deploy extra micro missile \nChanging weapon type reduce energy by 2\n\nTarget: Land\Air, Dmg: ${microMissile}, Ammo: 6, Rng: 400\n50% vs Structure, 100% vs units
-text_ru: Макро-головки
-description_ru: Специализированные ракеточки, наносящие хороший дамаг по жиру \n- Пробивают 5G \n- Есть шанс высрать дополнительную головку при атаке \n- Урон по бетону понижен
+text_ru: Микро Боеголовки
+description_ru: Дрон с самонаводящимися микро боеголовками, которые атакуют наземную и воздушную технику\n Примечания:\n- Пробивает щиты, а также имеет 15% шанс выпустить доп. боеголовку\n- Имеет пониженный урон по зданиям.
 
 temporarilyAddTags: weaponT_3
 temporarilyRemoveTags: weaponT_1, weaponT_2, weaponT_4
@@ -191,8 +192,8 @@ ai_isHighPriority: false
 
 text: Unguided Rocket
 description: Unguided Rocket deals massive damage for multiple or single targets\nHas secondary payload that deploys 2 micro missiles if miss the target\nChanging weapon type reduce energy by 2\n\nTarget: Air, Dmg: ${AArocket+(AArocket/2)}, Ammo: 2, Rng: 310\n 100% vs units, Ignore shield
-text_ru: ПВА ракеты
-description_ru: Снаряжает летуна ПВА ракетами с хорошим разовым дамагом \n- Ракеты запускаются в паре с обычными
+text_ru: Неуправляемые Ракеты
+description_ru: Дрон с неуправляемыми ПВО ракетами, наносящими колоссальный урон, а также пробивающими щиты\n- Имеет в запасе 2 микро боеголовки, что запускаются вместе с основными ракетами.
 
 temporarilyAddTags: weaponT_4
 temporarilyRemoveTags: weaponT_1, weaponT_2, weaponT_3
@@ -331,17 +332,17 @@ text: Build Drones
 description: Click only if carrier stop\broke building drones
 text_zh:建造无人机
 description_zh:如果莱特停止建造无人机，请单击
-text_ru: Наклепать Дронов
+text_ru: Построить Дронов
 description_ru: Нажмите только если лейте перестанет строить дронов
 alsoQueueAction: droneBuildRRRR
 addResources: setFlag=1-2, unsetFlag=3
 [action_rebuild]
 text: Auto Rebuild
-text_ru: Автоперестройка
+text_ru: Автопроизводство
 text_zh:自动重建
 buildSpeed: 0s
 description: [Rebuilds lost drones automatically].\n-Cool look'n Controllable UAV\n-A compact drone, virsatile and easy to manufacture\n-Deployed via Drone Mech Carrier\n-Can attack ground, air and subs, depends equiped weapon\nPrice:${Dprice}, Build time: 16.7s
-description_ru: Автоматически клепает новых дронов на змену уничтоженным\n- Время строительства: 16.7 сек.
+description_ru: Автоматически строит новых дронов на змену уничтоженным\n- Время строительства: 16.7 сек.
 description_zh: [自动重建丢失的无人机]
 isGuiBlinking: if not self.hasFlag(id=3)
 
@@ -453,12 +454,10 @@ isGuiBlinking: if self.hasFlag(id=12)
 isVisible: false
 text: DISPERS
 description: [Disperse and attack]\nScouting random area and \nPrioritized attacking nearby units
-text_ru: РАСПЫЛИТЬСЯ
-description_ru: [Распылиться и атаковать]\nЛупит в случайную точку и\n атакует ближайшее мясо.
 isLockedMessage: Cannot attack move while 'engage' is active
 isLockedAlt: if self.hasFlag(id=11)
 isLockedAltMessage: Carrier is currently Guarding
-isLockedAltMessage_ru: Авиапоносец пока защищается
+isLockedAltMessage_ru: Авианосец на данный момент под блоком охраны.
 
 iconImage: ROOT:data\icons\deploy2.png 
 temporarilyAddTags: ScatterMe_${leyteC}
