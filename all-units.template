@@ -201,7 +201,7 @@ hidden:true
 #---------------        builder > prerequisite: Dark Drone research
 @global darkDrone:      500
 #---------------        ---
-@global mmt:            550
+@global mmt:            500
 @global beamCrab:       450
 @global mist:           550
 @global lightningBug:   600
@@ -219,7 +219,7 @@ hidden:true
 @global comanche:       2750
 @global bgBomberMech:   4250
 #---------------        ---
-@global modMech:        2000
+@global modMech:        2500
 @global honeyBadger:    3000
 @global langley:        6200
 @global gunMech:        5000

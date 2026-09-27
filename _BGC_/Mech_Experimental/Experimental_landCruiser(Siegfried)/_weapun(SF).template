@@ -1,8 +1,8 @@
 
 #_weapun(SF).template
 [core]
-@global SFRaildamage_A: 125
-@global SFRaildamage_B: 125
+@global SFRaildamage_A: 175
+@global SFRaildamage_B: 175
 @global SFRailAoE: 55
 @global SFRailHDM: 1
 @global SFRailBDM: 1

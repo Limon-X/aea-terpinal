@@ -2,7 +2,7 @@
 #_weapun.template
 [core]
 #Mech price
-@global price: 250000, uranium=17000
+@global price: 300000, uranium=17000
 #Mech mode range
 @global range: 360
 #Gunship mode range
@@ -13,7 +13,7 @@
 #Burn Drive Cooldown
 @global BDrivecooldown: 45
 #Railgun Cooldown
-@global RailGuncooldown: 30
+@global RailGuncooldown: 45
 
 #====Transform Cooldown
 #Mech Mode
@@ -73,7 +73,7 @@
 @global reloadG: 10
 #-----------------------========> Railgun Mode <========----------------------- Railgun , Rerugan
 #Rail cost
-@global RailPrice: uranium=1000
+@global RailPrice: uranium=1500
 #Rail AoE
 @global RailAoE: 40
 #hull damage multiplier
