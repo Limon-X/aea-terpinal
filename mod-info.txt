@@ -1,5 +1,5 @@
 [mod]
-title:  AUE.REfI [10.2E]
+title:  AUE.REfI [10.1F]
 description: Это уже чёрт знает какая версия REfI, ребаланс-форка мода AUE. Удачи на полях моральных разложений!
 tags: Units
 minVersion: 1.15
