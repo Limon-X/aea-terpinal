@@ -6,11 +6,11 @@
 @global meleeModeCool: 10
 
 @global shield: 2000
-@global shieldregen: 0.5
+@global shieldregen: 0.25
 
 #----------------Photon kannon
-@global photonCannonDir: 700
-@global photonCannonAoE: 300
+@global photonCannonDir: 750
+@global photonCannonAoE: 250
 @global photonDelay: 135
 # 4x faster fire rate but damage devided by 4
 @global photonCannonMul: 2

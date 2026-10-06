@@ -69,14 +69,14 @@ instantReuseLast: true
 
 color:#FF3695ff
 
-areaDamage: 10000
-areaRadius: 150
+areaDamage: 12500
+areaRadius: 250
 
 largeHitEffect: true
 lightColor: #FF3695ff
 lightSize: 0.95
 
-buildingDamageMultiplier: 1.35
+buildingDamageMultiplier: 1.1
 image: railgun_projectile.png
 
 hitSound: true
@@ -87,8 +87,9 @@ hitSound: true
 trailEffect: NONE
 [projectile_Sconan2]
 @copyFromSection: projectile_Sconan
-areaDamage: 1000
-areaRadius: 120
+areaDamage: 250
+areaRadius: 600
+areaExpandTime: 600
 
 [projectile_beam]
 #=== for the beam effect ===

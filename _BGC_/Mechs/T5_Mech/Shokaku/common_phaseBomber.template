@@ -7,7 +7,7 @@ name: phaseBomber_${shokaku_D}
 displayText: Aichi
 displayDescription: -"Hello?, ..............."\n-Parent carrier number: ${shokaku_D}\n[Aichi Carrier Fighter\Bomber]\n-Cool look'n Controllable UAV and Attack all nearby idiots\n-Has Phase module and Warp engine\n-Can magically disappear\n-Deployed via Mech Carrier\n-Can attack ground, air and subs, depends equiped weapon
 displayText_ru: Айтишник
-displayDescription_ru:\n- Не злите айтишников, иначе вас потом вычислят по айпи \n- Имеет сбалансированные показатели жира и 5G, а также очень неплохо вооружается 
+displayDescription_ru: Не злите айтишников, иначе вас потом вычислят по айпи \n- сынок Шозурика \n- Каждый Шозуру имеет два сынка, так что "у физрука было четыре сына..." \n- Очень неплохо вооружается, но и стоит как крыло от самолёта при смерти \n- Раздаёт знатных лещей, телепортируется при первой атаке, доджа снаряд \n- По растрате боеприпаса он испаряется с поля боли, отправляясь обратно к отцу под юбку \n- Бойтесь его, ибо его МНОГА!
 class: CustomUnitMetadata
 displayText_zh: 爱知无人机
 displayDescription_zh: -“喂？………………”\n-主航母编号：${shokaku_D}\n[爱知航母战斗机\轰炸机]\n-拥有酷炫外观的可控无人机\n-攻击附近的所有白痴\n-拥有相位模块和曲速引擎\n-可以神奇地消失\n-通过翔鹤号航母部署\n-可以攻击地面、空中和水下单位，取决于装备的武器
@@ -20,7 +20,7 @@ mass: 10000
 armour: 1
 
 techLevel: 1
-buildSpeed: 40s
+buildSpeed: 50s
 radius: 15
 softCollisionOnAll: 10
 fogOfWarSightRange:15
@@ -63,8 +63,8 @@ displayType: infoOnlyNoBox
 #=====================================================================
 text: Weapon Set I
 description: - This weapon loadout used by T2 'Leyte Class'\n Slightly stronger, less damage to hull, Best against structure\nChance to deal critical damage\n-=Weapons=-\n[AA Unguided Rocket]: Target: Air, Dmg: ${(AArocket+(AArocket/2))}, AoE\n[High Explosive Bomb]: Target: Land, dmg:${bombLand}, AoE\n Drop range: ${range_I}, Ammo: 4-8\n120% vs structure, 50% vs hull, 110% vs shield, 5 PEN\nCrit: +120% vs structure, -50% vs hull\n Changing weapon set reduce energy by ${energyP}
-text_ru: Фугасный микс
-description_ru: - Помесь II-го и IV-го режима Лейтуна \n- Точечные фугасы сбрасываются Айтишниками прямо на бетон, а для свободных радикалов в воздухе есть ракеты \n- Урон по бетону повышен, по жиру понижен \n- Имеется шанс крит дамага
+text_ru: Фугасный заряд
+description_ru: - Помесь II-го и IV-го режима Лесенки \n- Точечные фугасы сбрасываются Айтишниками прямо на бетон \n- Урон по бетону повышен, по жиру понижен \n- Имеется шанс крит дамага
 text_zh: 武器设置 I
 description_zh: -T2“莱特类”使用的这种武器\n-对机体的伤害较小，对建筑结构造成致命伤害\n-=武器=-\n[防空非制导火箭]：目标：空中单位，造成伤害：${(AArocket+(AArocket/2))}，范围伤害\n[高爆炸弹]：目标：陆地单位，造成伤害：${bombLand}，范围伤害\n发射范围：${range_I}\n对建筑造成120%伤害，对机体造成50%伤害，对护盾单位造成110%伤害
 
@@ -78,7 +78,7 @@ pos: 20
 @define pr: 5
 text: Weapon Set II
 description: - This weapon loadout used by T4 'Okhotnik Class'\n Slightly reduce damage, Best against Hull, Armored and Agile units\nMissile target acquisition time: 2s\n-=Weapons=-\n[AAM Magic Missile]: Target: Air, Dmg: ${ionMAA_Dmg}, Single Target\n[ASM Magic Missile]: Target: Land, Dmg: ${ionM_Dmg}, AoE\n Drop range: ${range_II}, Ammo: 4-8\n 120% vs hull, 50% vs structure, 25 PEN\nNote: If missile too close it only deal 100 dmg\n Changing weapon set reduce energy by ${energyP}
-text_ru: Пощёчина Лешего
+text_ru: Пощёчина от Лешего
 description_ru: - Даёт Айтишникам побыть передастами, давая Лешьих лещей ещё и с небес \n- Дамаг, оф коурс, меньше, чем у оригинала \n- Возможна атака по кислоуродам 
 text_zh: 武器设置 II
 description_zh: -T4单位“奥特霍尼克”使用的武器\n-发射会稍微减少伤害，对抗机体、装甲和敏捷部队非常有效\n-导弹击中目标的时间：2s\n-=武器=-\n[AAM魔法飞弹]：攻击目标：空中单位，造成伤害：${ionMAA_Dmg}，单体目标\n[ASM魔法导弹]：攻击目标：陆地单位，造成伤害：${ionM_Dmg}，范围伤害\n下降距离：${range_II} \n对机体造成120%伤害，对建筑造成50%伤害\n注意：如果导弹靠近单位太近，它只造成100伤害\n-更改武器将减少${energyP}能量
@@ -90,7 +90,7 @@ iconImage: ROOT:data\icons\ws_2.png
 text: Weapon Set III
 description: - Retrofits all bomb slots with ranged weaons, Entirely converted into aerial gunship\n Its firepower allows it to make short work of anything on the ground \n Gains ${shieldB} shield pool, if hp less than 30% automatically retreats\n-=Weapon=-\n [M137 Cannon]: Target: Surface, Dmg: ${M137shellD}, AoE: 55, Rearm time: ${M137shellDelay}s, Ammo: ${M137ammo}\n [L60 Bofors] Target: Surface, Dmg: ${L60},Rearm time: ${L60Delay}s, Burtsize: 6\n [Light MG] Target: Surface, Single target, range: ${mgRnage}\n Once M137 Cannon is depleted it automatically return to carrier\nPhase Warp only triggers when very close to the target within 100 range\n Changing weapon set reduce energy by ${energyP}
 text_ru: Косплей на Жировика
-description_ru: - Начинает дико кружить и обсирать врагов под собой потоком зелёной мочи \n- Солидный ДПС при использовании всех 20-ти айтишников в этом режиме \n- Урон по бетону снижен
+description_ru: - Начинает дико обсирать врагов под собой потоком зелёной мочи \n- Солидный ДПС при использовании всех 20-ти айтишников в этом режиме \n- Урон по бетону снижен
 text_zh: 武器设置III
 description_zh: -使用远程武器改装所有炸弹槽，完全变形为空中炮舰\n-其火力允许其在短时间内完成任何任务\n-如果耐久低于30%，则获得${shieldB}点护盾\n-=武器=-\n[M137加农炮]：攻击目标：地面单位，造成伤害：${M137shellD}，伤害范围:55，重新装填时间：${M137shellDelay}秒，弹药量： ${M137ammo}\n[L60 博福斯]攻击目标：地面单位，造成伤害：${L60}，重新装填时间：${L60Delay}秒\n[轻机枪]攻击目标：地面单位，单体目标，射程：${mgRnage}\n M137加农炮弹药耗尽后，它会自动返回航母\n-相位扭曲仅在100范围内非常接近目标时触发\n更改武器设置将减少${energyP}能量
 
@@ -100,8 +100,8 @@ iconImage: ROOT:data\icons\ws_3.png
 @define pr: 7
 text: Weapon Set IV
 description: - New type of heavy bomb primarily use for demolition\n Extremely stronk against structure, slow rearm time \n Bomb detonation delay: ${exDelay}s\n-=Weapon=-\n [Meteor Bomb]: Target: Land\Sub, Dmg: ${meteor_Dmg}, AoE: ${meteor_AoE}\n Drop range: ${range_IV}, Ammo: 1-2\n 200% vs structure, 100% vs hull\shield\nBetter self regen while phasing\n Changing weapon set reduce energy by ${meteor_EnergyP}
-text_ru: /dev/null бомба
-description_ru: - Позволяет Айтишникам высирать огроменные бомбы, способными обнулить здания\n- Атакуют только наземное и подводное пространство \n- Порой, чтобы высрать хотя бы одну бомбу, Айтишник пожертвует своей жизнью (Но если их 20, то эффект можно сравнить с Пердуном).
+text_ru: Закос на Пердуна
+description_ru: - Позволяет Айтишникам высирать огроменные бомбы, подобные бомбе Пердуна \n- Атакуют только наземное и подводное пространство \n- Порой, чтобы высрать хотя бы одну ракету, Айтишник пожертвует своей жизнью
 text_zh: 武器设置 IV
 description_zh: -新型重型炸弹主要用于摧毁建筑\n-重新装填非常缓慢的定时炸弹，爆炸延迟：${exDelay}秒\n-=武器=-\n[流星炸弹]：目标：陆地/水下单位，造成伤害：${meteor_Dmg}，爆炸范围：${meteor_AoE}\n下降范围：${range_IV}\n对建筑物造成200%伤害，对机体/护盾单位造成100%伤害\n相位调整时更快的进行自我恢复\n更改武器设置减少${meteor_EnergyP}能量
 
@@ -113,7 +113,7 @@ displayType: infoOnlyNoBox
 #=====================================================================
 text: Pylon turn [Off]
 description: Attack or AttackMove, to automatically enable Pylon turn \nFlying in a large circle around the target
-text_ru: Кручение [ВЫКЛ]
+text_ru: Кружение [ВЫКЛ]
 description_ru: Осуществляет последний танец со своей жертвой, кружась над нею \n- Радиус довольно большой \n- В зависимости от режима будет сближаться для нанесения атаки
 text_zh: 环形转弯[Off]
 description_zh:-攻击或攻击移动时自动启用围绕目标的大圆圈的转弯
@@ -326,7 +326,7 @@ addResources: unsetFlag=0
 [hiddenAction_ScatterIfNotattacking]
 isActive:true
 text: Scatter and Attack
-text_ru: Рассыпаться и налететь
+text_ru: Разбежаться и атаковать
 
 #autoTrigger: if not self.isAttacking() and not self.hasActiveWaypoint(type='loadInto') and not self.hasActiveWaypoint(type='Attack') and not self.hasActiveWaypoint(type='move') and not self.hasActiveWaypoint(type='guard') and self.customTimer(laterThanSeconds=5) and self.energy(greaterThan=0) and not self.hasParent()
 #autoTrigger: if not self.isAttacking() and self.customTimer(laterThanSeconds=2) and self.resource(type="TypeZSelector",greaterThan=0) and self.resource(type="TypeZAttack",greaterThan=0) 

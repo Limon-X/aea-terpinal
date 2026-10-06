@@ -17,7 +17,7 @@ text_zh: 自动训练
 description_zh: [关闭]\n-开始自动训练步兵\n-可选择训练的对象：步枪兵、迫击炮、火箭炮步兵
 description: [OFF]\n-Unit can be auto queue\n-Riflemen, mortar, RPG Infantry
 text_ru: Авто-Обучение
-description_ru: [ВЫКЛ]\n- Автоматически обучает пехоту\n- Доступная для этой функции пехота:\nСтрелок, Пехотинец с РПГ и Миномётный Отряд
+description_ru: [ВЫКЛ]\n- Позволяет обучать первых трёх смехотинцев на постоянной основе \n- Необходимо выбрать, кого именно качалка будет обучать
 buildSpeed: 0s
 addResources: setFlag=0
 pos: 0.2
@@ -27,7 +27,7 @@ alwaysSinglePress: true
 @copyFromSection: action_autoQueueOff
 isVisible: if self.hasFlag(id=0)
 description: [ON]\n-Unit can be auto queue\n-Riflemen, mortar, RPG Infantry
-description_ru: [ВКЛ]\n- Автоматически обучает пехоту\n- Доступная для этой функции пехота:\nСтрелок, Пехотинец с РПГ и Миномётный Отряд
+description_ru: [ВКЛ]\n- Автоматически обучает первых трёх смехотинцев с 1-го уровня качалки
 description_zh: [开启]\n-开始自动训练步兵\n-可选择训练的对象：步枪兵、迫击炮、火箭炮步兵
 addResources: unsetFlag=0
 #------------------

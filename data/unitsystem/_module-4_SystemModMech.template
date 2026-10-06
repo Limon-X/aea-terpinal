@@ -290,6 +290,8 @@ isVisible: if self.hasResources(select1=1) and self.numberOfAttachedUnits(withTa
 @define Mprice_VI:   1000
 #-------turtle core
 @define Mprice_VII:  3000
+#-------Red Shuriken
+@define Mprice_III:  2250
 
 [resource_deposit]
 hidden: true
@@ -359,10 +361,19 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_1
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}
 	@define deposit: -200
-
+[action_install_module_redShell_A]
+	@copyFromSection: template_moduleSelector, template_temModLock_1, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_1
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Спиннерекс
+    price: ${Mprice_III}
+	@define deposit: -2700
 [action_install_mechBuilder_A]
 	@copyFromSection: template_moduleSelector, template_temModLock_1
 	@define modsTag: 		mechBuilder
@@ -370,7 +381,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_1
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 	@define deposit: 0
 [action_install_module_repairbot_A]
@@ -380,7 +391,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_1
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 	@define deposit: -500
 [action_install_module_shurikenS_A]
@@ -400,7 +411,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_1
 	@define modName: 		Shield Generator
 	@define modName_zh: 		护盾发生器
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 	@define deposit: -1000
 [action_install_module_laser_A]
@@ -410,7 +421,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_1
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 	@define deposit: -500
 [action_install_module_turtle_A]
@@ -420,7 +431,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_1
 	@define modName: 		Turtle Core
 	@define modName_zh: 		龟核
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 	@define deposit: -900
 [action_install_moduleMax_repairbot_A]
@@ -430,7 +441,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_1_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -442,7 +453,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_1_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00			
@@ -455,9 +466,19 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_2
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}
 	@define deposit: -200
+[action_install_module_redShell_B]
+	@copyFromSection: template_moduleSelector, template_temModLock_2, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_2
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Спиннерекс
+	price: ${Mprice_III}
+	@define deposit: -2700
 [action_install_mechBuilder_B]
 	@copyFromSection: template_moduleSelector, template_temModLock_2
 	@define modsTag: 		mechBuilder
@@ -465,7 +486,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_2
 	@define modName: 		Mech Builder
 	@define modName_zh: 		机甲建造者
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 	@define deposit: 0
 [action_install_module_repairbot_B]
@@ -475,7 +496,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_2
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 	@define deposit: -500	
 [action_install_module_shurikenS_B]
@@ -495,7 +516,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_2
 	@define modName: 		Shield Generator
 	@define modName_zh: 		护盾发生器
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 	@define deposit: -1000
 [action_install_module_laser_B]
@@ -505,7 +526,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_2
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 	@define deposit: -500
 [action_install_module_turtle_B]
@@ -515,7 +536,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_2
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 	@define deposit: -900
 [action_install_moduleMax_repairbot_B]
@@ -525,7 +546,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_2_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -537,7 +558,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_2_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00	
@@ -550,9 +571,19 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_3
 	@define modName_zh: 		轻机枪
 	@define modName: 		Light MG
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}	
 	@define deposit: -200
+[action_install_module_redShell_C]
+	@copyFromSection: template_moduleSelector, template_temModLock_3, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_3
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Спиннерекс
+	price: ${Mprice_III}
+	@define deposit: -2700
 [action_install_mechBuilder_C]
 	@copyFromSection: template_moduleSelector, template_temModLock_3
 	@define modsTag: 		mechBuilder
@@ -560,7 +591,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_3
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 	@define deposit: 0
 [action_install_module_repairbot_C]
@@ -570,7 +601,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_3
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный раб
 	price: ${Mprice_II}
 	@define deposit: -500	
 [action_install_module_shurikenS_C]
@@ -590,7 +621,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_3
 	@define modName_zh: 		护盾发生器
 	@define modName: 		Shield Generator
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 	@define deposit: -1000
 [action_install_module_laser_C]
@@ -600,7 +631,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_3
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 	@define deposit: -500
 [action_install_module_turtle_C]
@@ -610,7 +641,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_3
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 	@define deposit: -900
 [action_install_moduleMax_repairbot_C]
@@ -620,7 +651,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_3_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -632,7 +663,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_3_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00	
@@ -645,9 +676,19 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LMG_4
 	@define modName: 		Light MG
 	@define modName_zh: 		轻机枪
-	@define modName_ru:		Лёгкий Пулемёт
+	@define modName_ru:		Пулешмёт
 	price: ${Mprice_I}	
 	@define deposit: -200
+	[action_install_module_redShell_D]
+	@copyFromSection: template_moduleSelector, template_temModLock_4, template_lockT2
+	@define modsTag: 		RedTurtle
+	@define moduleT: 		module_redShell
+	@define modTrig: 		TRIGGER_REDTURTLE_4
+	@define modName: 		Red Shuriken
+	@define modName_zh: 		红色手里剑
+	@define modName_ru:		Спиннерекс
+	price: ${Mprice_III}
+	@define deposit: -2700
 [action_install_mechBuilder_D]
 	@copyFromSection: template_moduleSelector, template_temModLock_4
 	@define modsTag: 		mechBuilder
@@ -655,7 +696,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_MECHBUILDER_4
 	@define modName_zh: 		机甲建造者
 	@define modName: 		Mech Builder
-	@define modName_ru:		Мини-Завод
+	@define modName_ru:		Минфак
 	price: ${Mprice_I2}
 	@define deposit: 0
 [action_install_module_repairbot_D]
@@ -665,7 +706,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_4
 	@define modName_zh: 		修复程序
 	@define modName: 		Repair Bot
-	@define modName_ru:		Рем. Бот
+	@define modName_ru:		Ремонтный Раб
 	price: ${Mprice_II}
 	@define deposit: -500	
 [action_install_module_shurikenS_D]
@@ -685,7 +726,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_SHIELDGENERATOR_4
 	@define modName_zh: 		护盾发生器
 	@define modName: 		Shield Generator
-	@define modName_ru:		Генератор Щита
+	@define modName_ru:		Генератор 5G
 	price: ${Mprice_VI}
 	@define deposit: -1000
 [action_install_module_laser_D]
@@ -695,7 +736,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_LASERDEFENSE_4
 	@define modName: 		Laser Defense
 	@define modName_zh: 		激光防御
-	@define modName_ru:		Лазерная Защита
+	@define modName_ru:		Лазерный защищт
 	price: ${Mprice_IV}
 	@define deposit: -500
 [action_install_module_turtle_D]
@@ -705,7 +746,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_4
 	@define modName_zh: 		龟核
 	@define modName: 		Turtle Core
-	@define modName_ru:		Черепашье Ядро
+	@define modName_ru:		Черепахочистое ядро
 	price: ${Mprice_VII}
 	@define deposit: -900
 [action_install_moduleMax_repairbot_D]
@@ -715,7 +756,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_REPAIR_4_max
 	@define modName_zh: 		MAX修复程序
 	@define modName: 		Max Repair Bot
-	@define modName_ru:		Макс. Рем. Бот
+	@define modName_ru:		МАКС. Рем. Раб
 	price: ${Mprice_II+3200}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topII.png
 	iconExtraColor: #fffd00
@@ -727,7 +768,7 @@ isLocked: if self.hasResources(select2=1)
 	@define modTrig: 		TRIGGER_TURTLECORE_4_max
 	@define modName_zh: 		MAX龟核
 	@define modName: 		Max Turtle Core
-	@define modName_ru:		Макс. Черепашье Ядро
+	@define modName_ru:		МАКС. Черепахочистое
 	price: ${Mprice_VII+1700+2700}
 	iconExtraImage: ROOT:data\icons\icon_upgrade_topIII.png
 	iconExtraColor: #fffd00	

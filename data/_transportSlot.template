@@ -30,5 +30,5 @@ forceUnloadTransportNow_onlyOnSlot: ${slotId}
 
 isLocked: if self.transportingUnitWithTags(includes='hacker')
 isLockedMessage: No no! I ain't jump'n 
-isLockedMessage_ru: Нет, я не могу спрыгивать!
+isLockedMessage_ru: Я НЕ ДЕСАНТ!!!
 isLockedMessage_zh: 不不！我不会跳

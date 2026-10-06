@@ -111,7 +111,7 @@ displayTextAppendResourceWithGap: true
 
 [global_resource_uranium]
 displayName: Uranium
-displayName_ru: Скуфедрон
+displayName_ru: Терпение
 displayName_zh: 铀
 displayNameShort: U
 displayNameShort_ru: У
@@ -120,7 +120,7 @@ hidden:true
 displayWhenZero: true
 displayColor:#008e54
 displayTextPrefix: Uranium:  
-displayTextPrefix_ru: Скуфедрон: 
+displayTextPrefix_ru: Терпение:
 displayNameHideWhenIconShownInText: true
 displayNameHideWhenIconShownInHUD: true
 iconImage: ROOT:data\icons\u.png
@@ -146,7 +146,7 @@ iconImage: ROOT:data\icons\u.png
 #========================================================EKE Stuff=========================================================
 [global_resource_Power]
 displayName: Power
-displayName_ru: Энергия
+displayName_ru: Благодать
 displayName_zh: 电力
 displayNameShort: P
 displayNameShort_ru: Э
@@ -172,7 +172,7 @@ displayTextPostfix_ru: ед.
 [global_resource_darkmatter]
 #global resource, shared with all units on team
 displayName:DarkMatter
-displayName_ru: Чёрная Материя
+displayName_ru: Чёрные мощщи
 displayName_zh:暗物质
 displayNameShort: Ω
 displayNameShort_ru: Ω
@@ -199,93 +199,93 @@ hidden:true
 #================================BlackGuard Prices =====Donut touch dis
 # Tier I
 #---------------        builder > prerequisite: Dark Drone research
-@global darkDrone:      700
+@global darkDrone:      500
 #---------------        ---
-@global mmt:            400
-@global beamCrab:       500
-@global mist:           575
-@global lightningBug:   700
-@global basicMech2:     850
-@global miniMLRS:       1000
+@global mmt:            500
+@global beamCrab:       450
+@global mist:           550
+@global lightningBug:   600
+@global basicMech2:     800
+@global miniMLRS:       950
 @global miniVLS:        1000
 @global miniBertha:     1200
 @global strider:        1000
-@global reparatorMech:  1500
-@global miniNapalm:     1300
-@global miniSamurai:    1800, MSamurai=1
+@global reparatorMech:  1200
+@global miniNapalm:     950
+@global miniSamurai:    1350, MSamurai=1
 # Tier II
 #---------------        Air > prerequisite: T2 Mech gantry/Langley
-@global lighFlyingMecg: 1300
+@global lighFlyingMecg: 1200
 @global comanche:       2750
-@global bgBomberMech:   4500
+@global bgBomberMech:   4250
 #---------------        ---
-@global modMech:        3000
+@global modMech:        2500
 @global honeyBadger:    3000
-@global langley:        5000
-@global gunMech:        5500
-@global ionMech:        5800
-@global brokenMech:     6400
+@global langley:        6200
+@global gunMech:        5000
+@global ionMech:        5300
+@global brokenMech:     6500
 @global mediumMT:       5500
-@global leyte:          7200
+@global leyte:          5900
 @global ritter:         7200
-@global AArocketMech:   6000
-@global heavyAAMech:    8500
+@global AArocketMech:   8250
+@global heavyAAMech:    7500
 @global type2Mech:      8000
 # Tier III
-@global athena:         7000
-@global tacticalMech:   7000
-@global rama:           9000
-@global odogaron:       12300
+@global athena:         6500
+@global tacticalMech:   6000
+@global rama:           9250
+@global odogaron:       17500
 @global heavyMT:        14000
-@global ATMech:         6000
-@global CamperMech:     13000
+@global ATMech:         5500
+@global CamperMech:     12000
 # Tier IV
-@global type3Mech:      12000
-@global vigorous:       23000
-@global plasmaBeetle:   23000
-@global type4:          23000, uranium=75
+@global type3Mech:      14000
+@global vigorous:       23000, uranium=150
+@global plasmaBeetle:   30000, uranium=200
+@global type4:          27500, uranium=300
 @global SamuraiX: 21000, uranium=1000
 # Tier V
-@global T4okhotnik:     55000, uranium=2750
-@global T4shokaku:      37500, uranium=800, SoaringCrane=1
-@global T5warpMech:     30000, uranium=750
-@global apolloOldPrice: 65000, uranium=3200
+@global T4okhotnik:     65000, uranium=1500
+@global T4shokaku:      40000, uranium=800, SoaringCrane=1
+@global T5warpMech:     90000, uranium=7500
+@global apolloOldPrice: 75000, uranium=3000
 # Experimental
-@global orion1: 8500, uranium=100
+@global orion1: 8500, uranium=150
 @global shikishinaPr:   44000, uranium=1666, samuraiSoulL=1     
 @global konig: 15000, uranium=400
 #================================Module Prices =====Donut touch dis
 #-------light MG
-@global Mprice_I:    400
+@global Mprice_I:    250
 #-------mech builder
-@global Mprice_I2:   500
+@global Mprice_I2:   600
 #-------repair bot
-@global Mprice_II:   1000
+@global Mprice_II:   1250
 @global Mprice_IIa:  1500
 #-------Shuriken Swarmer
-@global Mprice_II2:    1500
+@global Mprice_II2:    2000
 #-------red shell
 @global Mprice_III:  2100
 #-------laser defense
-@global Mprice_IV:   1000
+@global Mprice_IV:   1250
 #-------energy charger
-@global Mprice_V:    1900
+@global Mprice_V:    1500
 #-------shield generator
-@global Mprice_VI:   2000
+@global Mprice_VI:   2750
 #-------turtle core
 @global Mprice_VII:  3900
 #-------precision beam
-@global Mprice_VIII: 4750
+@global Mprice_VIII: 4000
 #-------particle beam
-@global Mprice_IX:   4000
+@global Mprice_IX:   3500
 #-------repair pulse
-@global Mprice_X:    6000
+@global Mprice_X:    7500
 #-------ion death
 @global Mprice_XI:   900
 #-------demo charge
-@global Mprice_XII:  4000
+@global Mprice_XII:  4500
 #-------nuke payload
-@global Mprice_XIII: 12000
+@global Mprice_XIII: 20000
 #================================Module Prices  END
 #========Setting==========
 #Setting this to false will diactivates credits(Special thanks), default true
@@ -336,8 +336,8 @@ hidden:true
 # 0 -Default              0 -Default 
 # 1 -Plasma Crytal        1 -Classic 'concept'
 # 2 -Plasma classic
-@global camo_ApolloII_barreal: 0
-@global camo_ApolloII_gunHouse: 0
+@global camo_ApolloII_barreal: 2
+@global camo_ApolloII_gunHouse: 1
 #Built mech stop moving for sec..... timer for how long they wait till the gantry fully opened
 @global mechGantryHalttimer: 2
 #========Global Resources=======
@@ -345,10 +345,10 @@ hidden:true
 #Apollo's core
 displayPos: 2
 displayName:Delta Core
-displayName_ru: Дельта-Ядро
+displayName_ru: Папогномий
 hidden:false
 displayNameShort:Delta-C
-displayNameShort_ru:Д-Ядро
+displayNameShort_ru:Папий
 displayColor:#f9a602
 displayWhenZero: false
 iconImage: ROOT:data\icons\module_shieldUpS.png
@@ -359,9 +359,9 @@ displayTextAppendResource:Widow
 @copyFromSection: global_resource_DeltaCore 
 #widow
 displayName: Arachnid Core
-displayName_ru: Арахнидное Ядро
+displayName_ru: Код Активации Шинды
 displayNameShort: Arc-Core
-displayNameShort_ru: А-Ядро
+displayNameShort_ru: КАШ
 hidden:true
 iconImage: ROOT:data\icons\module_shieldUp.png
 displayTextAppendResource:samuraiSoulL
@@ -369,7 +369,7 @@ displayTextPostfix:
 [global_resource_samuraiSoulL]
 @copyFromSection: global_resource_DeltaCore
 displayName: Samurai Soul
-displayName_ru: Душа Самурая
+displayName_ru: Душа Потужности
 displayNameShort: Soul
 displayNameShort_ru: Душа
 hidden:true
@@ -381,7 +381,7 @@ displayTextPostfix:
 [global_resource_MechCarrier]
 displayPos: 3
 displayName:Mech Carrier
-displayName_ru:Шагоход-Авианосец
+displayName_ru:Ходуля-Авианасерец
 hidden:true
 displayColor: #44eaea
 #displayWhenZero: true
@@ -434,9 +434,9 @@ displayTextAppendResource: IGNORE
 #@copyFromSection: global_resource_DeltaCore 
 #widow
 displayName: Arachnid Core+
-displayName_ru: Арахнидное Ядро+
+displayName_ru: Код активации Шинды ПРО
 displayNameShort: Arc-Core+
-displayNameShort_ru: А-Ядро+
+displayNameShort_ru: ШинПРО
 hidden:true
 displayWhenZero: false
 displayTextAppendResource: IGNORE
@@ -444,9 +444,9 @@ displayTextAppendResource: IGNORE
 #@copyFromSection: global_resource_DeltaCore 
 #widow
 displayName: Mini Samurai
-displayName_ru: Мини Самурай
+displayName_ru: Мини Саня
 displayNameShort: Mini Sam
-displayNameShort_ru: Мини Сам.
+displayNameShort_ru: Мини Сан.
 hidden:true
 displayWhenZero: false
 displayTextAppendResource: IGNORE

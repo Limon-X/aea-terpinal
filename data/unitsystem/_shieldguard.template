@@ -18,12 +18,12 @@ pos: 30
 isVisible: false
 displayType: infoOnlyNoBox
 text: Shield Overload 
-text_ru: Энергетический Всплеск
+text_ru: Всплеск 5G
 iconImage: ROOT:data\icons\RhinoXT2Shi.png
 iconExtraColor: #96f9e0
 iconExtraImage: ROOT:data\icons\RhinoXT2Shi.png
 iconExtraIsVisible: if self.numberOfUnitsInTeam(withTag='shieldOverload', withinRange=300)>0
 description: Once the Shield Overload is activated all nearby\nstructures within 300 range granted a 2000 shield pool for 20 seconds
-description_ru: Восполняет/даёт силовой щит всей ближайшей технике и строениям в радиусе 300\n Если щита изначально у строения/техники нет, то щит пропадёт через 20 секунд
+description_ru: Восстанавливает абсолютно весь кап 5G близлежащим единицам \n- Рейндж неплох \n- Накидывает 2к щита бетону на 20 сек
 text_zh: 护盾超载
 description_zh:- 一旦护盾过载被激活，\n 250范围内的所有附近建筑将获得1500单位的护盾值15秒

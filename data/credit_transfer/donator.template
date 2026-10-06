@@ -1,7 +1,7 @@
 [core]
-# CTtimeToUnlock = 30 min
+# CTtimeToUnlock = 0 min
 @global CTexpUnit_tag: None
-@global CTtimeToUnlock: 3
+@global CTtimeToUnlock: 0
 
 defineUnitMemory: unit rf0, unit rf1, unit rf2, unit rf3, unit rf4, unit rf5, unit rf6, unit rf7, unit rf8, float selected_amount, string selected_resource
 
@@ -34,7 +34,7 @@ autoTriggerCooldownTime_allowDangerousHighCPU: true
 autoTrigger: if self.resource(type='t_minutes_a')==${CTtimeToUnlock} and memory.timerUnlock == 1
 setUnitMemory: timerUnlock=2
 showMessageToPlayer: Credit Transfer Unlocked!
-showMessageToPlayer_ru: Ресурсо отправитель разблокирован!
+showMessageToPlayer_ru: РесоТранс разблокирован!
 [hiddenAction_setTimerUnlock_b]
 autoTrigger: if self.hasFlag(id=31)
 addResources: unsetFlag=31
@@ -48,8 +48,8 @@ isActive: false
 displayType: infoOnly
 text: Credit Transfer \n [ Locked ]
 description: Transfer credits to the allies \n Time to unlock [ 30 min ]
-text_ru: Ресурсо Отправитель \n [НЕДОСТУПЕН]
-description_ru: Передаёт ресурсы союзникам \n Чтобы открыть, необходимо подождать 30 минут
+text_ru: РесоТранс \n [ЗАКРЫТ]
+description_ru: Скидывает долларсуппорт союзникам и не совсем \n- Открывается по истечению 30-ти игровых минут
 text_zh: 资金转移\n[锁定]
 description_zh: 向盟友转移资金\n解锁时间[30分钟]
 buildSpeed: 0
@@ -84,7 +84,7 @@ text: [ %{memory.selected_amount} ]\n %{memory.selected_resource}
 text_ru: [ %{memory.selected_amount} ]\n ресурсов
 description: Amount of %{memory.selected_resource} to be sent \n TRF = Transfer $| RCV = Receive $
 description_zh:要发送的%{memory.selected_resource}数量\n TRF=传输$|RCV=接收$
-description_ru: Количество ресурсов на отправку
+description_ru: На отправку будет вот столько ресурсов 
 displayType: infoOnly
 buildSpeed: 0
 
@@ -99,7 +99,7 @@ pos: 41
 text: ${sl_am} %{memory.selected_resource}
 text_ru: ${sl_am} ресурсов
 description: Select ${sl_am} %{memory.selected_resource} to send
-description_ru: Выбрать ${sl_am} ресурсов на отправку
+description_ru: Выбрать ${sl_am} далларов
 description_zh: 选择要发送的${sl_am}至%{memory.selected_resources｝
 displayType: upgrade
 buildSpeed: 0
@@ -108,7 +108,7 @@ setUnitMemory: selected_amount = ${sl_am}
 
 isLocked: if self.resource(type="${resource}") < memory.selected_amount and memory.selected_amount == ${sl_am} or self.resource(type="${resource}") < ${sl_am}
 isLockedMessage: Not enough of %{memory.selected_resource}
-isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_ru: У тя нет нифига \n Бомж
 isLockedMessage_zh:没有足够的 %{memory.selected_resource}
 
 #isVisible: if self.numberOfUnitsInTeam(withTag='${CTexpUnit_tag}')>0 and (self.resource(type='t_minutes')>${CTtimeToUnlock} or self.resource(type='t_hours')>=1)
@@ -121,19 +121,19 @@ ai_isDisabled: true
 
 [action_sl_1]
 @copyFromSection: action_sl_0
-@define sl_am: 500
+@define sl_am: 100
 
 [action_sl_2]
 @copyFromSection: action_sl_0
-@define sl_am: 1000
+@define sl_am: 500
 
 [action_sl_3]
 @copyFromSection: action_sl_0
-@define sl_am: 5000
+@define sl_am: 1000
 
 [action_sl_4]
 @copyFromSection: action_sl_0
-@define sl_am: 10000
+@define sl_am: 5000
 
 
 [action_send_rf0_0]
@@ -149,7 +149,7 @@ isVisible: if memory.selected_resource == "${resource}" and memory.rf${number} !
 
 isLocked: if self.resource(type="${resource}") < memory.selected_amount or self.queueSize > 0
 isLockedMessage: Not enough of %{memory.selected_resource}
-isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_ru: У тя нет нифига
 isLockedMessage_zh:没有足够的 %{memory.selected_resource}
 
 text: Send to %{memory.rf${number}.playerName()}
@@ -168,7 +168,7 @@ sendMessageWithTags: donation
 sendMessageWithData: donation=memory.selected_amount, resource="${resource}", donator=self
 alsoTriggerAction: tfr_a1, tfr_a2, tfr_a3, tfr_a4, tfr_a5
 
-addActionCooldownTime: 15s
+addActionCooldownTime: 5s
 
 [action_send_rf0_1]
 @copyFromSection: action_send_rf0_0
@@ -210,16 +210,16 @@ addResources: transferredCredit=${sl_am}
 spawnEffects: CUSTOM:credit_a${sl_am}
 [hiddenAction_tfr_a2]
 @copyFromSection: hiddenAction_tfr_a1
-@define sl_am: 500
+@define sl_am: 100
 [hiddenAction_tfr_a3]
 @copyFromSection: hiddenAction_tfr_a1
-@define sl_am: 1000
+@define sl_am: 500
 [hiddenAction_tfr_a4]
 @copyFromSection: hiddenAction_tfr_a1
-@define sl_am: 5000
+@define sl_am: 1000
 [hiddenAction_tfr_a5]
 @copyFromSection: hiddenAction_tfr_a1
-@define sl_am: 10000
+@define sl_am: 5000
 
 [effect_credit_a100]
 alsoEmitEffects: CUSTOM:credit_donated

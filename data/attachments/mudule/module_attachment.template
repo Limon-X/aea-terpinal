@@ -61,7 +61,7 @@ sendMessageWithTags: depositClear
 requireConditional: if self.queueSize()>0
 refundAllQueuedItems: true
 showQuickWarLogToPlayer: Module installation Cancelled
-showQuickWarLogToPlayer_ru: Установка модуля отменена.
+showQuickWarLogToPlayer_ru: Прекращена установка модуля
 showQuickWarLogToPlayer_zh: 模块安装已取消
 #------------------------------------------Install
 [hiddenAction_triggerInstall_LMG]
@@ -375,14 +375,14 @@ price: ${Mprice_XIII}
 isVisible: if self.hasParent(withTag='RepairBot')
 buildSpeed: 36s
 convertTo: module_RepairBot_T2
-price: ${Mprice_II+3200}
+price: ${Mprice_II+4750}
 [action_repairbay_max]
 @copyFromSection: template_buildTurret
 #@define price: 1000
 isVisible: if self.hasParent(withTag='exRepairBay')
 buildSpeed: 69s
 convertTo: module_ex_RepairBay_T2
-price: ${Mprice_IIa+3200}
+price: ${Mprice_IIa+4750}
 [action_laser_max]
 @copyFromSection: template_buildTurret
 #@define price: 1000

@@ -2,12 +2,12 @@
 #=================== lock not for u hacky wacky
 isLockedAlt: if not self.globalTeamTags(includes='EKE_noHack')
 isLockedAltMessage: Unauthorized
-isLockedAltMessage_ru: Былинный отказ!
+isLockedAltMessage_ru: Фиг тебе, а не небесная канцелярия!
 isLockedAltMessage_zh: 未授权！
 
-isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=840) > 0 and self.hasTags(includes='airStriker')
+isLockedAlt: if self.numberOfUnitsInEnemyTeam(withTag="KashtanRadarOn", withinRange=1000) > 0 and self.hasTags(includes='airStriker')
 isLockedAltMessage: Air Strike Disabled
-isLockedAltMessage_ru: Умный артур рататуй глушит связь с небесной канцелярией.
+isLockedAltMessage_ru: Небесную канцелярию глушат
 isLockedAltMessage_zh: 空袭被禁用
 #===================================================
 
@@ -20,7 +20,7 @@ ai_isDisabled: true
 text: Shield Jammer
 description: \n-An orbiting power station will bombard the area with resonating electromagnetic waves \n-Overloads all shield systems in the target area for 20 seconds
 text_ru: Глушилка связи
-description_ru: - Насылает на врагов пролятие поноса и перекрывает связь\n- Все 5-жи щиты в зоне поражения ломаются\n Радиус вызова: приблизительно 400
+description_ru: - Насылает на врагов пролятие поноса и перекрывает связь\n- Все 5-жи щиты в зоне поражения ломаются\n Радиус вызова: 400
 text_zh: 护盾干扰
 description_zh: \n-轨道发电站将用共振电磁波轰炸该地区\n-使目标地区的所有护盾系统过载20秒
 addActionCooldownTime: 60s

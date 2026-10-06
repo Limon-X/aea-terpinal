@@ -9,8 +9,8 @@ mass: 9000
 
 displayText: Resource Converter
 displayDescription: - The core purpose of the Resource Converter is to convert\n Credits into Uranium or Uranium into Credits\n- Goes Nuclear on death
-displayText_ru: Самогонный аппарат
-displayDescription_ru: - Преобразовывает скуфедрон в денюшки и денюшки в скуфдерон \n- Вопреки своим собратам АУЕ и терпилам, он не взрывается
+displayText_ru: Плантации хлопка
+displayDescription_ru: - Ну типа Т4 фаб ок да \n- Можно в ручном режиме настроить то, в какую сторону он будет работать \n- Вопреки собратам из других фракций, не пердит при смерти
 displayText_zh: 资源转换器
 displayDescription_zh: -资源转换器的核心功能是将资金转换为铀\n-或将铀转换为资金\n-在被摧毁时触发核爆
 
@@ -40,9 +40,9 @@ nukeOnDeathDisableWhenNoNuke: false
 # orginaly one (1)
 autoTriggerCooldownTime: 0.2s
 autoTriggerCooldownTime_allowDangerousHighCPU: true
-#uranium ratio 4:1
-#500 > 125 per second | 
-#125 > 31.25 per 0.25 sec
+#uranium ratio 5:1
+#1000 > 200 per second | 
+#200 >  40 per 0.25 sec
 #50 > 12.5
 
 #description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates 125U and consume $500 per second\n If resource runs out it automatically shutdown
@@ -57,14 +57,14 @@ allowMultipleInQueue: false
 [action_CreditToUranium]
 @copyFromSection: template_press
 text: Credits to Uranium
-text_ru: Даллары в Уран 
+text_ru: Денюшки в Терпение
 text_zh: 资金换铀
-isLocked: if self.resource(type='credits')<500
+isLocked: if self.resource(type='credits')<1000
 isLockedMessage: Credits low
-isLockedMessage_ru: Недостаточно ресурсов
+isLockedMessage_ru: На балансе мало ресурсов!
 isLockedMessage_zh: 钱太少了你个穷逼
 description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates 125U and consume $500 per second\n If resource runs out it automatically shutdown
-description_ru: [КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ] \n- Нажмите, чтобы отключить преобразование \n- Хавает 125 скуфедрона в обмен на 500 денюшек в скекунду \n- При нехватке ресов автоматом останавливается
+description_ru: [КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ] \n- Нажмите, чтобы отключить преобразование \n- Хавает 1000 денюшек в обмен на 200 Терпение в скекунду \n- При нехватке ресов автоматом останавливается
 description_zh:[切换开关：再次按下可停工]\n-生成125铀并每秒消耗500资金\n-如果资源耗尽，则自动关闭
 isGuiBlinking: if self.hasFlag(id=1)
 ai_isHighPriority: if self.resource.uranium < 25000
@@ -76,14 +76,14 @@ convertTo: Uconverter_DU
 [action_UraniumToCredit]
 @copyFromSection: template_press
 text: Uranium to Credits
-text_ru: Уран в Ресурсы
+text_ru: Терпение в денюшки
 text_zh: 铀换资金
 isLocked: if self.resource(type='uranium')<125
 isLockedMessage: Uranium low
 isLockedMessage_ru: Недостаточно урана
 isLockedMessage_zh: 你缺铀
 description:[TOGGLE BUTTON: Press again to disable conversion]\n Generates $500 and consume 125U per second\n If resource runs out it automatically shutdown
-description_ru:[КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ] \n- Нажмите, чтобы отключить преобразование \n- Хавает 500 денюшек в обмен на 125 скуфедрона в скекунду \n- При нехватке ресов автоматом останавливается
+description_ru:[КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ] \n- Нажмите, чтобы отключить преобразование \n- Хавает 200 Терпение в обмен на 1000 денюшек в скекунду \n- При нехватке ресов автоматом останавливается
 description_zh:[切换开关：再次按下可停工]\n-生成500资金并每秒消耗125铀\n-如果资源耗尽，它将自动关闭
 isGuiBlinking: if self.hasFlag(id=2)
 
@@ -96,7 +96,7 @@ convertTo: Uconverter_UD
 #isLocked: if not self.hasFlag(id=1) and self.hasFlag(id=2) or self.hasFlag(id=1) and not self.hasFlag(id=2)
 #isLockedMessage: No Active Conversion
 text: Shutdown
-text_ru: Остановить
+text_ru: СТОП!
 ai_isHighPriority: if self.resource.uranium > 25000
 addResources: unsetFlag=1-2
 alsoTriggerAction: S
@@ -110,7 +110,7 @@ convertTo: Uconverter_S
 showMessageToPlayer: Conversion disable 
 showMessageToPlayer_ru: Преобразование отключено
 showQuickWarLogToPlayer: Credits low
-showQuickWarLogToPlayer_ru: Мало далларов на балансе, найди работу!
+showQuickWarLogToPlayer_ru: Мало ресурсов на балансе!
 showMessageToPlayer_zh:停工
 showQuickWarLogToPlayer_zh: 钱太少啦你个穷逼
 [hiddenAction_shutDown_b]
@@ -120,7 +120,7 @@ convertTo: Uconverter_S
 showMessageToPlayer: Conversion disable 
 showMessageToPlayer_ru: Преобразование отключено
 showQuickWarLogToPlayer: Uranium low
-showQuickWarLogToPlayer_ru: Мало скуфедрона на баланс
+showQuickWarLogToPlayer_ru: Мало Терпение на балансе!
 showMessageToPlayer_zh:停工
 showQuickWarLogToPlayer_zh: 缺铀
 #-------------------------------------
