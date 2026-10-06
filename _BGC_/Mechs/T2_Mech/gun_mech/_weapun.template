@@ -1,5 +1,0 @@
-
-#_weapun.template
-[core]
-@global dmg: 15
-@global range: 220

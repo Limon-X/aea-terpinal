@@ -1,8 +1,0 @@
-
-[core]
-
-@global MainCannonRange: 310
-#this one is used
-
-@global secondaryRange: 220
-#this one is just placeholder
