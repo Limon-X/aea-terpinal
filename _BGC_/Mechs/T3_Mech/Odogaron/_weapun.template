@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #_weapun.template
 [core]
@@ -8,4 +9,16 @@
 @global DMGpenalty: 0.7
 #==================Cooldown, also energy pool
 @global cooldown: 5
+=======
+
+#_weapun.template
+[core]
+#Napalm canister damage------------
+@global NPD: 45
+@global NPDAoE: 120
+@global NPDtick: 1
+@global DMGpenalty: 0.7
+#==================Cooldown, also energy pool
+@global cooldown: 5
+>>>>>>> upstream/REfI
 @global NPDduration: 3

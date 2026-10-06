@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 
 [core]
 
 @global MaxRange: 500
 
 @global MainCannonRange: 300
+=======
+
+[core]
+
+@global MaxRange: 500
+
+@global MainCannonRange: 300
+>>>>>>> upstream/REfI
 @global secondaryRange: 290

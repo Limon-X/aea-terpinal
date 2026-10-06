@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #_weapun.template
 [core]
@@ -10,3 +11,17 @@
 
 @global mechRange: 380
 #@global missileLimittingMinRange: 200
+=======
+
+#_weapun.template
+[core]
+
+@global summissileDamage: 120
+@global missileHp: 150
+@global missileDeployment: 115
+@global missileSpeed: 1.1
+@global missileRearm: 8
+
+@global mechRange: 380
+#@global missileLimittingMinRange: 200
+>>>>>>> upstream/REfI
