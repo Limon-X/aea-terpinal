@@ -30,7 +30,7 @@ radius: 35
 #displayRadius: 25
 isBio: false
 isBuilding: true
-
+tags: fabricator
 
 nukeOnDeath: false
 nukeOnDeathRange: 90
