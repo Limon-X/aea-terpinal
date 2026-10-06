@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #_weapun.template
 [core]
@@ -6,4 +7,14 @@
 @global delay: 115
 @global warmup: 1
 @global limitingRange: 140
+=======
+
+#_weapun.template
+[core]
+@global dmg: 675
+@global range: 310
+@global delay: 115
+@global warmup: 1
+@global limitingRange: 140
+>>>>>>> upstream/REfI
 @global acidRange: 180
