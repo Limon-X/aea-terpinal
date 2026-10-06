@@ -1,0 +1,66 @@
+
+[core]
+copyFrom:ROOT:effects/rocketmech.template, ROOT:effects/explosions.template, ROOT:effects/flares.template, ROOT:effects/trails.template, ROOT:effects/water.template, ROOT:effects/plasma.template, ROOT:effects/muzzle.template, ROOT:effects/healing.template, ROOT:effects/chrono.template
+
+#-----------------------------------------Bug effect------------------------------------
+#Test paul if i realy here | reply: um Ok, looks fine
+
+
+[effect_sporesmoke]
+priority:veryhigh
+createWhenOffscreen: true
+showInFog: true
+image: SHARED:light_50.png
+
+life: 500
+fadeOut: true
+attachedToUnit: false
+color: #98AA72
+fadeInTime: 100
+fadeOut: true
+scaleFrom: 2
+scaleTo: 28
+alpha: 0.15
+drawUnderUnits:false
+xOffsetRelative: 0
+yOffsetRelative: 0
+xSpeedAbsoluteRandom:0.15
+ySpeedAbsoluteRandom:0.15
+xSpeedAbsolute: 0
+
+atmospheric: false
+
+
+shadow:true
+imageShadow: SHADOW:SHARED:light_50.png
+
+
+[effect_debris]
+priority:high
+createWhenOffscreen: false
+createWhenZoomedOut: false
+image: ROOT:shared/dust_sparse.png
+
+life: 480
+fadeOut: true
+attachedToUnit: false
+color: #7C9C38
+fadeInTime: 60
+scaleFrom: 3
+scaleTo: 3
+alpha: 1
+drawUnderUnits:false
+
+hSpeed: -0.4
+hOffset: 80
+dirOffsetRandom:360
+
+shadow:true
+imageShadow: SHADOW:ROOT:shared/dust_sparse.png
+xOffsetRelativeRandom: 200
+yOffsetRelativeRandom: 200
+xSpeedAbsolute: 0.15
+xSpeedAbsoluteRandom:0.15
+ySpeedAbsoluteRandom:0.15
+atmospheric: true
+#-----------------------------------------------------------------------------

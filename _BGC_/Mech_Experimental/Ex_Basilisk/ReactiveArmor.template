@@ -1,0 +1,5 @@
+[core]
+#here u can balance the reactive armor regen (its pain in the ass to manually typu the number one by one)
+# RAhpRegen x num tick per second = hp/sec
+# 2.5 x 10 = 25hp/sec 
+@global RAhpRegen: 2.5

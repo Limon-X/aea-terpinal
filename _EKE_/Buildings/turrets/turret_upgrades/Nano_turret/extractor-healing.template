@@ -1,0 +1,79 @@
+
+# AREA HEALING PROTOTYPE
+
+
+autoTriggerCooldownTime: 2s
+
+[action_areaHeal]
+displayType: action
+iconImage: ROOT:shared/nanoBurstIcon.png
+text: Passive Nano
+description: - Releases healing bursts that repair units for 200HP each\n- Healing depends on distance from the unit\n- Cannot repair shields
+text_ru: Пассивное Лечение
+description_ru: - Испускает волны наномашин, чинящих юнитов по 200 хп за раз\n- Эффективность лечения зависит от дистанции
+text_zh: 纳米回复
+description_zh: 释放治疗脉冲，每次可修复范围内单位200点耐久\n-治疗能力取决于单位与提取器的距离\n-无法修复护盾
+isGuiBlinking: true
+isLocked: true
+
+buildSpeed: 0s
+fireTurretXAtGround: heal
+fireTurretXAtGround_withOffset: 0,0
+resetCustomTimer: true
+canPlayerCancel: false
+#spawnEffects: CUSTOM:powerAura, CUSTOM:powerAura2
+autoTrigger: if self.customTimer(laterThanSeconds=5)
+
+
+
+[turret_heal]
+# AREA HEAL TURRET
+x: 0
+y: 0
+
+invisible: true
+
+limitingRange: 250
+
+canAttackFlyingUnits: false
+canAttackLandUnits: false
+canAttackUnderwaterUnits: false
+projectile: 3
+
+turnSpeed: 5.0
+
+
+shoot_sound:NONE
+shoot_sound_vol:0.5
+shoot_flame:NONE
+
+canShoot: true
+
+size: 0
+
+delay: 0
+
+warmup:0
+
+
+
+[projectile_3]
+# HEALING BURST
+
+areaDamage: -100
+areaDamageNoFalloff:true
+areaRadius: 250
+targetGround: true
+areaExpandTime: 90
+areaHitAirAndLandAtSameTime: true
+speed: 0
+life: 0
+instant: false
+largeHitEffect: true
+explodeOnEndOfLife: true
+deflectionPower: -1
+shieldDamageMultiplier: 0
+buildingDamageMultiplier: 0.5
+friendlyFire: only-ignoreEnemy
+explodeEffect: CUSTOM:healBodyLightYellow, CUSTOM:yellowHealing
+

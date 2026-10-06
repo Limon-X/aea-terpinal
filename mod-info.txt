@@ -1,0 +1,10 @@
+[mod]
+title:  AUE.REfI [10.2E]
+description: Это уже чёрт знает какая версия REfI, ребаланс-форка мода AUE. Удачи на полях моральных разложений!
+tags: Units
+minVersion: 1.15
+thumbnail: mod-thumbnail.png
+
+[music]
+sourceFolder: music
+whenUsingUnitsFromThisMod_playExclusively: true

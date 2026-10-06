@@ -1,0 +1,206 @@
+#WARNING 1.15 CODE IS UNSTABLE, ACTIVATING MULTIPLE BUFFS IN RAPID SCUCCESION OFTEN BREAKS RUSTED WARFARE SETSTAT CODE
+
+[core] 
+shieldRegen=0
+shieldRenderRadius:0
+
+[graphics]
+showQueueBar: false
+
+[hiddenAction_t1damageupgrade]
+#FIRST DMG UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugDamageUp') and not self.globalTeamTags(includes='T2BugDamageUp') and not self.hasFlag(id=1)
+setUnitStats: shootDamageMultiplier=1.3
+addResources: setFlag=1
+
+
+[hiddenAction_t2damageupgrade]
+autoTrigger: if self.globalTeamTags(includes='T2BugDamageUp') and not self.globalTeamTags(includes='T3BugDamageUp') and not self.hasFlag(id=2)
+setUnitStats: shootDamageMultiplier=1.7
+addResources: setFlag=2
+
+
+[hiddenAction_t3damageupgrade]
+autoTrigger: if self.globalTeamTags(includes='T3BugDamageUp') and not self.hasFlag(id=3)
+setUnitStats: shootDamageMultiplier=2
+addResources: setFlag=3
+
+
+######################################################################
+
+
+[hiddenAction_t1healthupgrade]
+#FIRST Health UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugHealthUp') and not self.globalTeamTags(includes='T2BugHealthUp') and not self.hasFlag(id=4) 
+setUnitStats: maxHp=${core.maxHp+20}, hp+=20
+addResources: setFlag=4
+
+
+[hiddenAction_t2healthupgrade]
+autoTrigger: if self.globalTeamTags(includes='T2BugHealthUp') and not self.globalTeamTags(includes='T3BugHealthUp') and not self.hasFlag(id=5) 
+setUnitStats: maxHp=${core.maxHp+50}, hp+=50
+addResources: setFlag=5
+
+
+[hiddenAction_t3healthupgrade]
+autoTrigger: if self.globalTeamTags(includes='T3BugHealthUp') and not self.hasFlag(id=6) 
+setUnitStats: maxHp=${core.maxHp+70}, hp+=70
+addResources: setFlag=6
+
+
+######################################################################
+
+
+[hiddenAction_t1speedupgrade]
+#FIRST Speed UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugspeedUp') and not self.globalTeamTags(includes='T2BugspeedUp') and not self.hasFlag(id=7) 
+setUnitStats: moveSpeed=${movement.moveSpeed+0.2}
+addResources: setFlag=7
+
+
+[hiddenAction_t2speedupgrade]
+autoTrigger: if self.globalTeamTags(includes='T2BugspeedUp') and not self.globalTeamTags(includes='T3BugspeedUp') and not self.hasFlag(id=8) 
+setUnitStats: moveSpeed=${movement.moveSpeed+0.4}
+addResources: setFlag=8
+
+
+[hiddenAction_t3speedupgrade]
+autoTrigger: if self.globalTeamTags(includes='T3BugspeedUp') and not self.hasFlag(id=9) 
+setUnitStats: moveSpeed=${movement.moveSpeed+0.6}
+addResources: setFlag=9
+
+
+#######################################################################
+
+
+[hiddenAction_t1armourupgrade]
+#FIRST Armour UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugarmourUp') and not self.globalTeamTags(includes='T2BugarmourUp') and not self.hasFlag(id=10) 
+setUnitStats: armour=+0
+addResources: setFlag=10
+
+
+[hiddenAction_t2armourupgrade]
+#FIRST Armour UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T2BugarmourUp') and not self.globalTeamTags(includes='T3BugarmourUp') and not self.hasFlag(id=11) 
+setUnitStats: armour=+1
+addResources: setFlag=11
+
+
+[hiddenAction_t3armourupgrade]
+#FIRST Armour UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T3BugarmourUp') and not self.hasFlag(id=12) 
+setUnitStats: armour=+1
+addResources: setFlag=12
+
+
+########################################################################
+
+
+[hiddenAction_t1rangeupgrade]
+#FIRST Range UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugrangeUp') and not self.globalTeamTags(includes='T2BugrangeUp') and not self.hasFlag(id=13) 
+setUnitStats: maxAttackRange=${attack.maxAttackRange+2}
+addResources: setFlag=13
+
+
+[hiddenAction_t2rangeupgrade]
+#FIRST Range UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T2BugrangeUp') and not self.globalTeamTags(includes='T3BugrangeUp') and not self.hasFlag(id=14)
+setUnitStats: maxAttackRange=${attack.maxAttackRange+3}
+addResources: setFlag=14
+
+
+[hiddenAction_t3rangeupgrade]
+#FIRST Range UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T3BugrangeUp') and not self.hasFlag(id=15)
+setUnitStats: maxAttackRange=${attack.maxAttackRange+4}
+addResources: setFlag=15
+
+
+########################################################################
+
+
+[hiddenAction_t1Exoupgrade]
+#FIRST Exo UPGRADE IMPROVEMENT
+autoTrigger: if self.globalTeamTags(includes='T1BugshieldUp') and not self.globalTeamTags(includes='T2BugshieldUp') and not self.hasFlag(id=16)
+setUnitStats: maxShield=+40, shield+=40
+addResources: setFlag=16
+
+
+[hiddenAction_t2Exoupgrade]
+autoTrigger: if self.globalTeamTags(includes='T2BugshieldUp') and not self.globalTeamTags(includes='T3BugshieldUp') and not self.hasFlag(id=17)
+setUnitStats: maxShield=+80, shield+=80
+addResources: setFlag=17
+
+
+[hiddenAction_t3Exoupgrade]
+autoTrigger: if self.globalTeamTags(includes='T3BugshieldUp') and not self.hasFlag(id=18)
+setUnitStats: maxShield=+120, shield+=120
+addResources: setFlag=18
+
+
+#######################################################################
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+####################SPORE BUFF SECTION######################################
+
+[hiddenAction_SmogOmniBoost]
+autoTrigger: if numberOfUnitsInTeam(withTag='omnispore', withinRange=350, greaterThan=0) and not self.hasFlag(id=19)
+setUnitStats: maxHp+=40, maxAttackRange+=0, armour+=0, shootDamageMultiplier+=0.2, moveSpeed+=0.1, hp+=40
+addResources: setFlag=19,  
+
+
+[hiddenAction_Omnidebuff]
+autoTrigger: if numberOfUnitsInTeam(withTag="omnispore", withinRange=350, lessThan=1) and self.hasFlag(id=19)
+setUnitStats: maxHp-=40, maxAttackRange-=0, armour-=0, shootDamageMultiplier-=0.2, moveSpeed-=0.1, hp-=40
+addResources: unsetFlag=19 
+
+##################################END  OF SPORE BUFFS###################################################
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#######################################################################
+
+[hiddenAction_princessBuff]
+autoTrigger: if numberOfUnitsInTeam(withTag='princes', withinRange=250, greaterThan=0) and not self.hasFlag(id=20)
+setUnitStats: maxHp+=5, armour+=1, moveSpeed+=0.2, hp+=5
+addResources: setFlag=20  
+
+[hiddenAction_princesdebuff]
+autoTrigger: if numberOfUnitsInTeam(withTag="princes", withinRange=250, lessThan=1) and self.hasFlag(id=20)
+setUnitStats: maxHp-=5,  armour-=1, moveSpeed-=0.2, hp-=5
+addResources: unsetFlag=20
+
+#####################################
+
+[hiddenAction_princeBuff]
+autoTrigger: if numberOfUnitsInTeam(withTag='prince', withinRange=250, greaterThan=0) and not self.hasFlag(id=21)
+setUnitStats: maxAttackRange+=0, shootDamageMultiplier+=0.1, moveSpeed+=0.1
+addResources: setFlag=21  
+
+[hiddenAction_princessdebuff]
+autoTrigger: if numberOfUnitsInTeam(withTag="prince", withinRange=250, lessThan=1) and self.hasFlag(id=21)
+setUnitStats: maxAttackRange-=0, shootDamageMultiplier-=0.1, moveSpeed-=0.1
+addResources: unsetFlag=21
+

@@ -1,0 +1,35 @@
+#dumb
+[turret_Dummy_barrel_spin_5]
+@copyFromSection: template_sase, template_sase2
+@define num: 5
+invisible: if self.hasFlag(id=4)
+resourceUsage: setFlag=3
+warmup: ${delay*0.8}
+
+[turret_Dummy_barrel_spin_4]
+@copyFromSection: template_sase, template_sase2
+@define num: 4
+invisible: if self.hasFlag(id=3)
+resourceUsage: setFlag=2
+warmup: ${delay*0.6}
+
+[turret_Dummy_barrel_spin_3]
+@copyFromSection: template_sase, template_sase2
+@define num: 3
+invisible: if self.hasFlag(id=2)
+resourceUsage: setFlag=1
+warmup: ${delay*0.4}
+
+[turret_Dummy_barrel_spin_2]
+@copyFromSection: template_sase, template_sase2
+@define num: 2
+invisible: if self.hasFlag(id=1)
+resourceUsage: setFlag=0
+warmup: ${delay*0.2}
+
+[turret_Dummy_barrel_spin_1]
+@copyFromSection: template_sase
+@define num: 1
+invisible: if self.hasFlag(id=0)
+resourceUsage: unsetFlag=0-4, energy=-10
+warmup: 0

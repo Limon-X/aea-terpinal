@@ -1,0 +1,498 @@
+[core]
+#useless passcode code.... devs can use this for unlocking cheat and hidden stuff like 1v5 boss battle, op boss unit, infinite resource, memery, evil desire, etc
+#make sure update the passcodes every patch 
+# "    "   hide the code somewhere (not in all-units.template aint safe for rats)
+
+#============== passcode / unlock bug faction (ALPHA): warning this faction still in under development
+#@global numNumPass_e1: 8
+#@global numNumPass_e2: 7
+#@global numNumPass_e3: 2
+#@global numNumPass_e4: 4
+
+#======================================
+defineUnitMemory: """
+float num1, float num2, float num3, float num4, 
+float numPas1, float numPas2, float numPas3, float numPas4,
+string passmess
+"""
+autoTriggerCooldownTime: 0.1s
+autoTriggerCooldownTime_allowDangerousHighCPU: true
+[action_dummy]
+@copyFromSection: template_passcodeflag31
+displayType: infoOnlyNoBox
+text: 
+description: 
+isActive: 	false
+buildSpeed: 0s
+[action_passcodeInterface]
+@copyFromSection: template_passcodeflag31
+displayType: infoOnly
+isActive: true
+text:------------------------\n |[ %{memory.num1} ][ %{memory.num2} ][ %{memory.num3} ][ %{memory.num4} ]|\n------------------------\nEnter a passcode
+isActive: 	true
+buildSpeed: 0s
+[action_delnumpasscode]
+@copyFromSection: template_passcodeflag31
+displayType: action
+text: DEL
+isActive: 	true
+buildSpeed: 0s
+alsoTriggerAction: """
+numDEL_A1, numDEL_A2, numDEL_A3, numDEL_A4, numDEL_A5, numDEL_A6, numDEL_A7, numDEL_A8, numDEL_A9,
+numDEL_B1, numDEL_B2, numDEL_B3, numDEL_B4, numDEL_B5, numDEL_B6, numDEL_B7, numDEL_B8, numDEL_B9,
+numDEL_C1, numDEL_C2, numDEL_C3, numDEL_C4, numDEL_C5, numDEL_C6, numDEL_C7, numDEL_C8, numDEL_C9,
+numDEL_D1, numDEL_D2, numDEL_D3, numDEL_D4, numDEL_D5, numDEL_D6, numDEL_D7, numDEL_D8, numDEL_D9,
+numpass_a1, numpass_a2, numpass_a3, numpass_a4
+"""
+[action_enterpasscode]
+@copyFromSection: template_passcodeflag31
+requireConditional: if memory.numPas1==1
+displayType: action
+text: Input Unlock
+isActive: 	true
+buildSpeed: 0s
+isGuiBlinking: if memory.numPas1==1 and memory.numPas2==1 and memory.numPas3==1 and memory.numPas4==1
+alsoTriggerAction: numpass_execute_a, numpass_execute_b, numpass_execute_c, numpass_execute_d
+addResources: setFlag=24
+[action_enterpasscodedummy]
+@copyFromSection: template_passcodeflag31
+displayType: infoOnlyNoBox
+text:
+description:  %{memory.passmess}
+isActive: 	true
+buildSpeed: 0s
+#setUnitMemory: passmess=memory.passmess+'fish'	| \nA [${numNumPass_a1}${numNumPass_a2}${numNumPass_a3}${numNumPass_a4}]\nB [${numNumPass_b1}${numNumPass_b2}${numNumPass_b3}${numNumPass_b4}]\nC [${numNumPass_c1}${numNumPass_c2}${numNumPass_c3}${numNumPass_c4}]\nD [${numNumPass_d1}${numNumPass_d2}${numNumPass_d3}${numNumPass_d4}]
+#------------------------------
+#RND Passcode
+[hiddenAction_created_rndpasscode]
+autoTriggerOnEvent: created
+alsoTriggerAction: rrraqar_1, rrraqar_2, rrraqar_3, rrraqar_4
+addResources: setFlag=25
+
+[hiddenAction_rrraqar_1]
+requireConditional: if rnd(0,1)<0.25 and self.hasFlag(id=25)
+setUnitMemory: passmess=memory.passmess+'${numNumPass_a_hint}'	
+addResources: unsetFlag=25, setFlag=26, setFlag=27
+[hiddenAction_rrraqar_2]
+requireConditional: if rnd(0,1)<0.25 and self.hasFlag(id=25)
+setUnitMemory: passmess=memory.passmess+'${numNumPass_b_hint}'
+addResources: unsetFlag=25, setFlag=26, setFlag=28
+[hiddenAction_rrraqar_3]
+requireConditional: if rnd(0,1)<0.25 and self.hasFlag(id=25)
+setUnitMemory: passmess=memory.passmess+'${numNumPass_c_hint}'
+addResources: unsetFlag=25, setFlag=26, setFlag=29
+[hiddenAction_rrraqar_4]
+requireConditional: if rnd(0,1)<0.25 and self.hasFlag(id=25)
+setUnitMemory: passmess=memory.passmess+'${numNumPass_d_hint}'
+addResources: unsetFlag=25, setFlag=26, setFlag=30
+
+#Reroll Passcode if failed
+[hiddenAction_rrraqar_reroll_r]
+autoTrigger: if self.hasFlag(id=25) and not self.hasFlag(id=26) and (not self.hasFlag(id=27) or not self.hasFlag(id=28) or not self.hasFlag(id=29) or not self.hasFlag(id=30))
+alsoTriggerAction: rrraqar_1, rrraqar_2, rrraqar_3, rrraqar_4
+addResources: unsetFlag=26
+#fix 
+
+[hiddenAction_rrraqar_reroll_s]
+autoTrigger: if self.hasFlag(id=25) and self.hasFlag(id=26) and (self.hasFlag(id=27) or self.hasFlag(id=28) or self.hasFlag(id=29) or self.hasFlag(id=30))
+addResources: unsetFlag=25-26
+
+#------------------------------------------------- execute 
+[hiddenAction_numpass_execute_e]
+@define sld: d
+@copyFromSection: template_inmutxaxaaaxaxaxa
+requireConditional: if memory.num1==${numNumPass_e1} and memory.num2==${numNumPass_e2} and memory.num3==${numNumPass_e3} and memory.num4==${numNumPass_e4}
+showMessageToPlayer: IGNORE
+alsoQueueAction: RND
+playSoundAtUnit: ROOT:data\soundFx\_quick_poop.ogg:10
+############################################################ templates
+[template_passcodeflag31]
+isVisible:  if (not self.hasFlag(id=31) and not self.tags(includes='failed')) or (not self.tags(includes='failed') and not self.hasFlag(id=31)) or not self.hasFlag(id=31) 
+[template_passcode_lock]
+isVisible: false
+isActive: false
+[template_inmutxaxaaaxaxaxa]
+@define sld: 0
+alsoTriggerAction: delnumpasscode
+addResources: unsetFlag=24, setFlag=31
+temporarilyAddTags: bugUnlocked
+showMessageToPlayer: Bug Faction unlocked! Commence testing...
+
+[template_presEaxceAAXCCSa]
+@copyFromSection: template_passcodeflag31
+@define num: 0
+	#text: ${num}
+	description: Number ${num}
+	displayType: infoOnlyNoBox
+	isActive: 	true
+	isAlsoViewableByAllies: 	false
+	isAlsoViewableByEnemies: 	false
+	highPriorityQueue: 				true	
+	alwaysSinglePress:        true
+	buildSpeed: 0s
+	iconExtraImage: ROOT:data\icons\num_${num}.png
+	iconImage: 			ROOT:data\icons\num_${num}.png
+	iconExtraColor: #c9f8f5
+	iconExtraIsVisible: true
+	alsoTriggerAction: numnum_A${num}, numnum_B${num}, numnum_C${num}, numnum_D${num}
+	resetCustomTimer: true
+[template_numDEL]
+	@define num: 0
+	@define column: 0
+	requireConditional: if memory.num${column}==${num}
+	setUnitMemory: num${column}=memory.num${column}-${num}	
+	addResources: unsetFlag=20	
+[template_numnum_0]
+	@define num: 0
+	@define column: 0
+	setUnitMemory: num${column}=memory.num${column}+${num}, numPas${column}=memory.numPas${column}+1
+	debugMessage: press num: ${num} | column: ${column}
+############################################################	
+[hiddenAction_unflag21]
+@define num: 1
+autoTrigger: if self.hasFlag(id=2${num})
+addResources: unsetFlag=2${num}	
+debugMessage: unflag 2${num}
+[hiddenAction_unflag22]
+@copyFromSection: hiddenAction_unflag21
+@define num: 2
+[hiddenAction_unflag23]
+@copyFromSection: hiddenAction_unflag21
+@define num: 3
+[hiddenAction_unflag24]
+@copyFromSection: hiddenAction_unflag21
+@define num: 4
+alsoTriggerAction: delnumpasscode
+temporarilyAddTags: failed
+showMessageToAllPlayers: %{self.playerName}' attempted unlock the secrets of the universe. Not today buddy :)
+alsoQueueAction: RND
+playSoundAtUnit: ROOT:data\soundFx\_quick_poop.ogg:10
+showQuickWarLogToPlayer: Error Passcode > Commence Random Faction Picker
+############################################################ buttons
+	[action_passButton_1]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 1
+	
+	[action_passButton_2]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 2
+	
+	[action_passButton_3]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 3
+	
+	[action_passButton_4]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 4
+	
+	[action_passButton_5]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 5
+	[action_passButton_6]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 6
+	
+	[action_passButton_7]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 7
+	
+	[action_passButton_8]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 8
+	
+	[action_passButton_9]
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 9
+	
+	[action_passButton_0]
+	#bruh
+	@copyFromSection: template_presEaxceAAXCCSa
+	@define num: 0
+	isVisible: false
+	alsoTriggerAction: IGNORE
+	
+#---------------------------
+[hiddenAction_numnum_A1]
+@copyFromSection: template_numnum_0
+	@define num: 1
+	@define column: 1
+	requireConditional: if memory.numPas1<1
+		addResources: setFlag=21
+[hiddenAction_numnum_A2]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 2
+[hiddenAction_numnum_A3]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 3
+[hiddenAction_numnum_A4]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 4
+[hiddenAction_numnum_A5]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 5
+[hiddenAction_numnum_A6]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 6
+[hiddenAction_numnum_A7]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 7
+[hiddenAction_numnum_A8]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 8
+[hiddenAction_numnum_A9]
+@copyFromSection: hiddenAction_numnum_A1
+	@define num: 9
+#----------------------------------------
+[hiddenAction_numnum_B1]
+@copyFromSection: template_numnum_0
+	@define num: 1
+	@define column: 2
+	requireConditional: if memory.numPas2<1 and memory.numPas1==1 and not self.hasFlag(id=21)
+		addResources: setFlag=22
+[hiddenAction_numnum_B2]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 2
+[hiddenAction_numnum_B3]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 3
+[hiddenAction_numnum_B4]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 4
+[hiddenAction_numnum_B5]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 5
+[hiddenAction_numnum_B6]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 6
+[hiddenAction_numnum_B7]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 7
+[hiddenAction_numnum_B8]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 8
+[hiddenAction_numnum_B9]
+@copyFromSection: hiddenAction_numnum_B1
+	@define num: 9
+#----------------------------------------
+[hiddenAction_numnum_C1]
+@copyFromSection: template_numnum_0
+	@define num: 1
+	@define column: 3
+	requireConditional: if memory.numPas3<1 and memory.numPas1==1 and memory.numPas2==1 and not self.hasFlag(id=22)
+		addResources: setFlag=23
+[hiddenAction_numnum_C2]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 2
+[hiddenAction_numnum_C3]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 3
+[hiddenAction_numnum_C4]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 4
+[hiddenAction_numnum_C5]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 5
+[hiddenAction_numnum_C6]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 6
+[hiddenAction_numnum_C7]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 7
+[hiddenAction_numnum_C8]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 8
+[hiddenAction_numnum_C9]
+@copyFromSection: hiddenAction_numnum_C1
+	@define num: 9
+#----------------------------------------
+[hiddenAction_numnum_D1]
+@copyFromSection: template_numnum_0
+	@define num: 1
+	@define column: 4
+	requireConditional: if memory.numPas4<1 and memory.numPas1==1 and memory.numPas2==1 and memory.numPas3==1 and not self.hasFlag(id=23)
+[hiddenAction_numnum_D2]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 2
+[hiddenAction_numnum_D3]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 3
+[hiddenAction_numnum_D4]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 4
+[hiddenAction_numnum_D5]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 5
+[hiddenAction_numnum_D6]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 6
+[hiddenAction_numnum_D7]
+@copyFromSection: hiddenAction_numnum_D9
+	@define num: 7
+[hiddenAction_numnum_D8]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 8
+[hiddenAction_numnum_D9]
+@copyFromSection: hiddenAction_numnum_D1
+	@define num: 9
+#----------------------------------------
+############################################### DEL
+		[hiddenAction_numpass_a1]
+		requireConditional: if memory.numPas1==1
+		setUnitMemory: numPas1=memory.numPas1-1	
+		[hiddenAction_numpass_a2]
+		requireConditional: if memory.numPas2==1
+		setUnitMemory: numPas2=memory.numPas2-1	
+		[hiddenAction_numpass_a3]
+		requireConditional: if memory.numPas3==1
+		setUnitMemory: numPas3=memory.numPas3-1	
+		[hiddenAction_numpass_a4]
+		requireConditional: if memory.numPas4==1
+		setUnitMemory: numPas4=memory.numPas4-1
+		
+		[hiddenAction_numDEL_A1]
+		@copyFromSection: template_numDEL
+		@define num: 1
+		@define column: 1
+		[hiddenAction_numDEL_A2]
+		@copyFromSection: template_numDEL
+		@define num: 2
+		@define column: 1
+		[hiddenAction_numDEL_A3]
+		@copyFromSection: template_numDEL
+		@define num: 3
+		@define column: 1
+		[hiddenAction_numDEL_A4]
+		@copyFromSection: template_numDEL
+		@define num: 4
+		@define column: 1
+		[hiddenAction_numDEL_A5]
+		@copyFromSection: template_numDEL
+		@define num: 5
+		@define column: 1
+		[hiddenAction_numDEL_A6]
+		@copyFromSection: template_numDEL
+		@define num: 6
+		@define column: 1
+		[hiddenAction_numDEL_A7]
+		@copyFromSection: template_numDEL
+		@define num: 7
+		@define column: 1
+		[hiddenAction_numDEL_A8]
+		@copyFromSection: template_numDEL
+		@define num: 8
+		@define column: 1
+		[hiddenAction_numDEL_A9]
+		@copyFromSection: template_numDEL
+		@define num: 9
+		@define column: 1
+		#----------------------
+		[hiddenAction_numDEL_B1]
+		@copyFromSection: template_numDEL
+		@define num: 1
+		@define column: 2
+		[hiddenAction_numDEL_B2]
+		@copyFromSection: template_numDEL
+		@define num: 2
+		@define column: 2
+		[hiddenAction_numDEL_B3]
+		@copyFromSection: template_numDEL
+		@define num: 3
+		@define column: 2
+		[hiddenAction_numDEL_B4]
+		@copyFromSection: template_numDEL
+		@define num: 4
+		@define column: 2
+		[hiddenAction_numDEL_B5]
+		@copyFromSection: template_numDEL
+		@define num: 5
+		@define column: 2
+		[hiddenAction_numDEL_B6]
+		@copyFromSection: template_numDEL
+		@define num: 6
+		@define column: 2
+		[hiddenAction_numDEL_B7]
+		@copyFromSection: template_numDEL
+		@define num: 7
+		@define column: 2
+		[hiddenAction_numDEL_B8]
+		@copyFromSection: template_numDEL
+		@define num: 8
+		@define column: 2
+		[hiddenAction_numDEL_B9]
+		@copyFromSection: template_numDEL
+		@define num: 9
+		@define column: 2
+		#----------------------
+		[hiddenAction_numDEL_C1]
+		@copyFromSection: template_numDEL
+		@define num: 1
+		@define column: 3
+		[hiddenAction_numDEL_C2]
+		@copyFromSection: template_numDEL
+		@define num: 2
+		@define column: 3
+		[hiddenAction_numDEL_C3]
+		@copyFromSection: template_numDEL
+		@define num: 3
+		@define column: 3
+		[hiddenAction_numDEL_C4]
+		@copyFromSection: template_numDEL
+		@define num: 4
+		@define column: 3
+		[hiddenAction_numDEL_C5]
+		@copyFromSection: template_numDEL
+		@define num: 5
+		@define column: 3
+		[hiddenAction_numDEL_C6]
+		@copyFromSection: template_numDEL
+		@define num: 6
+		@define column: 3
+		[hiddenAction_numDEL_C7]
+		@copyFromSection: template_numDEL
+		@define num: 7
+		@define column: 3
+		[hiddenAction_numDEL_C8]
+		@copyFromSection: template_numDEL
+		@define num: 8
+		@define column: 3
+		[hiddenAction_numDEL_C9]
+		@copyFromSection: template_numDEL
+		@define num: 9
+		@define column: 3
+		#----------------------
+		[hiddenAction_numDEL_D1]
+		@copyFromSection: template_numDEL
+		@define num: 1
+		@define column: 4
+		[hiddenAction_numDEL_D2]
+		@copyFromSection: template_numDEL
+		@define num: 2
+		@define column: 4
+		[hiddenAction_numDEL_D3]
+		@copyFromSection: template_numDEL
+		@define num: 3
+		@define column: 4
+		[hiddenAction_numDEL_D4]
+		@copyFromSection: template_numDEL
+		@define num: 4
+		@define column: 4
+		[hiddenAction_numDEL_D5]
+		@copyFromSection: template_numDEL
+		@define num: 5
+		@define column: 4
+		[hiddenAction_numDEL_D6]
+		@copyFromSection: template_numDEL
+		@define num: 6
+		@define column: 4
+		[hiddenAction_numDEL_D7]
+		@copyFromSection: template_numDEL
+		@define num: 7
+		@define column: 4
+		[hiddenAction_numDEL_D8]
+		@copyFromSection: template_numDEL
+		@define num: 8
+		@define column: 4
+		[hiddenAction_numDEL_D9]
+		@copyFromSection: template_numDEL
+		@define num: 9
+		@define column: 4

@@ -1,0 +1,5 @@
+
+[core]
+
+@global MainCannonRange: 320
+@global secondaryRange: 265

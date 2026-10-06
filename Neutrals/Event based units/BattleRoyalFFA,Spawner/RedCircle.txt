@@ -1,0 +1,89 @@
+[core]
+name: redcircle
+tags: redZone
+
+mass: 100000000
+radius: 9999
+price: 0
+class: 0
+maxHp: 1
+techLevel: 1
+buildSpeed: 1s
+
+@global redZoneMultWhenTriggered: 0.75
+#0.5 would be half size each time, the 0.75 is 25% smaller each time.
+@global redZoneReduceTime: 30
+@global redZoneDamageMultPerTrigger: 0.25
+#Figure out radius yourself
+#damageMultPerTrigger is how much you add to the multiplier each time the reduction is triggered. 0.25 is 25% more damage per time.
+#redZoneReduceTime is how long it would take for the zone to reduce the first time, in seconds.
+
+onNewMapSpawn: mapCenter_asNeutral
+stayNeutral: true
+
+@memory redZoneRadius: float
+@memory redZoneReduceTo: float
+@memory redZoneDamageMult: float
+@memory redZoneMoveDistance: float
+@memory redZoneMoveTo: float
+@memory redZoneReduceTime: float
+@memory redZoneReduceAmount: float
+
+canNotBeDirectlyAttacked: true
+canNotBeDamaged: true
+disableDeathOnZeroHp: true
+
+updateUnitMemory: redZoneRadius=max(memory.redZoneRadius,memory.redZoneRadius-memory.redZoneReduceAmount)
+updateUnitMemoryRate: 6
+#DO NOT SET THIs TO SECONDS, do it in ticks.
+
+disableAllUnitCollisions: true
+
+[graphics]
+total_frames: 1
+image: ROOT:data\images\circleWaveIn.png
+image_wreak:  NONE
+image_turret: NONE
+drawLayer: top
+scaleImagesTo: 300
+#AUTO
+image_shadow: AUTO
+shadowOffsetX: 0
+shadowOffsetY: 0
+
+
+
+
+[hiddenAction_created]
+autoTriggerOnEvent: created
+setUnitMemory: redZoneRadius=squareRoot(((game.mapWidth/2)*2)+((game.mapHeight/2)*2)), redZoneReduceTo=memory.redZoneRadius, redZoneDamageMult=1-${redZoneDamageMultPerTrigger}, redZoneReduceTime=${redZoneReduceTime}/0.75
+#Setting redZoneDamageMult to 1-${redZoneDamageMultPerTrigger} might seem weird, but that increases it to 1 after first trigger, so no need to do a check if it is the first time
+teleportTo: createMarker(x=game.mapWidth/2,y=game.mapHeight/2)
+[hiddenAction_triggerReduction]
+autoTrigger: if self.customTimer(laterThanSeconds=30)
+setUnitMemory: """
+redZoneMoveTo:self.getOffsetRelative(y=rnd(0,memory.redZoneRadius/2),dir=rnd(0,360))
+redZoneReduceTo=memory.redZoneRadius*${redZoneMultWhenTriggered},
+redZoneDamageMult=memory.redZoneDamageMult+${redZoneDamageMultPerTrigger},
+redZoneReduceTime=memory.redZoneReduceTime*0.75,
+redZoneReduceAmount=distanceBetween(self, memory.redZoneMoveTo ) / (memory.redZoneReduceTime*${core.updateUnitMemoryRate}) 
+"""
+alsoTriggerAction: move
+resetCustomTimer: true
+[hiddenAction_move]
+addWaypoint_type: move
+addWaypoint_target_fromReference: memory.redZoneMoveTo
+setUnitStats: moveSpeed=memory.redZoneReduceAmount/${core.updateUnitMemoryRate}
+
+[attack] 
+canAttack: false
+
+[movement]
+movementType: AIR
+moveSpeed: 0
+moveAccelerationSpeed: 99
+moveDecelerationSpeed: 99
+maxTurnSpeed: 0
+moveIgnoringBody: true
+targetHeight: 0
+targetHeightDrift: 0

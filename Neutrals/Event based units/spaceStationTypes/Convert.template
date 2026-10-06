@@ -1,0 +1,39 @@
+[hiddenAction_convertT1]
+autoTrigger: if self.isOnNeutralTeam()
+convertTo: spacestation
+
+[hiddenAction_convertT2]
+autoTrigger: if self.resource(type='DarkMatter')>10 and self.resource(type='DarkMatter')<50
+convertTo: spacestation2
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT3]
+autoTrigger: if self.resource(type='DarkMatter')>50 and self.resource(type='DarkMatter')<100
+convertTo: spacestation3
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT4]
+autoTrigger: if self.resource(type='DarkMatter')>100 and self.resource(type='DarkMatter')<300
+convertTo: spacestation4
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT5]
+autoTrigger: if self.resource(type='DarkMatter')>300 and self.resource(type='DarkMatter')<500
+convertTo: spacestation5
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT6]
+autoTrigger: if self.resource(type='DarkMatter')>500 and self.resource(type='DarkMatter')<700
+convertTo: spacestation6
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT7]
+autoTrigger: if self.resource(type='DarkMatter')>700 and self.resource(type='DarkMatter')<1000
+convertTo: spacestation7
+requireConditional: if not self.isOnNeutralTeam()
+
+[hiddenAction_convertT8]
+#final stage income adapter.
+autoTrigger: if self.resource(type='DarkMatter')>1000
+convertTo: spacestation8
+requireConditional: if not self.isOnNeutralTeam()

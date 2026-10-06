@@ -1,0 +1,425 @@
+#Shokaku
+#Carrier command
+
+#TAG used=
+# 0=converting
+# 1=build
+# 4, 5, 6, 7 = weapon sets
+
+[core]
+#Drone Price
+#@global shokaku: I
+
+
+
+copyFrom: _weapun.template
+
+
+#-----------------transport
+maxTransportingUnits: 2
+transportUnitsHealBy: 0.5
+transportUnitsUnloadDelayBetweenEachUnit:20
+
+transportUnitsCanUnloadUnits: true
+transportUnitsAddUnloadOption: false
+
+transportUnitsRequireTag: shokakuDrone_${shokaku}
+transportUnitsRequireMovementType: air
+transportUnitsKeepBuiltUnits: true
+
+exit_x: -11.5
+exit_y: -17
+exit_dirOffset: 0
+exit_heightOffset:4
+exit_moveAwayAmount: 250
+#-----------------transport
+
+#----------------------Ai
+[hiddenAction_Ai_weapontypu]
+autoTrigger: if not self.hasFlag(id=15) and self.hasParent(withTag='ReadyGoMain')
+requireConditional: if self.isControlledByAI()
+
+addResources: setFlag=15
+
+[hiddenAction_Ai_weapontypuOof]
+autoTrigger: if self.hasFlag(id=15) and not self.hasParent(withTag='ReadyGoMain')
+requireConditional: if self.isControlledByAI()
+
+addResources: unsetFlag=15
+[hiddenAction_ai_timerReset]
+requireConditional: if self.isControlledByAI() 
+resetCustomTimer: true
+#----------------------Ai
+[hiddenAction_unload]
+attachments_unload: true
+#startUnloadingTransport:true
+
+buildSpeed: 1s
+alsoQueueAction: unloadII
+[hiddenAction_unloadII]
+@copyFromSection: hiddenAction_unload
+buildSpeed: 1s
+
+alsoQueueAction: NONE
+temporarilyAddTags: clearAttackMove
+resetCustomTimer: true
+[hiddenAction_clearAttackMoveToParent]
+autoTrigger: if self.customTimer(laterThanSeconds=1) and self.tags(includes='clearAttackMove')
+temporarilyRemoveTags: clearAttackMove
+
+#=========================Selector
+[hiddenAction_createdSelector]
+autoTriggerOnEvent: created
+addResources: setFlag=4
+
+temporarilyAddTags: weaponT_1
+temporarilyRemoveTags: weaponT_2, weaponT_3, weaponT_4
+
+#-----reset tag
+[hiddenAction_resetTempTag_I]
+autoTrigger: if self.hasFlag(id=4) and not self.tags(includes='weaponT_1')
+temporarilyAddTags: weaponT_1
+temporarilyRemoveTags: weaponT_2, weaponT_3, weaponT_4
+[hiddenAction_resetTempTag_II]
+autoTrigger: if self.hasFlag(id=5) and not self.tags(includes='weaponT_2')
+temporarilyAddTags: weaponT_2
+temporarilyRemoveTags: weaponT_1, weaponT_3, weaponT_4
+[hiddenAction_resetTempTag_III]
+autoTrigger: if self.hasFlag(id=6) and not self.tags(includes='weaponT_3')
+temporarilyAddTags: weaponT_3
+temporarilyRemoveTags: weaponT_2, weaponT_1, weaponT_4
+[hiddenAction_resetTempTag_IV]
+autoTrigger: if self.hasFlag(id=7) and not self.tags(includes='weaponT_4')
+temporarilyAddTags: weaponT_4
+temporarilyRemoveTags: weaponT_2, weaponT_3, weaponT_1
+
+[action_press1]
+@define pr: 4
+autoTrigger: if not self.isControlledByAI() and self.hasParent(withTag='weaponT_${pr-3}') and not self.hasFlag(id=${pr})
+ai_isDisabled: if not self.hasFlag(id=15)
+ai_isHighPriority: if self.hasFlag(id=15) and numberOfUnitsInEnemyTeam(greaterThan=0, withinRange=1000) and self.transportingCount(greaterThan=1) and self.customTimer(laterThanSeconds=5)
+isVisible: if self.isControlledByAI()
+#text: Turret ${pr}
+buildSpeed:0
+displayType: action
+pos:0.1
+canPlayerCancel: false
+allowMultipleInQueue: false
+#extraLagHidingInUI: true
+highPriorityQueue: true
+
+#=====================================================================
+text: Weapon Set I
+description: - This weapon loadout used by T2 'Leyte Class'\n Slightly stronger, less damage to hull, Best against structure\nChance to deal critical damage\n-=Weapons=-\n[AA Unguided Rocket]: Target: Air, Dmg: ${(AArocket+(AArocket/2))}, AoE\n[High Explosive Bomb]: Target: Land, dmg:${bombLand}, AoE\n Drop range: ${range_I}, Ammo: 4-8\n120% vs structure, 50% vs hull, 110% vs shield, 5 PEN\nCrit: +120% vs structure, -50% vs hull\n Changing weapon set reduce energy by ${energyP}
+text_ru: Загрузка Дрона I
+description_ru: - Усовершенствованная загрузка дрона лейте II и IV(ОФ бомба, Неуправляемые Ракеты)\n- Имеет повышенный урон по зданиям и пониженный по технике\n- Атакует воздух и наземную технику\n- Имеет шанс нанести крит. урон.
+text_zh: 武器设置 I
+description_zh: -T2“莱特类”使用的这种武器\n-对机体的伤害较小，对建筑结构造成致命伤害\n-=武器=-\n[防空非制导火箭]：目标：空中单位，造成伤害：${(AArocket+(AArocket/2))}，范围伤害\n[高爆炸弹]：目标：陆地单位，造成伤害：${bombLand}，范围伤害\n发射范围：${range_I}\n对建筑造成120%伤害，对机体造成50%伤害，对护盾单位造成110%伤害
+
+
+#=====================================================================
+
+addResources: unsetFlag=4-7, setFlag=${pr}
+isGuiBlinking: if self.hasFlag(id=${pr})
+
+iconImage: ROOT:data\icons\ws_1.png
+temporarilyAddTags: weaponT_1
+temporarilyRemoveTags: weaponT_2, weaponT_3, weaponT_4
+
+alsoTriggerAction: ai_timerReset
+
+showQuickWarLogToPlayer: Weapon I set! | AA Unguided Rocket/High Explosive Bomb
+showQuickWarLogToPlayer_ru: Загрузка Дрона I готова! 
+showQuickWarLogToPlayer_zh: 武器 I 设置! | 防空无制导火箭/高爆炸弹
+
+#--------------------------------------------
+#Bruh
+#iconExtraImage: ROOT:data\icons\select.png
+#iconExtraColor: #64FFFFFF
+#iconExtraIsVisible: if self.hasFlag(id=${pr})
+#--------------------------------------------
+[action_press2]
+@define pr: 5
+@copyFromSection: action_press1
+text: Weapon Set II
+description: - This weapon loadout used by T4 'Okhotnik Class'\n Slightly reduce damage, Best against Hull, Armored and Agile units\nMissile target acquisition time: 2s\n-=Weapons=-\n[AAM Magic Missile]: Target: Air, Dmg: ${ionMAA_Dmg}, Single Target\n[ASM Magic Missile]: Target: Land, Dmg: ${ionM_Dmg}, AoE\n Drop range: ${range_II}, Ammo: 4-8\n 120% vs hull, 50% vs structure, 25 PEN\nNote: If missile too close it only deal 100 dmg\n Changing weapon set reduce energy by ${energyP}
+text_ru: Загрузка Дрона II
+description_ru: - Тип боеприпасов используется от шагохода Охотник\n- Урон ниже в сравнении с оригиналом\n- Имеет пониженный урон по зданиям и повышенный по технике\n- Атакует наземную и воздушную технику.
+text_zh: 武器设置 II
+description_zh: -T4单位“奥特霍尼克”使用的武器\n-发射会稍微减少伤害，对抗机体、装甲和敏捷部队非常有效\n-导弹击中目标的时间：2s\n-=武器=-\n[AAM魔法飞弹]：攻击目标：空中单位，造成伤害：${ionMAA_Dmg}，单体目标\n[ASM魔法导弹]：攻击目标：陆地单位，造成伤害：${ionM_Dmg}，范围伤害\n下降距离：${range_II} \n对机体造成120%伤害，对建筑造成50%伤害\n注意：如果导弹靠近单位太近，它只造成100伤害\n-更改武器将减少${energyP}能量
+
+temporarilyAddTags: weaponT_2
+temporarilyRemoveTags: weaponT_1, weaponT_3, weaponT_4
+
+iconImage: ROOT:data\icons\ws_2.png
+
+showQuickWarLogToPlayer: Weapon II set! | AAM/ASM Magic Missile
+showQuickWarLogToPlayer_ru: Загрузка Дрона II готова!
+showQuickWarLogToPlayer_zh: 武器 II 设置! | AAM/ASM 魔法导弹
+[action_press3]
+@define pr: 6
+@copyFromSection: action_press1
+text: Weapon Set III
+description: - This bomb base from 'Rama' ion core and 'Type 3' ion cluster missile\n Slightly reduce damage, Bad against structure, Ignore shield \n Upon impact it has unusual explosion patern\n-=Weapon=-\n [Ion Cluster Bomb]: Target: Land, Dmg: ${ionBomb} for each line, small AoE\n Drop range: ${range_III}, Ammo: 1-2\n Ignore Shield, 40% vs structure, 100% vs hull\nBetter Rearm time\n Changing weapon set reduce energy by ${energyP}
+text_ru: Загрузка Дрона III
+description_ru: - Переоборудует все слоты с бомбами в скорострельные орудия,\n полностью меняя тип атаки на подобный штурмовику\n- Имеет пониженный урон по зданиям\n- Атакуют только наземные цели.
+text_zh: 武器设置 III
+description_zh: -来自“拉玛”离子核心和“Type-3”离子簇导弹的炸弹底座\n略微减少了伤害，对建筑结构不行，忽略护盾造成伤害，撞击后，它有不寻常的爆炸模式\n-=武器=-\n[离子簇炸弹]：目标：陆地单位，伤害:${ionBomb}每条线，小爆炸范围\n投掷范围：${range_III}，弹药量：1-2\n忽略护盾，对建筑结构造成40%伤害，对机体造成100%伤害\n更长的重新装填时间\n更换武器组将减少${energyP}的能量
+
+temporarilyAddTags: weaponT_3
+temporarilyRemoveTags: weaponT_1, weaponT_2, weaponT_4
+
+iconImage: ROOT:data\icons\ws_3.png
+
+showQuickWarLogToPlayer: Weapon III set! | Gunship Mode
+showQuickWarLogToPlayer_ru: Загрузка Дрона III готова!
+showQuickWarLogToPlayer_zh: 武器 III 设置! | 炮艇机模式
+[action_press4]
+@define pr: 7
+@copyFromSection: action_press1
+
+isLocked: if not numberOfUnitsInTeam(greaterThan=1, withTag='PDEnergyFull_${shokaku}')
+isLockedMessage: Require Full energy drone
+isLockedMessage_ru: Требует полностью заряженного энергией дрона
+
+ai_isDisabled: true
+ai_isHighPriority: false
+
+text: Weapon Set IV
+description: - New type of heavy bomb primarily use for demolition\n Extremely stronk against structure, Very SLOW rearm time \n Bomb detonation delay: ${exDelay}s\n-=Weapon=-\n [Meteor Bomb]: Target: Land\Sub, Dmg: ${meteor_Dmg}, AoE: ${meteor_AoE}\n Drop range: ${range_IV}, Ammo: 1-2\n 200% vs structure, 100% vs hull\shield\nBetter self regen while phasing\n Changing weapon set reduce energy by ${meteor_EnergyP}
+text_ru: Загрузка Дрона IV
+description_ru: - Совершенно новый тип бомб, используемый для уничтожения всего и вся\n- Невероятно мощны против зданий, имеют ОЧЕНЬ медленную перезарядку\n- Атакуют наземные и подводные цели.
+text_zh: 武器设置 IV
+description_zh: -新型重型炸弹主要用于摧毁建筑\n-重新装填非常缓慢的定时炸弹，爆炸延迟：${exDelay}秒\n-=武器=-\n[流星炸弹]：目标：陆地/水下单位，造成伤害：${meteor_Dmg}，爆炸范围：${meteor_AoE}\n下降范围：${range_IV}\n对建筑物造成200%伤害，对机体/护盾单位造成100%伤害\n相位调整时更快的进行自我恢复\n更改武器设置减少${meteor_EnergyP}能量
+
+temporarilyAddTags: weaponT_4
+temporarilyRemoveTags: weaponT_1, weaponT_2, weaponT_3
+
+
+iconImage: ROOT:data\icons\meteor.png
+
+showQuickWarLogToPlayer: Weapon IV set! | Meteor Bomb
+showQuickWarLogToPlayer_ru: Загрузка Дрона IV готова!
+showQuickWarLogToPlayer_zh: 武器 IV 设置! | 流星炸弹
+#====================Starting Drone
+[hiddenAction_startingDrones]
+autoTrigger: if not self.hasFlag(id=1) and self.tags(includes='Shōkaku_${shokaku}')
+addResources: setFlag=1, shokakuDrone_${shokaku}=-2
+alsoQueueAction: droneBuild
+[action_droneBuild]
+text: Drone ${shokaku}
+description: -Uncontrollable drone\n-Deployed via Drone Carrier\n-Can attack ground and air.
+text_ru: Дрон ${shokaku}
+description_ru: - Неконтролируемый дрон\n- Установлен на авианосце\n- Атакует наземную и воздушную технику.
+text_zh:无人机 ${shokaku}
+description_zh: -无法控制的无人机\n-通过无人机载体部署\n-可以攻击地面和空中单位
+
+price: ${Dprice}
+buildSpeed: 3s
+isVisible: false
+isActive: false
+
+#whenBuilding_playAnimation: buildA
+
+isLocked: if not self.resource(greaterThan=0, type='shokakuDrone_${shokaku}')
+isLockedMessage: Maximum amount already being built.
+isLockedMessage_ru: Максимальное количество уже построено
+isLockedMessage_zh: 已建造最大数量
+
+produceUnits: phaseBomber_${shokaku}*2
+canPlayerCancel: false
+#iconImage: drone.png
+unitShownInUI: phaseBomber_${shokaku}
+
+addResources: shokakuDrone_${shokaku}=2
+pos: 1
+#====================Starting Drone END
+[hiddenAction_droneBuildReplacement]
+autoTrigger: if self.hasResources(shokakuDrone_${shokaku}=1) and self.hasFlag(id=1) and not self.hasFlag(id=2) and not self.hasFlag(id=3) and not self.queueSize(greaterThan=0) and not numberOfUnitsInTeam(greaterThan=1, withTag='shokakuDrone_${shokaku}')
+requireConditional: if self.hasResources(credits=${Dprice})
+addResources: setFlag=2, credits=-${Dprice}, shokakuDrone_${shokaku}=-1
+alsoQueueAction: droneBuildRRRR
+#playAnimation: buildB
+[action_droneBuildRRRR]
+buildSpeed: ${BDspeed}s
+isVisible: false
+isActive: false
+produceUnits: phaseBomber_${shokaku}
+addResources: shokakuDrone_${shokaku}=1
+alsoQueueAction: droneBuildRRRREnd
+#whenBuilding_playAnimation: buildB
+[hiddenAction_droneBuildRRRREnd]
+buildSpeed: 1s
+addResources: unsetFlag=2
+#=================================Autobuild
+[action_rebuild]
+text: Auto Rebuild
+buildSpeed: 0s
+description: [Rebuilds lost drones automatically]\nPrice:${Dprice}, Build time: ${BDspeed}s\n
+text_ru: Автопроизводство
+description_ru: Автоматически строит новых дронов, если те были уничтожены\n- Стоимость дрона: ${Dprice} ресурсов, время строительства: ${BDspeed} сек.
+text_zh: 自动重建
+description_zh: [自动重建失去的无人机]\n价格:${Dprice}, 建造时间: ${BDspeed}s\n
+isGuiBlinking: if not self.hasFlag(id=3)
+
+#iconImage: droneicon.png
+unitShownInUI: phaseBomber_${shokaku}
+descriptionAddFromUnit: phaseBomber_${shokaku}
+#descriptionAddUnitStats: phaseBomber_${shokaku}
+
+highPriorityQueue: true
+isActive: true
+isVisible: true
+addResources: autoB=1, setFlag=3
+alsoTriggerAction: unflag
+pos: 1
+[hiddenAction_unflag]
+requireConditional: if self.hasFlag(id=3) and self.hasResources(autoB=2) 
+addResources: unsetFlag=3, autoB=-2
+[resource_autoB]
+displayName: Oof
+#=================================Autobuild END
+[hiddenAction_ReturnFromParent]
+autoTrigger: if self.hasParent(withTag='return_Main') and not self.hasFlag(id=10)
+requireConditional: if not self.transportingCount(greaterThan=1) 
+addResources: setFlag=10
+alsoQueueAction: Return
+[action_Return]
+isActive: true
+isGuiBlinking: if self.transportingCount(lessThan=1)
+#isVisible: if self.transportingCount(lessThan=4)
+isVisible: false
+buildSpeed:0
+displayType: action
+pos:0.3
+canPlayerCancel: false
+allowMultipleInQueue: false
+highPriorityQueue: true
+
+text: Return
+text_ru: Вернуть
+text_zh: 返航
+
+isLocked: if self.transportingCount(greaterThan=1)
+isLockedMessage: Cannot and dont press it
+isLockedMessage_ru: Нельзя нажать эту кнопку!
+isLockedMessage_zh: 不能也不要按
+
+iconImage: ROOT:data\icons\l_Return.png
+temporarilyAddTags: PDreturn_${shokaku}
+resetCustomTimer: true 
+[action_goodbye]
+isActive: true
+#isGuiBlinking: if self.transportingCount(lessThan=4)
+
+isLocked: if self.transportingCount(greaterThan=1)
+isLockedMessage: Nope
+isLockedMessage_ru: Не-а
+isLockedMessage_zh: 不
+
+isVisible: true
+buildSpeed:0
+displayType: infoOnly
+pos:7
+canPlayerCancel: false
+allowMultipleInQueue: false
+highPriorityQueue: true
+
+text: Detroy Drone
+description: Press it, if the drone got stuck\nRefund: ${Dprice/2}
+text_ru: Уничтожить Дрона
+description_ru: Нажми это, если дрон застрял\nВозврат: ${Dprice/2} ресурсов
+text_zh: 摧毁无人机
+description_zh:-如果无人机被卡住，请按一下\n-退款：${Dprice/2}
+
+iconImage: ROOT:data\icons\warning.png
+#alsoTriggerAction: GuardOofA, ATTACKMOVOofA   
+temporarilyAddTags: deleteDrone_${shokaku}
+#alsoQueueAction: goodbyeB
+resetCustomTimer: true
+[hiddenAction_goodbyeB]
+autoTrigger: if self.tags(includes='deleteDrone_${shokaku}') and self.customTimer(laterThanSeconds=1)
+temporarilyRemoveTags: deleteDrone_${shokaku}
+
+[hiddenAction_ReturnOof]
+autoTrigger: if self.tags(includes='PDreturn_${shokaku}') and self.customTimer(laterThanSeconds=3)
+temporarilyRemoveTags: PDreturn_${shokaku}
+addResources: unsetFlag=10
+#-----------------Attachment weapon
+[attachment_Topweapon]
+x: 0
+y: 0
+#isVisible:false
+idleDir:0
+lockRotation:false
+onCreateSpawnUnitOf: ShokakoSec
+canBeAttackedAndDamaged: false
+isUnselectable: true
+#lockLegMovement:false
+canAttack:true
+keepAliveWhenParentDies:false
+prioritizeParentsMainTarget:true
+[attachment_TopweaponB]
+x: 0
+y: 0
+#isVisible:false
+
+idleDir:0
+lockRotation:false
+onCreateSpawnUnitOf: ShokakoPrimary
+canBeAttackedAndDamaged: false
+addTransportedUnits: false
+isUnselectable: true
+#lockLegMovement:false
+setDrawLayerOnTop: true
+canAttack:true
+keepAliveWhenParentDies:false
+prioritizeParentsMainTarget:true
+#-----------------Attachment Drone
+[attachment_drone_I]
+x:-12.2
+y:3
+height:0
+isVisible:true
+keepAliveWhenParentDies:false
+setDrawLayerOnTop:true
+addTransportedUnits:true
+canBeAttackedAndDamaged:true
+isUnselectable: true
+canAttack: true
+idleDir: 0
+deattachIfWantingToMove: false
+prioritizeParentsMainTarget:true
+alwaysAllowedToAttackParentsMainTarget: true
+lockRotation:true
+lockLegMovement:true
+[attachment_drone_II]
+@copyFromSection: attachment_drone_I
+#y:-37
+y:-30
+
+
+#-----------------Attachment
+
+[arm_1]
+#Light MG
+@define ffff: 4
+x:0
+y:0
+#hidden: if not self.hasFlag(id=${ffff})
+hidden: if not self.tags(includes='weaponT_${ffff-3}')
+image_end:wt_${ffff-3}.png
+image_end_teamColors: true
+drawOverBody: true
+[arm_2]
+#HE Bomb
+@define ffff: 5
+@copyFromSection: arm_1
+[arm_3]
+#Micro Missile
+@define ffff: 6
+@copyFromSection: arm_1
+[arm_4]
+#Unguided Rocket
+@define ffff: 7
+@copyFromSection: arm_1

@@ -1,0 +1,110 @@
+
+#_weapun.template
+[core]
+#Mech price
+@global price: 300000, uranium=17000
+#Mech mode range
+@global range: 360
+#Gunship mode range
+@global rangeAir: 330
+#Rail kannun range
+@global railGRange: 600
+#-----------------------========> Ability <========-----------------------
+#Burn Drive Cooldown
+@global BDrivecooldown: 45
+#Railgun Cooldown
+@global RailGuncooldown: 45
+
+#====Transform Cooldown
+#Mech Mode
+@global MechModeC: 8
+#Gunship Mode
+@global GunshipModeC: 8
+#Kannun Mode
+@global KannunModeC: 8
+#skill temporary lock after transforming
+@global templock: 3
+
+#-----------------------========> Mech mode <========-----------------------
+#--------------------Primary weapon
+#Arm Kannun
+@global KAreaDamge: 325
+@global KAoE: 115
+#ADV - use only for cosmetic split projectile.... but added dmg anyway 
+@global ADVAreaDanage: 100
+@global ADVAoE: 25
+
+#Daemon HEAD
+@global beamHead: 30
+#--------------------Secondary weapon (MagicMissile)
+#Advance Magic Missile
+#      |-Deploys 4x MM's 
+#Note: -magic missile main and secondary share damage ... however secondary payload has bounus damage
+#      -Secondary payload can damage air and subs
+#${MMAreaDamge*0.5}, 50% aoe penalty
+
+#magic missile>              450*0.5 = 225    >   MMAreaDamge*0.5
+#secondary payload>    (450*0.5)+100 = 325    >   (MMAreaDamge*0.5)+MMSecPayBonusDamge
+#                      ------------------
+#Total damage:                         550
+#-------------------------------------------
+@global MMAreaDamge: 450
+@global MMAoE: 150
+#Magic missile secondary payload expolotion delay
+@global MMExDelay: 1.3
+@global MMSecPayBonusDamge: 75
+
+#-----------------------========> Gunship Mode <========-----------------------
+#--------------------Primary weapon
+@global KAreaDamgeGM: 200
+@global KAoEGM: 75
+#auto cannons
+@global KSecondary: 125
+
+#--------------------Secondary weapon (IonFlak)
+@global ionFlahL: 330
+
+@global damageDirect: 30
+@global damageBlast: 10
+
+@global ammo: 1000
+@global percentage: 50
+@global subPr: 20
+@global reloadG: 10
+#-----------------------========> Railgun Mode <========----------------------- Railgun , Rerugan
+#Rail cost
+@global RailPrice: uranium=1500
+#Rail AoE
+@global RailAoE: 40
+#hull damage multiplier
+@global RailHDM: 2
+#building damage multiplier
+@global RailBDM: 1
+#ignore shield..     NOTE: 0 = 100% ignore shield
+@global RailSDM: 0
+#ignor armor, PEN
+@global RailPEN: 200 
+
+#Warmup
+@global Railwarmup: 3
+
+#-----Primary projectile =
+#cannot damage unit with tags: exp
+@global Raildamage_A: 2000
+#can ONLY damage unit with tags: exp ........ NOTE: doesn't get any damage multiplier
+@global Raildamage_B: 12000
+
+#-----------------------========> END <========-----------------------
+#Extras
+radius: 44
+displayRadius: 54
+shieldDisplayOnlyDeflection: true
+shieldDeflectionDisplayRate: 2
+shieldRenderRadius: 0
+#--------------------Movement Speed
+#Mech Mode
+@global MechMove: 0.4
+#Gunship Mode
+@global GunShMove: 0.7
+#Kannon mode
+@global KannMove: 0.15

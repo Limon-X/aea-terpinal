@@ -1,0 +1,19 @@
+[core]
+showInEditor: false
+fogOfWarSightRange: 5
+disableAllUnitCollisions: true
+explodeOnDeath: false
+hideScorchMark: true
+#showOnMinimap: false
+isUnrepairableUnit: true
+nanoFactorySpeed: 2
+selfBuildRate: 5s
+
+[action_DecoyDelete]
+text: Delete
+buildSpeed: 0.5s
+iconImage: ROOT:data\icons\undeploy.png
+deleteSelf: true
+[hiddenAction_extraDamageTaken]
+autoTriggerOnEvent: tookDamage
+addResources: hp=-${core.maxHp*0.05}

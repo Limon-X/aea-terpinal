@@ -1,0 +1,134 @@
+[core]
+name: flameWeapon
+class: CustomUnitMetadata
+dont_load:true
+
+
+[action_deathExplosion]
+isVisible: false
+fireTurretXAtGround:invisible
+fireTurretXAtGround_withOffset: 0,-15
+fireTurretXAtGround_withProjectile: flame_friendlyfire
+fireTurretXAtGround_count:10
+
+
+[projectile_flame]
+life: 105
+#Don't set too low otherwise flame disappear before hit
+speed: 5
+targetSpeed: 3
+speedSpread: 1
+drawSize: ${projectile_flame.areaDamage/150+0.2}
+flameWeapon: true
+hitSound: false
+targetGround:true
+targetGroundSpread: 40
+deflectionPower: -1
+areaDamage: 20
+areaRadius:25
+areaRadiusFromEdge: true
+buildingDamageMultiplier: 2.25
+effectOnCreate: CUSTOM:attachedFlame, CUSTOM:attachedLight
+initialUnguidedSpeedHeight: 0.6
+gravity:0.3
+frame: 3
+wobbleAmplitude: 0.45
+wobbleFrequency: 1.1s
+
+
+[projectile_flame_friendlyfire]
+@copyFromSection: projectile_flame
+speed: 2
+targetSpeed: 2
+areaDamage: ${projectile_flame.areaDamage * 3}
+targetGroundSpread: ${projectile_flame.areaRadius + 15}
+areaRadius:${projectile_flame.areaRadius + 5}
+friendlyFire: true
+effectOnCreate: CUSTOM:attachedFlame
+
+
+
+[effect_attachedFlame]
+priority:veryhigh
+frameIndex: 3
+stripIndex: projectiles
+life: 150
+fadeOut: true
+attachedToUnit: true
+color: #FFFFFF
+fadeInTime:9
+scaleFrom: ${projectile_flame.areaDamage/140+0.18}
+scaleTo: ${projectile_flame.areaDamage/70+0.36}
+alpha: 1.5
+drawUnderUnits:false
+liveAfterAttachedDies: false
+
+
+[effect_attachedLight]
+image: SHARED:light_50.png
+life: 150
+fadeOut: true
+attachedToUnit: true
+color: #fdc14d
+fadeInTime:4
+scaleFrom: ${projectile_flame.areaDamage/120+0.2}
+scaleTo: ${projectile_flame.areaDamage/120+0.2}
+alpha: 0.5
+drawUnderUnits:false
+liveAfterAttachedDies: false
+
+[effect_smoke]
+frameIndex: 0
+stripIndex: smoke_black
+spawnChance: 0.3
+life: 24
+fadeOut: true
+attachedToUnit: false
+color: #FFFFFF
+fadeInTime:6
+scaleFrom: ${projectile_flame.areaDamage/150+0.12}
+scaleTo: ${projectile_flame.areaDamage/50+0.4}
+alpha: 1.2
+drawUnderUnits:false
+liveAfterAttachedDies: false
+hSpeed:0.75
+dirOffsetRandom:180
+atmospheric: true
+xSpeedRelativeRandom:0.15
+ySpeedRelativeRandom:0.15
+
+
+[effect_flameExplosion]
+image: ROOT:/myAssets/explosion_flame.png
+life: 40
+fadeOut: true
+fadeInTime:1
+scaleFrom: 0.85
+scaleTo: 0.85
+alpha: 1
+drawUnderUnits:false
+total_frames: 16
+animateFrameStart: 0
+animateFrameEnd: 15
+animateFrameSpeed: 0.4
+alwayStartDirAtZero:true
+alsoEmitEffects:CUSTOM:hitLightFlashWhiteSmall
+
+[effect_hitLightFlash]
+image: SHARED:light_50.png
+life: 7
+fadeOut: true
+attachedToUnit: false
+color: #63e6e8
+scaleFrom: 1.2
+scaleTo: 1.2
+alpha: 0.4
+drawUnderUnits:false
+
+[effect_hitLightFlashWhiteSmall]
+@copyFromSection: effect_hitLightFlash
+life: 6
+color: #ffffff
+scaleFrom: 0.8
+scaleTo: 0.8
+alpha: 0.33

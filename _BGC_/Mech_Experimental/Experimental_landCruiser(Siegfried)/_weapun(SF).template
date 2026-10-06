@@ -1,0 +1,31 @@
+
+#_weapun(SF).template
+[core]
+@global SFRaildamage_A: 175
+@global SFRaildamage_B: 175
+@global SFRailAoE: 55
+@global SFRailHDM: 1
+@global SFRailBDM: 1
+@global SFRailSDM: 1
+@global SFRailPEN: 50
+#Main gun cannot fire upclose
+@global SFmainLimitRng: 160
+#Secondary cannon range------------
+@global SFsecondaryRange: 335
+@global SFsecondarynDmg: 250
+@global SFsecondaryDelay: 2
+#SecondaryII cannon range------------
+@global SFsecondaryRangeII: 275
+@global SFsecondarynDmgII: 60
+@global SFsecondaryDelayII: 0.6
+#Napalm canister damage------------
+@global SFNPD: 22
+#@global SFNPD: 50 #original
+@global SFNPDAoE: 90
+@global SFNPDtick: 0.5
+#@global SFNPDtick: 0.25 #original
+@global SFDMGpenalty: 0.3
+@global SFNPDduration: 1.5
+#---------------------------------
+
+nanoFactorySpeed: 5

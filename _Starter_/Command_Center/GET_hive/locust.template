@@ -1,0 +1,123 @@
+[effect_hitLightFlash]
+priority:high
+image: SHARED:light_50.png
+life: 17
+fadeOut: true
+attachedToUnit: false
+color: #63e6e8
+scaleFrom: 1.8
+scaleTo: 1.8
+alpha: 0.6
+drawUnderUnits:false
+alsoEmitEffects:CUSTOM:smallFlash
+
+[effect_smallFlash]
+image: SHARED:light_50.png
+life: 20
+fadeOut: true
+attachedToUnit: false
+color: #99BBFFEE
+fadeInTime:2
+scaleFrom: 1
+scaleTo: 0.2
+drawUnderUnits:false
+
+[effect_sparks]
+attachedToUnit: false
+life: 150
+physics: true
+xSpeedRelativeRandom: 1.1
+ySpeedRelativeRandom: 1.1
+hSpeed: 1.5
+image: SHARED:spark.png
+priority:verylow
+
+[effect_sparks1]
+attachedToUnit:false
+life:140
+physics:true
+xSpeedRelativeRandom:1
+ySpeedRelativeRandom:1
+ySpeedRelative:1.5
+hSpeed:1.5
+image:SHARED:spark.png
+priority:verylow
+
+[effect_sparks2]
+@copyFromSection:effect_sparks1
+xSpeedRelativeRandom:0.4
+ySpeedRelativeRandom:0.4
+ySpeedRelative:1
+hSpeed:1
+life:180
+
+[hiddenAction_effect]
+autoTrigger:true
+autoTriggerOnEvent:destroyed
+spawnEffects:CUSTOM:nano*3,CUSTOM:nano2*3,CUSTOM:nano3*3,CUSTOM:nano4*3
+
+[effect_nano]
+priority:low
+attachedToUnit: true
+life:250
+atmospheric: true
+xOffsetRelativeRandom:15
+yOffsetRelativeRandom:15
+xSpeedRelativeRandom:-0.1
+ySpeedRelativeRandom:-0.1
+dirSpeedRandom:0.5
+dirSpeed:2
+image:Nano.png
+shadow:true
+imageShadow:SHADOW:Nano.png
+hSpeed:0.2
+createWhenZoomedOut:true
+teamColorRatio:0.8
+
+[effect_nano2]
+delayedStartTimer:30
+@copyFromSection:effect_nano
+image:Nano2.png
+hSpeedRandom: 0.3
+imageShadow:SHADOW:Nano2.png
+
+[effect_nano3]
+@copyFromSection:effect_nano
+image:Nano3.png
+imageShadow:SHADOW:Nano3.png
+
+[effect_nano4]
+@copyFromSection:effect_nano
+image:Nano4.png
+imageShadow:SHADOW:Nano4.png
+
+[effect_projectile]
+attachedToUnit: true
+priority:veryhigh
+life:120
+liveAfterAttachedDies:true
+@copyFromSection:effect_nano
+
+[effect_projectile2]
+delayedStartTimer:30
+@copyFromSection:effect_projectile
+image:Nano2.png
+hSpeedRandom: 0.3
+imageShadow:SHADOW:Nano2.png
+
+[effect_projectile3]
+@copyFromSection:effect_projectile
+image:Nano3.png
+imageShadow:SHADOW:Nano3.png
+
+[effect_projectile4]
+@copyFromSection:effect_projectile
+image:Nano4.png
+imageShadow:SHADOW:Nano4.png
+
+[effect_nanoPass]
+delayedStartTimer:10
+@copyFromSection:effect_projectile
+image:Nano2.png
+life:60
+ySpeedRelative:1.25

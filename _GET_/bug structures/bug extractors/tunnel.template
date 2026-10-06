@@ -1,0 +1,73 @@
+[core]
+        effectOnDeath: resourcePoolSmoke
+        explodeTypeOnDeath: buildingNoShockwaveOrSmoke
+	maxTransportingUnits: 3
+	transportUnitsEachUnitAlwaysUsesSingleSlot: true
+	transportUnitsBlockOtherTransports: false
+	transportUnitsAddUnloadOption: false
+	tags: 3x3, core, c_n, tunnel_tunnel,
+	defineUnitMemory: unit tunnelHold
+	autoTriggerCooldownTime:0.001s
+	autoTriggerCooldownTime_allowDangerousHighCPU: true
+		#-------------------------------
+		[hiddenAction_assignTunnelHolder]
+			autoTriggerOnEvent: created
+			setUnitMemory: tunnelHold = globalSearchForFirstUnit(withTag="tunnel_hold", relation="own")
+			debugMessage: Holder at %{memory.tunnelHold.x}, %{memory.tunnelHold.y}
+		[hiddenAction_tunnel]
+			autoTrigger: if self.transportingCount(greaterThan=0) and (memory.tunnelHold.transportingCount < 30)
+			fireTurretXAtGround: emitter
+			fireTurretXAtGround_withTarget: unitref memory.tunnelHold
+		[hiddenAction_noload]
+			autoTrigger: if (memory.tunnelHold.transportingCount == 0) and self.tags(includes="tunnel_unloading")
+			temporarilyRemoveTags: tunnel_unloading
+			debugMessage: R-TU
+		[action_unloadAll]
+			text: Unload All (%{memory.tunnelHold.transportingCount})
+			resetCustomTimer: true
+			isActive: if not self.tags(includes="tunnel_unloading")
+			temporarilyAddTags: tunnel_unloading
+			buildSpeed: 0s
+			price: 0
+			pos: 0
+			alwaysSinglePress: true
+			allowMultipleInQueue: false
+			isLocked: if memory.tunnelHold.transportingCount < 1
+			isLockedMessage: No units in the tunnel.
+			[turret_emitter]
+				x: 0
+				y: 0
+				canShoot: false
+				projectile: jumpCurrent
+			[projectile_jumpCurrent]
+				life: 10
+				instant: true
+				friendlyFire: only-ignoreEnemy
+				targetGround: true
+				areaDamage: 0
+				areaRadius: 5
+				areaRadiusFromEdge: true
+				explodeEffect:NONE
+				deflectionPower: -1
+				spawnUnit: wrapper(transportedUnitsToTransfer=1)
+		#-----------------------------------
+[attack]
+	canAttack: false
+	canAttackFlyingUnits: false
+	canAttackLandUnits:   true
+	canAttackUnderwaterUnits: false
+	turretSize: 0
+	turretTurnSpeed: 0
+	maxAttackRange: 99999
+	shootDelay: 0
+[ai]
+useAsTransport: true
+
+[graphics]
+
+animation_idle_start: 0
+animation_idle_end: 0
+animation_idle_speed: 60
+animation_idle_scale_start:1
+animation_idle_scale_end:1.02
+animation_idle_pingPong: true

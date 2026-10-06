@@ -1,0 +1,42 @@
+
+[core]
+
+#/////////////////////////////////////////////////////////////////////#
+@global MechEnergy: 42
+# ${MechEnergy}
+
+@global MechMaxEnergy: 20
+# ${MechMaxEnergy}
+
+@global MechExtraMaxEnergy: 42
+# ${MechExtraMaxEnergy}
+
+@global MechShootDelay: 2
+# ${MechShootDelay}
+
+@global MechExtraShootDelay: 0.5
+# ${MechExtraShootDelay}
+
+@global MechRange: 280
+# ${MechRange}
+
+@global MechExtraRange: 220
+# ${MechExtraRange}
+
+@global MechMoveSpeed: 0.6
+# ${MechMoveSpeed}
+
+@global MechExtraMoveSpeed: 0.4
+# ${MechExtraMoveSpeed}
+
+@global MechExtraSeconds: 6s
+# ${MechExtraSeconds}
+
+@global TagX1: Overdriven
+# ${TagX1}
+
+@global TagX2: 2!gui
+# ${TagX2}
+
+#/////////////////////////////////////////////////////////////////////#
+
