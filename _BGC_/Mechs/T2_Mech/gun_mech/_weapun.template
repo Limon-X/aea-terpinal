@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 
 #_weapun.template
 [core]
 @global dmg: 15
 @global range: 220
-=======
-
-#_weapun.template
-[core]
-@global dmg: 15
-@global range: 220
->>>>>>> upstream/REfI
