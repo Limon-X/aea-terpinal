@@ -21,8 +21,6 @@ Limon-X
 Всё, что использовано непосредственно в REfI (а, может быть, и перекочевало из оригинального AUE), принадлежит своим создателям (музыка, звуки и т.д.). Мы просто типичные пользователи интернета, для которых это всё шутка. Никого не оскорбляем и не обижаем.
 А если нужны кредитс самого оригинального мода, то вот:
 
-
-
 (Note: Every unit has been either edited, re-coded, balanced, or otherwise reimagined by SkaarjLord, with help from Horseman and the entire AEA Community.)
 
 (Many projectile graphical improvements by Hawko)
