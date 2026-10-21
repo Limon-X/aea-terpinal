@@ -202,7 +202,7 @@ hidden:true
 @global darkDrone:      500
 #---------------        ---
 @global mmt:            500
-@global beamCrab:       450
+@global beamCrab:       500
 @global mist:           550
 @global lightningBug:   600
 @global basicMech2:     800
