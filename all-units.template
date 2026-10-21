@@ -219,7 +219,7 @@ hidden:true
 @global comanche:       3500
 @global bgBomberMech:   6000
 #---------------        ---
-@global modMech:        2500
+@global modMech:        2750
 @global honeyBadger:    3000
 @global langley:        6200
 @global gunMech:        5000
